@@ -52,7 +52,7 @@
         <br>
         Si te interesa conseguir clientes, proveedores o posibles 
         aliados, ingrese aquí.
-        <router-link to="/tejido">
+        <router-link to="/tejidoEmp">
         <button type="submit" class="btn btn-dark btn-lg btn-block">
         Tejido social</button></router-link><br>
       </b-col>
