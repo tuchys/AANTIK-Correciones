@@ -56,12 +56,6 @@ const routes = [
     meta: {requiresAuth: true}
   },
   {
-    path: '/ayudaDocente',
-    name: 'ayudaDocente',
-    component: () => import('../views/docente/ayudaD.vue'),
-    meta: {requiresAuth: true}
-  },
-  {
     path: '/ayudaEmpren',
     name: 'ayudaEmpren',
     component: () => import('../views/emprendimiento/ayudaE.vue'),
@@ -473,6 +467,36 @@ const routes = [
     name: 'datosDoc',
     component: () => import('../views/docente/ActualizarDatosDoc.vue')
     ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/estClass',
+    name: 'estClass',
+    component: () => import('../views/docente/estudiantexclase.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/ayudaDocente',
+    name: 'ayudaDocente',
+    component: () => import('../views/docente/ayudaD.vue'),
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/repoEstudiantes',
+    name: 'repoEstudiantes',
+    component: () => import('../views/docente/repoStud.vue'),
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/histoAsesorias',
+    name: 'histoAsesorias',
+    component: () => import('../views/docente/histoAsesorias.vue'),
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/modInfor',
+    name: 'modInfor',
+    component: () => import('../views/docente/modInfo.vue'),
+    meta: {requiresAuth: true}
   },
     //EMPRENDIMIENTO
     {

@@ -128,30 +128,29 @@ import AuthService from "@/service/auth.service";
             icon: 'bx-user',
           },
           {
-            link: '/coordHome',
+            link: '/homedoc',
             name: 'Inicio',
             tooltip: 'Dashboard',
-            icon: 'bx-home',
-            
+            icon: 'bx-home',            
           },
           {
-            link: '/',
+            link: '/estClass',
             name: 'Estudiantes',
             tooltip: 'Messages',
             icon: 'bx-pencil',
           },
           {
-            link: '/',
-            name: 'Docentes',
-            tooltip: 'Analytics',
-            icon: 'bx-chalkboard',
-          },
-          {
-            link: '/',
-            name: 'Emprendimientos',
+            link: '/noticias',
+            name: 'Noticias',
             tooltip: 'Order',
-            icon: 'bx-store',
-          },          
+            icon: 'bx-news',
+          },   
+          {
+            link: '/foro',
+            name: 'Foro',
+            tooltip: 'Setting',
+            icon: 'bx-message-dots',
+          },         
           {
             link: '/ayudaDocente',
             name: 'Ayuda',
