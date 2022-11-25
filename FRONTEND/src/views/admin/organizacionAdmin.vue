@@ -15,7 +15,7 @@
         Agregar organizaciones sociales</button>
     </router-link><br>
     Ingrese aquí para agregar una organizacion social de forma individual
-    <router-link to="/agregarOrgSoc">
+    <router-link to="/addOrg">
       <button type="submit" class="btn btn-dark btn-lg btn-block">
         Agregar organizacion social</button>
     </router-link><br>

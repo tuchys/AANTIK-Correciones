@@ -421,6 +421,11 @@ const routes = [
     name: 'indidEdit',
     component: () => import('../views/admin/indicadoresEdit.vue')
   },
+  {
+    path: '/addOrg',
+    name: 'addOrg',
+    component: () => import('../views/admin/addOrg.vue')
+  },
 
 
   //EMPRENDIMIENTO
