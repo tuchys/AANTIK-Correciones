@@ -159,12 +159,6 @@ import AuthService from "@/service/auth.service";
             icon: 'bx-calendar',
           },
           {
-            link: '/ayudaAdmin',
-            name: 'Ayuda',
-            tooltip: 'Setting',
-            icon: 'bx-help-circle',
-          },
-          {
             link: '/gesForo',
             name: 'Gestionar foro',
             tooltip: 'Setting',
@@ -175,6 +169,12 @@ import AuthService from "@/service/auth.service";
             name: 'Foro',
             tooltip: 'Setting',
             icon: 'bx-message-dots',
+          },
+          {
+            link: '/ayudaAdmin',
+            name: 'Ayuda',
+            tooltip: 'Setting',
+            icon: 'bx-help-circle',
           },
         ],
       },
