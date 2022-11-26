@@ -1,43 +1,28 @@
 <template>
   <b-container>
     <div>
-      <sidebar-menu-akahon @search-input-emit="search" />
+      <sidebar-menu-akahon/>
     </div>
     <b-row>
       <b-col>
         <br>
         <br>
-        <!--<br>
         <br>
-        <b-table striped hover id="pages-table" :items="users" :fields="fields"></b-table>
-
-        Click acá para eliminar permanentemente
-
-
-        <router-link to="/subirFileOrgSoc">
-          
-          <button @click="orgDelete(data.item.id, data.index)" class="btn btn-dark btn-lg btn-block">
-            Eliminar</button>
-        </router-link><br>-->
-
+        <h3>Modifique los valores del formulario con los datos a actualizar de la organización social</h3>
         <br>
-        <h3>Diligencie el siguiente formulario con los datos de la organización social</h3>
-        <br><br>
+    <h2>{{ idOS }}</h2><br>
         <div>
           <b-form @submit="onSubmit" @reset="onReset" v-if="show">
 
             <b-container>
               <b-col>
                 <b-form-group id="input-group-1" label="Nombres de la organización social:" label-for="input-1">
-                  <b-form-input id="input-1" v-model="form.nombreEmp" placeholder="Nombre" required></b-form-input>
-                </b-form-group>
-
-                <b-form-group id="input-group-1" label="NIT de la organización social:" label-for="input-1">
+                  <b-form-input id="input-1" v-model="form.nombreEmp" :input="orgSoc.nitId" required></b-form-input>
+                  <br>
+                NIT de la organización social:
                   <b-form-input id="input-1" v-model="form.nitId" placeholder="NIT" required></b-form-input>
                 </b-form-group>
 
-              </b-col>
-              <b-col>
                 <b-form-group id="input-group-3" label="Fecha de constitución:" label-for="input-3">
                   <b-form-input id="input-3" v-model="form.fechaCons" placeholder="dd/mm/aaaa" required></b-form-input>
                 </b-form-group>
@@ -150,7 +135,7 @@
 
 
               </b-col>
-              <b-button type="submit" variant="primary">Guardar</b-button>
+              <b-button type="submit" variant="primary" @click="actualizar(form)">Actualizar</b-button>
               <b-button type="reset" variant="danger">Cancelar</b-button>
 
             </b-container>
@@ -167,12 +152,16 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBar.vue"
-import axios from 'axios';
+import admService from "@/service/adminServices";
 
 export default {
+  name: "editOrgSoc",
+  props: {
+    idOS: String
+  },
   data() {
     return {
-      users: [{
+      orgSoc: {
         id: null,
         nombreEmp: '',
         nitId: null,
@@ -201,8 +190,7 @@ export default {
         limitacion: '',
         comunidad: '',
         transporte: '',
-
-      }],
+      },
       fields: [
         { key: "nombreEmp" },
         { key: "nitId" },
@@ -233,9 +221,9 @@ export default {
         { key: "transporte" },
       ],
       form: {
-        nombreEmp: '',
-        nitId: '',
-        fechaCons: '',
+        nombreEmp: 'hj',
+        nitId: 'hhh',
+        fechaCons: '12/5/2',
         direccion: '',
         localidad: '',
         barrio: '',
@@ -262,74 +250,38 @@ export default {
         transporte: '',
       },
       show: true,
-
       localidad: [{ text: 'Selecione una', value: null }, 'Usaquén', 'Chapinero', 'Santa Fe', 'San Cristóbal', 'Usme', 'Tunjuelito', 'Bosa', 'Kennedy', 'Fontibón', 'Engativá', 'Suba', 'Barrios Unidos', 'Teusaquillo', '	Los Mártires', 'Antonio Nariño', 'Puente Aranda', 'La Candelaria', 'Rafael Uribe Uribe', 'Ciudad Bolívar', 'Sumapaz'],
-
       sino: [{ text: 'Selecione una', value: null }, 'Si', 'No'],
-
       linAccion: [{ text: 'Selecione una', value: null }, 'Acesoria tecnica', 'Capacitacion', 'Ambas'],
-
       tipoOS: [{ text: 'Selecione una', value: null }, 'Fundación', 'Cooperativa', 'Colegio', 'Fondo de empleados', 'Asociacion', 'Corporacion', 'Hospital', 'Otro'],
-
       contacto: [{ text: 'Selecione una', value: null }, 'Whatsapp', 'Correo', 'Llamada', 'Conferencias virtuales'],
-
       horario: [{ text: 'Selecione una', value: null }, 'Entre semana AM', 'Entre semana PM', 'Entre semana 24h', 'Fines de semana AM', 'Fines de semana PM', 'Fines de semana 24h'],
-
       horario2: [{ text: 'Selecione una', value: null }, 'Entre semana AM', 'Entre semana PM', 'Entre semana 24h', 'Fines de semana AM', 'Fines de semana PM', 'Fines de semana 24h'],
-
       modalidad: [{ text: 'Selecione una', value: null }, 'Mixta', 'Presencial', 'Virtual'],
-
       genero: [{ text: 'Selecione una', value: null }, 'Indiferente', 'Masculino', 'Femenino'],
-
       comunidad: [{ text: 'Selecione una', value: null }, 'Niños 0-3', 'Jovenes 18-30', 'Adultos 30-60', 'Ancianos 60+'],
-
       show: true,
     }
   },
-
-  //id: {id: this.$route.params.id},
-
-  //id: this.$route.params.id
-
-  //console.log(id),
-
-
-  mounted() {
-    //console.log($route.params.id)
-/*
-    axios.post("http://localhost:8080/orgGetOne", {
-      id: this.$route.params.id
-    }).then(
-
-      (response) => {
-        this.users = response.data;
-        console.log(this.users)
-
-      }
-    );*/
-  },
-  //<h2>{{ $route.params.id }}</h2> 
-
-
-
-  items: [
-    {
-      label: "Refrescar",
-      icon: "pi pi-fw pi-refresh",
-      command: () => {
-        this.getAll();
-      }
-    }
-  ],
-
-
   components: {
     SidebarMenuAkahon,
+  }, 
+  created() {
+        this.admService = new admService();
+        this.getOS(this.idOS);
   },
   methods: {
-
-
-
+    getOS(idorgs) {
+            console.log("gj-----",idorgs);
+        this.admService.getOS(idorgs).then(data => {
+            this.form = data.data;
+            console.log("gj-----");
+            console.log("key-----",typeof data.headers);
+        });
+    },
+    actualizar(formR){
+      console.log(formR.nitId);
+    },
     onSubmit() {
       id: this.$route.params.id
 

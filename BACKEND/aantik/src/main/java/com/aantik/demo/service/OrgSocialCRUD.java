@@ -3,8 +3,6 @@ package com.aantik.demo.service;
 import java.util.Optional; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.aantik.demo.entidad.Noticia;
 import com.aantik.demo.entidad.OrgSocial;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -69,7 +67,8 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 				orgS.setLinAccion (orgLista[i].linAccion) ;                                                      
 				orgS.setLocalidad (orgLista[i].localidad) ;                                                      
 				orgS.setModalidad (orgLista[i].modalidad) ;                                                      
-				orgS.setNitId (orgLista[i].nitId) ;                                                            
+				orgS.setNitId (orgLista[i].nitId) ;  
+				orgS.setTipoOS(orgLista[i].tipoOS);
 				orgS.setNombreEmp (orgLista[i].nombreEmp) ;                                                      
 				orgS.setNombreInterOS (orgLista[i].nombreInterOS) ;                                                    
 				orgS.setProdServ (orgLista[i].prodServ) ;                                                       
@@ -95,7 +94,7 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 				userDoc.setUsername(orgS.getCorreoIOS());
 				userDoc.setPassword("1236");
 				Role rolDoc;
-				rolDoc=repositoryRol.findByName("Emprendimiento");
+				rolDoc=repositoryRol.findByName("OrgSocial");
 				userDoc.setRoles(rolDoc.getId());
 				repositoryUser.save(userDoc);
 				System.out.println("insertando usuario");
@@ -103,16 +102,21 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 			}
 			if(orgS.getNombreEmp() !=null) {
 				orgS = repository.save(orgS);
-				System.out.println("insertando estudiante");
+				System.out.println("insertando OrgSocial");
 			}
 		}else {
 			OrgSocial actualizar=repository.getByCorreoIOS(orgS.getCorreoIOS());
-			mapear(orgS,actualizar);
-			repository.save(actualizar);
+			if(actualizar!=null) {
+				actualizar=mapear(orgS,actualizar);
+				repository.save(actualizar);
+			}else
+				System.out.println("noi actualiza--------");
+			
 		}
 	}
 
-	private void mapear(OrgSocial orgS, OrgSocial actualizar) {
+	private OrgSocial mapear(OrgSocial orgS, OrgSocial actualizar) {
+		System.out.println("actualiza-----------------"+orgS.getComunidad());
 		// TODO Auto-generated method stub
 		actualizar.setActividadEco (orgS.getActividadEco());         
 		actualizar.setBarrio(orgS.getBarrio());               
@@ -130,13 +134,19 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 		actualizar.setLinAccion (orgS.getLinAccion());            
 		actualizar.setLocalidad (orgS.getLocalidad());            
 		actualizar.setModalidad (orgS.getModalidad());            
-		actualizar.setNitId (orgS.getNitId());                  
+		actualizar.setNitId (orgS.getNitId());  
+		actualizar.setTipoOS(orgS.getTipoOS());
 		actualizar.setNombreEmp (orgS.getNombreEmp());            
 		actualizar.setNombreInterOS (orgS.getNombreInterOS());             
 		actualizar.setProdServ (orgS.getProdServ());              
 		actualizar.setTelefonoIOS (orgS.getTelefonoIOS());          
 		actualizar.setTemaAsesorar (orgS.getTemaAsesorar());            
-		actualizar.setUserId (orgS.getUserId());   
+		actualizar.setUserId (orgS.getUserId());                                                 
+		actualizar.setTransporte (orgS.isTransporte()) ;                                        
+		actualizar.setPromedio(orgS.isPromedio()) ;                                                    
+		actualizar.setExperiencia(orgS.isExperiencia());                                                
+		actualizar.setLimitacion(orgS.isLimitacion()); 
+		return actualizar;
 	}
 
 	private boolean existeUser(String correoIOS) {
@@ -151,7 +161,7 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 	private boolean existe(OrgSocial orgS) {
 		Optional<OrgSocial> orgEncontrado = repository.findByNombreEmp(orgS.getNombreEmp());
 		if(orgEncontrado.isPresent()) {
-			System.out.println("Estudiante ya se encuentra registrado");
+			System.out.println("Org Social ya se encuentra registrado");
 			return false;
 		}
 		return true;
@@ -171,11 +181,80 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 		
 	}
 
-	public OrgSocial getById(long id) {
+	public ModOrgSocial getById(long id) {
 		// TODO Auto-generated method stub
 		OrgSocial org = repository.getById(id);
-		//return repository.getById(id);
-		return org;
+		ModOrgSocial orgRet= new ModOrgSocial();
+		if(org != null) {
+			orgRet.actividadEco=org.getActividadEco();         
+			orgRet.barrio=org.getBarrio();               
+			orgRet.comunidad=org.getComunidad();            
+			orgRet.contacto=org.getContacto();               
+			orgRet.correoIOS=org.getCorreoIOS();            
+			orgRet.cupos=org.getCupos(); 
+			orgRet.direccion=org.getDireccion();            
+			orgRet.disponibilidad=org.getDisponibilidad();       
+			orgRet.empleados=org.getEmpleados();               
+			orgRet.experiencia=org.isExperiencia();     
+			orgRet.fechaCons=org.getFechaCons();            
+			orgRet.genero=org.getGenero();                   
+			orgRet.horarioAtencion=org.getHorarioAtencion();      
+			orgRet.horarioNotif=org.getHorarioNotif();        
+			orgRet.limitacion=org.isLimitacion();           
+			orgRet.linAccion=org.getLinAccion();                        
+			orgRet.localidad=org.getLocalidad();
+			orgRet.modalidad=org.getModalidad();
+			orgRet.nitId=org.getNitId();  
+			orgRet.tipoOS=org.getTipoOS();
+			orgRet.nombreEmp=org.getNombreEmp();
+			orgRet.nombreInterOS=org.getNombreInterOS();
+			orgRet.prodServ=org.getProdServ();
+			orgRet.promedio=org.isPromedio();
+			orgRet.telefonoIOS=org.getTelefonoIOS();
+			orgRet.temaAsesorar=org.getTemaAsesorar();
+			orgRet.transporte=org.isTransporte();
+		}
+		return orgRet;
+	}
+
+	public void actualizar(ModOrgSocial orgSocUpd) {
+	    // TODO Auto-generated method stub
+	    OrgSocial orgS=new OrgSocial();
+	    if(orgSocUpd!=null) {
+	        orgS.setActividadEco (orgSocUpd.actividadEco) ;                                                   
+	        orgS.setBarrio (orgSocUpd.barrio) ;                                                         
+	        orgS.setComunidad (orgSocUpd.comunidad) ;                                                      
+	        orgS.setContacto (orgSocUpd.contacto) ;                                                       
+	        orgS.setCorreoIOS (orgSocUpd.correoIOS) ;                                                      
+	        orgS.setCupos (orgSocUpd.cupos) ;                                                          
+	        orgS.setDireccion (orgSocUpd.direccion) ;                                                      
+	        orgS.setDisponibilidad (orgSocUpd.disponibilidad) ;                                                 
+	        orgS.setEmpleados (orgSocUpd.empleados) ;                                                      
+	        orgS.setExperiencia (orgSocUpd.experiencia) ;                                                    
+	        orgS.setFechaCons (orgSocUpd.fechaCons) ;                                                      
+	        orgS.setGenero (orgSocUpd.genero) ;                                                         
+	        orgS.setHorarioAtencion (orgSocUpd.horarioAtencion) ;                                                
+	        orgS.setHorarioNotif (orgSocUpd.horarioNotif) ;                                                
+	        orgS.setLimitacion (orgSocUpd.limitacion) ;                                                     
+	        orgS.setLinAccion (orgSocUpd.linAccion) ;                                                      
+	        orgS.setLocalidad (orgSocUpd.localidad) ;                                                      
+	        orgS.setModalidad (orgSocUpd.modalidad) ;                                                      
+	        orgS.setNitId (orgSocUpd.nitId) ;  
+	        orgS.setTipoOS(orgSocUpd.tipoOS);
+	        orgS.setNombreEmp (orgSocUpd.nombreEmp) ;                                                      
+	        orgS.setNombreInterOS (orgSocUpd.nombreInterOS) ;                                                    
+	        orgS.setProdServ (orgSocUpd.prodServ) ;                                                       
+	        orgS.setPromedio (orgSocUpd.promedio) ;                                                        
+	        orgS.setTelefonoIOS (orgSocUpd.telefonoIOS) ;                                                    
+	        orgS.setTemaAsesorar (orgSocUpd.temaAsesorar) ;                                                   
+	        orgS.setTransporte (orgSocUpd.transporte) ;    
+	        try {
+	            repository.save(orgS);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
 	}
 
 

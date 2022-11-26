@@ -377,9 +377,10 @@ const routes = [
     component: () => import('../views/admin/organizacionAdmin.vue')
   },
   {
-    path: '/orgEdit:id',
+    path: '/orgEdit/:idOS',
     name: 'orgEdit',
-    component: () => import('../views/admin/organizacionEdit.vue')
+    component: () => import('../views/admin/organizacionEdit.vue'),
+     props: true 
   },
   {
     path: '/docEdit',

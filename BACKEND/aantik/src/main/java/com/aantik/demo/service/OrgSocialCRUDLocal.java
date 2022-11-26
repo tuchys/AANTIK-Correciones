@@ -7,4 +7,6 @@ public interface OrgSocialCRUDLocal {
 	public OrgSocial crearOrganizacion(OrgSocial org) throws Exception;
 	public Iterable<OrgSocial> getAll();
 	public void saveAll(ModOrgSocial[] orgLista);
+	public ModOrgSocial getById(long id);
+	public void actualizar(ModOrgSocial orgSocUpd);
 }
