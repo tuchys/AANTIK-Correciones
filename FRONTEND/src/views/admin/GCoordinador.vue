@@ -12,7 +12,7 @@
     por medio de un archivo .csv
     <router-link to="/subirCoord">
       <button type="submit" class="btn btn-dark btn-lg btn-block">
-        Agregar organizaciones sociales</button>
+        Agregar Coordinadoress</button>
     </router-link><br>
     Ingrese aquí para agregar un coordinador de forma individual
     <router-link to="/addCoord">

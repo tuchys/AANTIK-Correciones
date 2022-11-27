@@ -49,6 +49,7 @@ public class CoordController {
     public ResponseEntity<?> coordDelete(@RequestBody ModCoordinador update) {  
     
     long id = update.id;
+    System.out.println(update.id);
     
     coordService.deleteById(id);
     

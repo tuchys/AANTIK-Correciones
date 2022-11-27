@@ -91,7 +91,7 @@
                   <b-form-input id="input-6" v-model="form.nombreInterOS" placeholder="Nombre" required></b-form-input>
                 </b-form-group>
 
-                <b-form-group id="input-group-7" label="Teléfono:" label-for="input-77">
+                <b-form-group id="input-group-77" label="Teléfono:" label-for="input-77">
                   <b-form-input id="input-77" v-model="form.telefonoIOS" placeholder="Teléfono" required></b-form-input>
                 </b-form-group>
 

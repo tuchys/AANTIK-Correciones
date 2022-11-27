@@ -426,6 +426,11 @@ const routes = [
     name: 'addOrg',
     component: () => import('../views/admin/addOrg.vue')
   },
+  {
+    path: '/addEmp',
+    name: 'addEmp',
+    component: () => import('../views/admin/addEmp.vue')
+  },
 
 
   //EMPRENDIMIENTO
