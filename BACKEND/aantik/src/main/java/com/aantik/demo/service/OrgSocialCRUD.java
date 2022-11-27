@@ -219,7 +219,7 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 
 	public void actualizar(ModOrgSocial orgSocUpd) {
 	    // TODO Auto-generated method stub
-	    OrgSocial orgS=new OrgSocial();
+	    OrgSocial orgS=repository.getById(orgSocUpd.id);
 	    if(orgSocUpd!=null) {
 	        orgS.setActividadEco (orgSocUpd.actividadEco) ;                                                   
 	        orgS.setBarrio (orgSocUpd.barrio) ;                                                         

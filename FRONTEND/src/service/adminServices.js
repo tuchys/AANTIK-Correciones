@@ -21,9 +21,36 @@ export default class adminServices {
         });
     }
 
-    getRespDiag(correo){
-        return axios.post(this.url + "getResDG",null,{
-            params: { correo}
+    getActulizacion(formulario,idOrg){
+        return axios.post(this.url + "updateOrgSoc",{
+            id: idOrg,
+            nombreEmp: formulario.nombreEmp,
+            nitId: formulario.nitId,
+            fechaCons: formulario.fechaCons,
+            direccion: formulario.direccion,
+            localidad: formulario.localidad,
+            barrio: formulario.barrio,
+            nombreInterOS: formulario.nombreInterOS,
+            telefonoIOS: formulario.telefonoIOS,
+            correoIOS: formulario.correoIOS,
+            temaAsesorar: formulario.temaAsesorar,
+            cupos: formulario.cupos,
+            empleados: formulario.empleados,
+            linAccion: formulario.linAccion,
+            tipoOS: formulario.tipoOS,
+            actividadEco: formulario.actividadEco,
+            prodServ: formulario.prodServ,
+            contacto: formulario.contacto,
+            experiencia: formulario.experiencia,
+            promedio: formulario.promedio,
+            horarioNotif: formulario.horarioNotif,
+            modalidad: formulario.modalidad,
+            disponibilidad: formulario.disponibilidad,
+            horarioAtencion: formulario.horarioAtencion,
+            genero: formulario.genero,
+            limitacion: formulario.limitacion,
+            comunidad: formulario.comunidad,
+            transporte: formulario.transporte,
         });
     }
 
