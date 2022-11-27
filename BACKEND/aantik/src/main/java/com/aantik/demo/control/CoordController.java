@@ -36,9 +36,9 @@ public class CoordController {
 
 	
 	@PostMapping("/addCoord")
-	public ResponseEntity<?> addcoordrendimientos(@RequestBody ModCoordinador update) throws Exception {
+	public ResponseEntity<?> addCoord(@RequestBody ModCoordinador update) throws Exception {
 		
-		
+		System.out.println(update.nombre);
 		Coordinador coord = new Coordinador(update.id, update.nombre, update.correo, update.asignatura);
 		coordService.crearCoordinador(coord);
 
