@@ -36,7 +36,7 @@ public class Emprendimiento implements Serializable{
 	private String linAccion;
 	//perfil usuario
 	@Column
-	private String NIT;
+	private String nitId;
 	@Column
 	private String fechaCons;
 	@Column
@@ -133,12 +133,12 @@ public class Emprendimiento implements Serializable{
 		this.linAccion = linAccion;
 	}
 
-	public String getNIT() {
-		return NIT;
+	public String getNitId() {
+		return nitId;
 	}
 
-	public void setNIT(String nIT) {
-		NIT = nIT;
+	public void setNitId(String nitId) {
+		nitId = nitId;
 	}
 
 	public String getFechaCons() {
@@ -367,6 +367,52 @@ public class Emprendimiento implements Serializable{
 	public boolean getTransporte() {
 		// TODO Auto-generated method stub
 		return this.transporte;
+	}
+	
+	public Emprendimiento(long id, String nombreEmp, String direccion, String prodServ, String linAccion, String nitId,
+			String fechaCons, String orgSocial, String localidad, String barrio, String temaAsesorar,
+			String interlocutorEmp, String telefonoIE, String correoIE, String nombreInterOS, String telefonoIOS,
+			String correoIOS, int cupos, String empleados, String actividadEco, String contacto, boolean experiencia,
+			boolean promedio, String horarioNotif, char modalidad, String disponibilidad, String horarioAtencion,
+			char genero, boolean limitacion, String comunidad, boolean transporte) {
+		super();
+		this.id = id;
+		this.nombreEmp = nombreEmp;
+		this.direccion = direccion;
+		this.prodServ = prodServ;
+		this.linAccion = linAccion;
+		this.nitId = nitId;
+		this.fechaCons = fechaCons;
+		this.orgSocial = orgSocial;
+		this.localidad = localidad;
+		this.barrio = barrio;
+		this.temaAsesorar = temaAsesorar;
+		this.interlocutorEmp = interlocutorEmp;
+		this.telefonoIE = telefonoIE;
+		this.correoIE = correoIE;
+		this.nombreInterOS = nombreInterOS;
+		this.telefonoIOS = telefonoIOS;
+		this.correoIOS = correoIOS;
+		this.cupos = cupos;
+		this.empleados = empleados;
+		this.actividadEco = actividadEco;
+		this.contacto = contacto;
+		this.experiencia = experiencia;
+		this.promedio = promedio;
+		this.horarioNotif = horarioNotif;
+		this.modalidad = modalidad;
+		this.disponibilidad = disponibilidad;
+		this.horarioAtencion = horarioAtencion;
+		this.genero = genero;
+		this.limitacion = limitacion;
+		this.comunidad = comunidad;
+		this.transporte = transporte;
+	}
+	
+
+	public Emprendimiento() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	

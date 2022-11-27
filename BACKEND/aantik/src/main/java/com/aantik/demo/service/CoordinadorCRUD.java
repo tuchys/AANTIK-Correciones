@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aantik.demo.entidad.Coordinador;
+import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.repositorio.CoordinadorRepositorio;
 
 @Service
@@ -34,6 +35,15 @@ public class CoordinadorCRUD implements CoordinadorCRUDLocal{
 	@Override
 	public Iterable<Coordinador> getAll() {
         return repository.findAll();
+	}
+
+
+	public void deleteById(long id) {
+		// TODO Auto-generated method stub
+		Coordinador coord = repository.getById(id);
+		
+		repository.delete(coord);
+		
 	}
 
 }

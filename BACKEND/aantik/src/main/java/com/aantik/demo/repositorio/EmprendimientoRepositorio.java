@@ -12,4 +12,5 @@ public interface EmprendimientoRepositorio extends CrudRepository<Emprendimiento
 	public Optional<Emprendimiento> findByNombreEmp(String nombreEmp);
 	public Optional<Emprendimiento> findByLinAccion(String linAccion);
 	public Emprendimiento getByCorreoIE(String correoIE);
+	public Emprendimiento getById(long id);
 }

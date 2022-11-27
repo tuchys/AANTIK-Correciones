@@ -12,4 +12,5 @@ public interface CoordinadorRepositorio extends CrudRepository<Coordinador,Long>
 	public Optional<Coordinador> findByCorreo(String correo);
 	public Optional<Coordinador> findByAsignatura(String asignatura);
 	public Optional<Coordinador> findByNombre(String nombre);
+	public Coordinador getById(long id);
 }

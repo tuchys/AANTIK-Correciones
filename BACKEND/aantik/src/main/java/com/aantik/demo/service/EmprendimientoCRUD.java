@@ -71,7 +71,7 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 				empren.setLinAccion (empLista[i].linAccion) ;                                                      
 				empren.setLocalidad (empLista[i].localidad) ;                                                      
 				empren.setModalidad (empLista[i].modalidad) ;                                                      
-				empren.setNIT (empLista[i].NIT) ;                                                            
+				empren.setNitId (empLista[i].nitId) ;                                                            
 				empren.setNombreEmp (empLista[i].nombreEmp) ;                                                      
 				empren.setNombreInterOS (empLista[i].nombreInterOS) ;                                                  
 				empren.setOrgSocial (empLista[i].orgSocial) ;                                                      
@@ -157,7 +157,7 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 		actualizar.setLinAccion (empren.getLinAccion());            
 		actualizar.setLocalidad (empren.getLocalidad());            
 		actualizar.setModalidad (empren.getModalidad());            
-		actualizar.setNIT (empren.getNIT());                  
+		actualizar.setNitId (empren.getNitId());                  
 		actualizar.setNombreEmp (empren.getNombreEmp());            
 		actualizar.setNombreInterOS (empren.getNombreInterOS());        
 		actualizar.setOrgSocial (empren.getOrgSocial());            
@@ -169,5 +169,14 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 		actualizar.setTransporte (empren.getTransporte());           
 		actualizar.setUserId (empren.getUserId());   
 	}
+
+	public void deleteById(long id) {
+		// TODO Auto-generated method stub
+		Emprendimiento emp = repository.getById(id);
+		
+		repository.delete(emp);
+		
+	}
+
 
 }

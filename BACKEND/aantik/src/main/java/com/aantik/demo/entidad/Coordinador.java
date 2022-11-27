@@ -76,6 +76,20 @@ public class Coordinador implements Serializable{
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
+
+	public Coordinador(long id, String nombre, String correo, String asignatura) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.correo = correo;
+		this.asignatura = asignatura;
+
+	}
+
+	public Coordinador() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }

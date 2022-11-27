@@ -3,7 +3,7 @@ package com.aantik.demo.model;
 public class ModEmprendimiento {
 	public int id;
 	public String nombreEmp;
-	public String NIT;
+	public String nitId;
 	public String fechaCons;
 	public String direccion;
 	public String orgSocial;
