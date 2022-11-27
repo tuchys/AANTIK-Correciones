@@ -1,7 +1,5 @@
 package com.aantik.demo.model;
 
-
-
 public class ModCiclo {
 	
 	public long id;

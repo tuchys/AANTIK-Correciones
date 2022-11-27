@@ -54,4 +54,7 @@ export default class adminServices {
         });
     }
 
+    getAllIndicadores() {
+        return axios.get(this.url + "getIndicadores");
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.aantik.demo.entidad.BenchmarkingIndica;
 import com.aantik.demo.entidad.PreguntasModeloB;
 import com.aantik.demo.model.ModBench;
+import com.aantik.demo.model.ModIndicadorBench;
 import com.aantik.demo.model.ModelBenchAux;
 import com.aantik.demo.repositorio.BenchPregunRepository;
 import com.aantik.demo.service.BenchmarkingExcelReader;
@@ -78,6 +79,20 @@ public class BenchmarkingExcelService {
 			
 			
 		}
+	}
+
+	public ModIndicadorBench[] getAllIndicadores(ModIndicadorBench[] indicadores) {
+		// TODO Auto-generated method stub
+		
+		int i=0;
+		List<BenchmarkingIndica> aux=repository.findAll();
+		for(BenchmarkingIndica var: aux) {
+			indicadores[i]=new ModIndicadorBench();
+			indicadores[i].pregunta=var.getIdPregunta();
+			indicadores[i].nombre=var.getCategoriaPregunta();
+			i++;
+		}
+		return indicadores;
 	}
 
 

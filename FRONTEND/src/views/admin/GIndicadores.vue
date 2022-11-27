@@ -2,22 +2,15 @@
   <b-container>  
        <div>
           <sidebar-menu-akahon 
-            @search-input-emit="search"
           />
         </div> 
     <b-row>
       <b-col>
         <div class="hello">
           <h3>Gestor de Indicadores</h3>
-          <label-edit :text="text" id="labeledit1" v-on:text-updated="textUpdated" placeholder="Enter some text"></label-edit>
-        </div>
+       </div>
         <div>
-          <b-table striped hover id="pages-table" :items="items" :fields="fields">
-            <template #cell(Editar)="row">
-              <router-link to="/indiEdit">
-              <b-button class="mr-2">Editar/Ver
-              </b-button></router-link>
-            </template>
+          <b-table striped hover id="pages-table" :items="items" :fields="fields2">
             <template #cell(Eliminar)="row">
               <b-button class="mr-2">Eliminar
               </b-button>
@@ -35,40 +28,40 @@
 </template>
 
 <script>
-import SidebarMenuAkahon from "@/components/SideBar.vue"
+import SidebarMenuAkahon from "@/components/SideBarAdmin.vue"
+import admService from "@/service/adminServices";
 
 export default {
-  name: 'Homecoordinador',
-  props: {
-    msg: String
-  },
   data() {
-      return {
-        items: [
-          { ID: 40, Indicador: 'Eficacia', Preguntas: '1,2,3' },
-          { ID: 40, Indicador: 'Eficiencia', Preguntas: '40,50,55' },
-          { ID: 40, Indicador: 'Productividad', Preguntas: '44,74,75' }
-        ],
-        fields: [
-          {
-            key: "ID",
-            label: "ID",
-            sortable: true
-          },
-          { key: "Indicador" },
-          { key: "Preguntas" },
-          { key: "Editar" },
+    return {
+      items: [
+        {nombre: null,
+          pregunta:null }
+      ],
+      fields2: [
+          { key: "nombre",
+            label: 'Indicador' ,
+            sortable: true},
+          { key: "pregunta" },
           { key: "Eliminar" }
-        ]
-      }      
+      ]
+    }      
   },
-   components: {
+  components: {
     SidebarMenuAkahon,
   },
+  created() {
+    this.admService = new admService();
+    this.getIndBench();
+  },
   methods: {
-    search() {
-      
-    }
+    getIndBench() {
+      this.admService.getAllIndicadores().then(data => {
+        this.items = data.data;
+        console.log("gj-----");
+      });
+      console.log("gj-----");
+    },
   }
 }
 </script>
