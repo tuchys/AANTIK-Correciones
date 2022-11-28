@@ -195,6 +195,12 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: '/CargaMasiva',
+    name: 'CargaMasiva',
+    component: () => import('../views/CargasMasivas.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: '/estudiantes2',
     name: 'estudiantesCord2',
     component: () => import('../views/coordinador/getEstudiantes.vue')
