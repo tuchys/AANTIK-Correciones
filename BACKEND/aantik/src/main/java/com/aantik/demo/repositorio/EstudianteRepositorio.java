@@ -9,7 +9,7 @@ import com.aantik.demo.entidad.Estudiante;
 public interface EstudianteRepositorio extends CrudRepository<Estudiante,Long>{
 	public Optional<Estudiante> findById(Long id);
 	public Optional<Estudiante> getUserById(Long id) throws Exception;
-	public Optional<Estudiante> findByIdEstudiantil(Long idEstudiantil);
+	public Optional<Estudiante> findByIdEstudiantil(String idEstudiantil);
 	public Optional<Estudiante> findByIdentificacion(Long identificacion);
 	public Optional<Estudiante> findByNombre(String nombre);
 	public Estudiante getByCorreo(String correo);

@@ -29,6 +29,7 @@ public class Asignacion {
     @Id
     @GeneratedValue
     private long id1;
+    
     private long id;
     private String nombre;
     private String correo;   

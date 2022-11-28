@@ -8,4 +8,5 @@ public interface DiagnosticoCRUDLocal {
 	public void crearDiagnostico(ModDGV diag) throws Exception;
 	public Iterable<Diagnostico> getAll();
 	public Iterable<Diagnostico> getNoRespondidas(Iterable<Preguntas_Dig> listaPreg,Diagnostico dg_actual);
+	public void changeCuant(long id, int cuanti);
 }

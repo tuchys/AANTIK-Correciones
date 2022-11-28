@@ -96,12 +96,12 @@ public class DiagnosticoCRUD implements DiagnosticoCRUDLocal{
 			int i=0;
 			int tam= cantidad(respuestas);
 			//resp= new ModDGRes[tam];
-			for(Diagnostico aux: respuestas) {
-				
+			for(Diagnostico aux: respuestas) {				
 				resp[i]= new ModDGRes();
 				resp[i].pregunta=getPreguntaXcod(aux.getPreguntaCod());				
 				resp[i].respuesta=aux.getPuntajeS();				
-				resp[i].puntaje=aux.getPuntajeN();
+				resp[i].puntaje=aux.getPuntajeN();			
+				resp[i].id=aux.getId();
 				System.out.println("-----"+resp[i].pregunta);
 				i++;
 			}
@@ -132,6 +132,13 @@ public class DiagnosticoCRUD implements DiagnosticoCRUDLocal{
 		for(@SuppressWarnings("unused") Diagnostico aux:respuestas)
 			tam++;
 		return tam;
+	}
+
+	public void changeCuant(long id, int cuanti) {
+		// TODO Auto-generated method stub
+		Diagnostico respuesta = repDG.getById(id);
+		respuesta.setPuntajeN(cuanti);
+		repDG.save(respuesta);
 	}
 
 }

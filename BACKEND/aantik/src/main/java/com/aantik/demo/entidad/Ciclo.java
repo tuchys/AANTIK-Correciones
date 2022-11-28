@@ -38,9 +38,8 @@ public class Ciclo{
 		this.estado = estado;
 	}
 	
-	public Ciclo(long id, String periodo, boolean estado) {
+	public Ciclo(String periodo, boolean estado) {
 		super();
-		this.id = id;
 		this.periodo = periodo;
 		this.estado = estado;
 	}

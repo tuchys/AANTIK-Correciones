@@ -94,16 +94,24 @@ public class DVGController {
 	    return ResponseEntity.ok("ok");	    
 	 }
 	    
-		@PostMapping("/getResDG")
-		public ResponseEntity<ModDGRes[]> diagnosticoResp( @RequestParam String correo) {
-	        System.out.println(correo);
-	        int tam=servDG.getTamanio(correo);
-			ModDGRes[] resp=new ModDGRes[tam];
-			resp=servDG.getResXuser(resp,correo);
-			
-			System.out.println("estudiante: " + correo);
-			/*for(int i =0;i<8;i++)
-				resp[i]=new ModDGRes();
-		    */return new ResponseEntity<ModDGRes[]>(resp, HttpStatus.OK);
-		}
+	@PostMapping("/getResDG")
+	public ResponseEntity<ModDGRes[]> diagnosticoResp( @RequestParam String correo) {
+	    System.out.println(correo);
+	    int tam=servDG.getTamanio(correo);
+		ModDGRes[] resp=new ModDGRes[tam];
+		resp=servDG.getResXuser(resp,correo);
+		
+		System.out.println("estudiante: " + correo);
+		/*for(int i =0;i<8;i++)
+			resp[i]=new ModDGRes();
+	    */return new ResponseEntity<ModDGRes[]>(resp, HttpStatus.OK);
+	}
+	
+	@PostMapping("/changeCuant")
+	public ResponseEntity<?> cambiarCuantificación(@RequestParam long id,@RequestParam int cuanti) {
+	    System.out.println(id);;
+		servDG.changeCuant(id,cuanti);
+		
+		return new ResponseEntity<Object> (HttpStatus.OK);   
+	}
 }

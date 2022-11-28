@@ -165,6 +165,12 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: "/histoAsig",
+    name: "histoAsig",
+    component: () => import('../views/coordinador/historicoAsignaciones.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: "/agregarStd",
     name: "agregarStd",
     component: () => import('../views/coordinador/addEstudiante.vue')
@@ -192,6 +198,18 @@ const routes = [
     path: '/estudiantes',
     name: 'estudiantesCord',
     component: () => import('../views/coordinador/EstudiantesCord.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/BenchDefiniciones',
+    name: 'BenchDefini',
+    component: () => import('../views/BenchDefiniciones.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/CargaMasiva',
+    name: 'CargaMasiva',
+    component: () => import('../views/CargasMasivas.vue')
     ,meta: {requiresAuth: true}
   },
   {
@@ -329,6 +347,18 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: '/addInd',
+    name: 'addInd',
+    component: () => import('../views/admin/addIndicador.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/gesCiclos',
+    name: 'gesCiclos',
+    component: () => import('../views/admin/GCiclos.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: '/gesCoordinador',
     name: 'gesCoordinador',
     component: () => import('../views/admin/GCoordinador.vue')
@@ -377,9 +407,10 @@ const routes = [
     component: () => import('../views/admin/organizacionAdmin.vue')
   },
   {
-    path: '/orgEdit:id',
+    path: '/orgEdit/:idOS',
     name: 'orgEdit',
-    component: () => import('../views/admin/organizacionEdit.vue')
+    component: () => import('../views/admin/organizacionEdit.vue'),
+     props: true 
   },
   {
     path: '/docEdit',

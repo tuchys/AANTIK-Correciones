@@ -1,8 +1,7 @@
 package com.aantik.demo.model;
 
-public class ModDGRes {
+public class ModIndicadorBench {
 	public long id;
+	public String nombre;
 	public String pregunta;
-	public String respuesta;
-	public int puntaje;
 }

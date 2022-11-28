@@ -27,9 +27,9 @@
           <div class="mt-3">Archivo seleccionado: {{ file1 ? file1.name : '' }}</div>
           <button type="submit" class="btn btn-dark btn-lg btn-block" @click="send(file1)">
           Procesar datos</button>
-          <!-- Plain mode -->
+          <!-- Plain mode 
           <b-form-file v-model="file2" class="mt-3" plain></b-form-file>
-          <div class="mt-3">Archivo seleccionado: {{ file2 ? file2.name : '' }}</div>
+          <div class="mt-3">Archivo seleccionado: {{ file2 ? file2.name : '' }}</div>-->
        
       </b-col>
       <b-col>

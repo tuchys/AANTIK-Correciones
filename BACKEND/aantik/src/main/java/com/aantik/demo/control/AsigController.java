@@ -42,36 +42,44 @@ import com.aantik.demo.match.Match;
 
 
 @Controller
-
 @RequestMapping("/api")
-
 public class AsigController {
+	
 	@Autowired 
 	private AsignacionCRUD asigRepositorio;
+	
     @GetMapping("/asignacionNueva")
-    public ResponseEntity<Iterable<Asignacion>> asigancion() {
-    	try {
-
-    AsignacionF asigna = new AsignacionF();     
-    	
-    ModAsig asig[] = new ModAsig[20];
-    
-    asigna.inicial();
-    
-    asig=asigna.asig;
-
-    asigRepositorio.crearAsignacion(asig);    //asigRepositorio.save(asig);
-    Iterable<Asignacion> res = asigRepositorio.getAll();
-    return new ResponseEntity<Iterable<Asignacion>>  (res, HttpStatus.OK);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		//e.printStackTrace();
-		System.out.println("Usuario no existe"+e);
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-	}
+    public ResponseEntity<ModAsig[]> asigancion() {
+    	try {	
+		    AsignacionF asigna = new AsignacionF();    
+		    asigna.inicial();     	    	
+		    ModAsig asig[] = new ModAsig[asigna.asignados];		    
+		    asig=asigna.asig;
+		    ModAsig asig2[] = new ModAsig[asigna.asignados];		 
+		    String fecha=asigRepositorio.crearAsignacion(asig); 
+		    asig2=asigRepositorio.getAsigActual(asig2,fecha);
+		    //Iterable<Asignacion> res = asigRepositorio.getAll();
+		    return new ResponseEntity<ModAsig[]>  (asig2, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println("Usuario no existe"+e);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
     
     }
     
-
+    @GetMapping("/histoAsignacion")
+    public ResponseEntity<ModAsig[]> asigancionHistorico() {
+    	try {	
+    		int tam=asigRepositorio.cantidad();
+		    ModAsig asig[] = new ModAsig[tam];	    
+		    asig=asigRepositorio.getAllAsg(asig);  
+		    
+		    return new ResponseEntity<ModAsig[]>  (asig, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println("ERROR "+e);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+    
+    }
 
 }
