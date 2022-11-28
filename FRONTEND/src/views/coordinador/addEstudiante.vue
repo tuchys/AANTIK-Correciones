@@ -2,7 +2,6 @@
   <b-container>  
       <div>
         <sidebar-menu-akahon 
-          @search-input-emit="search"
         />
       </div> 
   <b-row>
@@ -12,11 +11,11 @@
     estudiante</h3>
     <br><br>
     <div>
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" @reset="onReset" >
         <b-form-group id="input-group-1" label="Nombres y apellidos:" label-for="input-1">     
           <b-form-input
             id="input-1"
-            v-model="form.name"
+            v-model="nombre"
             placeholder="Nombres y apellidos"
             required
           ></b-form-input>
@@ -29,7 +28,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.email"
+            v-model="correo"
             type="email"
             placeholder="Correo institucional"
             required
@@ -39,7 +38,7 @@
         <b-form-group id="input-group-3" label="ID estudiantil:" label-for="input-3">     
           <b-form-input
             id="input-3"
-            v-model="form.idEst"
+            v-model="idEstudiantil"
             placeholder="ID estudiantil"
             required
           ></b-form-input>
@@ -48,7 +47,7 @@
         <b-form-group id="input-group-4" label="Cédula:" label-for="input-4">     
           <b-form-input
             id="input-4"
-            v-model="form.cedula"
+            v-model="documento"
             placeholder="Cédula"
             required
           ></b-form-input>
@@ -57,8 +56,8 @@
         <b-form-group id="input-group-5" label="Asignatura a inscribir:" label-for="input-5">     
           <b-form-select
           id="input-5"
-          v-model="form.asignatura"
-          :options="asignatura"
+          v-model="asignatura"
+          :options="asignaturaa"
           required
         ></b-form-select>
         </b-form-group>
@@ -66,7 +65,7 @@
         <b-form-group id="input-group-6" label="Fecha en que asistió a charla sentido de mi práctica:" label-for="input-6">     
           <b-form-input
             id="input-6"
-            v-model="form.fechaTaller"
+            v-model="fechaSP"
             placeholder="dd/mm/aaaa"
             required
           ></b-form-input>
@@ -75,7 +74,7 @@
         <b-form-group id="input-group-7" label="Teléfono:" label-for="input-7">     
           <b-form-input
             id="input-7"
-            v-model="form.telefono"
+            v-model="telefono"
             placeholder="Teléfono"
             required
           ></b-form-input>
@@ -84,7 +83,9 @@
         <b-button type="submit" variant="primary">Guardar</b-button>
         <b-button type="reset" variant="danger">Cancelar</b-button>
       </b-form>
-      
+      <div class="s" margin-top>
+          <div v-if="message" class="alert alert-primary" role="alert">{{message}} </div>
+        </div>
     </div>
   </b-col>
       <b-col>
@@ -96,37 +97,60 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
-
+import axios from 'axios'
   export default {
     data() {
       return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        asignatura: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
-        show: true
+          message:"",
+          correo: "",
+          documento:"",
+          nombre: "",
+          idEstudiantil:"",
+          telefono: "",
+          fechaSP:"",
+          asignatura:[],
+        asignaturaa: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
       }
     },
     components: {
     SidebarMenuAkahon,
     },
     methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
+      onSubmit() {
+        console.log(this.asig)
+      
+        axios.post("http://localhost:8080/aut/agregEst",{
+          correo:this.correo,
+          documento:this.documento,
+          nombre:this.nombre,
+          idEstudiantil:this.idEstudiantil,
+          telefono:this.telefono,
+          fechaSP:this.fechaSP,
+          asignatura:this.asignatura
+        }).then((response)=>{
+          this.message=response.data.message;
+          this.correo="",
+          this.documento="",
+          this.nombre="",
+          this.idEstudiantil="",
+          this.telefono="",
+          this.fechaSP="",
+          this.asignatura=""
+        })
+        
+
+
       },
       onReset(event) {
         event.preventDefault()
         // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
+        this.correo="",
+          this.documento="",
+          this.nombre="",
+          this.idEstudiantil="",
+          this.telefono="",
+          this.fechaSP="",
+          this.asignatura=""
         this.$nextTick(() => {
           this.show = true
         })
@@ -150,5 +174,11 @@ li {
 }
 a {
   color: #42b983;
+}
+s{
+  margin-top: 5px;
+}
+.alert{
+  margin-top: 10px;
 }
 </style>
