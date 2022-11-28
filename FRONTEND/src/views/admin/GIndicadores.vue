@@ -7,8 +7,15 @@
     <b-row>
       <b-col>
         <div class="hello">
-          <h3>Gestor de Indicadores</h3>
+          <h3>Gestor de Indicadores de benchmarking</h3>
        </div>
+       <br>
+       <router-link to="/addInd">
+          <button type="submit" class="btn btn-dark btn-lg btn-inline">
+            <h2><b-icon-plus></b-icon-plus></h2>  
+            Agregar indicador
+        </button></router-link>
+       <br><br>
         <div>
           <b-table striped hover id="pages-table" :items="items" :fields="fields2">
             <template #cell(Eliminar)="row">
@@ -30,6 +37,7 @@
 <script>
 import SidebarMenuAkahon from "@/components/SideBarAdmin.vue"
 import admService from "@/service/adminServices";
+import { BIcon, BIconArrowUp, BIconNewspaper,BIconPlus } from 'bootstrap-vue'
 
 export default {
   data() {
@@ -49,6 +57,7 @@ export default {
   },
   components: {
     SidebarMenuAkahon,
+    BIconPlus
   },
   created() {
     this.admService = new admService();

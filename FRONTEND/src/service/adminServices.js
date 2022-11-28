@@ -57,4 +57,11 @@ export default class adminServices {
     getAllIndicadores() {
         return axios.get(this.url + "getIndicadores");
     }
+
+    saveInd(indicador) {
+        return axios.post(this.url + "addIndc",{          
+            pregunta:indicador.nombre,
+            nombre:indicador.pregunta
+        })
+}
 }

@@ -95,5 +95,22 @@ public class BenchmarkingExcelService {
 		return indicadores;
 	}
 
+	public void addIndicador(ModIndicadorBench indicador) {
+		// TODO Auto-generated method stub
+		Iterable<BenchmarkingIndica> aux=repository.getByCategoriaPregunta(indicador.nombre);
+		BenchmarkingIndica addIn=new BenchmarkingIndica();
+		for(BenchmarkingIndica bm: aux) {
+			if(bm !=null) {
+				BenchmarkingIndica desc= repository.getById((long)bm.getIdDef());
+				System.out.println("Datos"+desc.getCategoriaPregunta());
+				addIn.setCategoriaPregunta(desc.getCategoriaPregunta());
+				addIn.setIdPregunta(indicador.pregunta);
+				addIn.setIdDef(desc.getIdDef());
+				break;
+			}
+		}
+		//repository.save(addIn);
+	}
+
 
 }

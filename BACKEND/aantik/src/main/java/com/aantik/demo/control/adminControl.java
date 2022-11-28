@@ -46,28 +46,35 @@ public class adminControl {
 	 }
 	 
 	 @GetMapping("/getIndicadores")
-		public ResponseEntity<ModIndicadorBench[]> getIndicadoresBench( ) { 
-			System.out.println("RECIBIENDO...");
-			int tamanio=BenService.cantidad();
-			ModIndicadorBench[] indicadores=new ModIndicadorBench[tamanio];
-			indicadores=BenService.getAllIndicadores(indicadores);
-			
-			if(indicadores != null) {
-			System.out.println("enviando organizacion social a front");
-				return new ResponseEntity<ModIndicadorBench[]>  (indicadores, HttpStatus.OK);
-			}else
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	public ResponseEntity<ModIndicadorBench[]> getIndicadoresBench( ) { 
+		System.out.println("RECIBIENDO...");
+		int tamanio=BenService.cantidad();
+		ModIndicadorBench[] indicadores=new ModIndicadorBench[tamanio];
+		indicadores=BenService.getAllIndicadores(indicadores);
+		
+		if(indicadores != null) {
+		System.out.println("enviando organizacion social a front");
+			return new ResponseEntity<ModIndicadorBench[]>  (indicadores, HttpStatus.OK);
+		}else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+	
+	 @PostMapping("/addIndc")
+	public ResponseEntity<?> saveInd(@RequestBody ModIndicadorBench indicador) {
+		 System.out.println("actuasliza"+indicador.nombre);
+		 BenService.addIndicador(indicador);
+		 return ResponseEntity.ok("ok");	    
 	}
 		
 	 @GetMapping("/getCiclos")
-		public ResponseEntity<ModCiclo[]> getCiclos( ) { 
-			System.out.println("RECIBIENDO...");
-			ModCiclo[] ciclo=new ModCiclo[2];
-			//orgSoc=orgScService.getById(idOS);
-			if(ciclo != null) {
-			System.out.println("enviando organizacion social a front");
-				return new ResponseEntity<ModCiclo[]>  (ciclo, HttpStatus.OK);
-			}else
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	public ResponseEntity<ModCiclo[]> getCiclos( ) { 
+		System.out.println("RECIBIENDO...");
+		ModCiclo[] ciclo=new ModCiclo[2];
+		//orgSoc=orgScService.getById(idOS);
+		if(ciclo != null) {
+		System.out.println("enviando organizacion social a front");
+			return new ResponseEntity<ModCiclo[]>  (ciclo, HttpStatus.OK);
+		}else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 }
