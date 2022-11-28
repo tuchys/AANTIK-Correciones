@@ -58,10 +58,21 @@ export default class adminServices {
         return axios.get(this.url + "getIndicadores");
     }
 
+    getLIndicadores() {
+        return axios.get(this.url + "getListIndicadores");
+    }
+
     saveInd(indicador) {
         return axios.post(this.url + "addIndc",{          
-            pregunta:indicador.nombre,
-            nombre:indicador.pregunta
+            nombre:indicador.nombre,
+            pregunta:indicador.pregunta
         })
-}
+    }
+
+    borraInd(indicadorId){
+        console.log("parametro"+indicadorId);
+        return axios.post(this.url + "delIndc",null,{
+            params: {indicadorId}
+        })
+    }
 }

@@ -53,17 +53,34 @@ public class adminControl {
 		indicadores=BenService.getAllIndicadores(indicadores);
 		
 		if(indicadores != null) {
-		System.out.println("enviando organizacion social a front");
 			return new ResponseEntity<ModIndicadorBench[]>  (indicadores, HttpStatus.OK);
 		}else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
-	 @PostMapping("/addIndc")
+	@GetMapping("/getListIndicadores")
+	public ResponseEntity<String[]> getListaIndicadoresBench( ) { 
+		 int tamanio=BenService.cantidadInd();
+		 String [] listaInd = new String[tamanio];
+		 listaInd=BenService.getListaInd(listaInd);
+		 System.out.println("----"+tamanio);
+		return new ResponseEntity<String[]>  (listaInd, HttpStatus.OK);
+	}
+	
+	@PostMapping("/delIndc")
+	public ResponseEntity<?> borraInd(@RequestParam long indicadorId) {
+		
+		 System.out.println("eliminar "+indicadorId);
+		 BenService.deleteIndicador(indicadorId);
+		return new ResponseEntity<Object> (HttpStatus.OK);    
+	}
+	
+	@PostMapping("/addIndc")
 	public ResponseEntity<?> saveInd(@RequestBody ModIndicadorBench indicador) {
+		
 		 System.out.println("actuasliza"+indicador.nombre);
 		 BenService.addIndicador(indicador);
-		 return ResponseEntity.ok("ok");	    
+		return new ResponseEntity<Object> (HttpStatus.OK);    
 	}
 		
 	 @GetMapping("/getCiclos")
@@ -72,7 +89,6 @@ public class adminControl {
 		ModCiclo[] ciclo=new ModCiclo[2];
 		//orgSoc=orgScService.getById(idOS);
 		if(ciclo != null) {
-		System.out.println("enviando organizacion social a front");
 			return new ResponseEntity<ModCiclo[]>  (ciclo, HttpStatus.OK);
 		}else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

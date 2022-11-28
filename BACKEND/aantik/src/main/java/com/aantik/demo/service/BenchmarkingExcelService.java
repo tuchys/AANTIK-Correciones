@@ -88,6 +88,7 @@ public class BenchmarkingExcelService {
 		List<BenchmarkingIndica> aux=repository.findAll();
 		for(BenchmarkingIndica var: aux) {
 			indicadores[i]=new ModIndicadorBench();
+			indicadores[i].id=var.getIdBenchIndica();
 			indicadores[i].pregunta=var.getIdPregunta();
 			indicadores[i].nombre=var.getCategoriaPregunta();
 			i++;
@@ -109,7 +110,52 @@ public class BenchmarkingExcelService {
 				break;
 			}
 		}
-		//repository.save(addIn);
+		repository.save(addIn);
+	}
+
+	public int cantidadInd() {
+		// TODO Auto-generated method stub
+		int cant=cantidad();
+		int cant2=1;
+		List<BenchmarkingIndica> aux=repository.findAll();
+		for(int i=0;i<cant;i++) {
+			BenchmarkingIndica dato1=aux.get(i);
+			if(i>0) {
+				BenchmarkingIndica dato2=aux.get(i-1);
+				if(!dato1.getCategoriaPregunta().equals(dato2.getCategoriaPregunta()))
+					cant2++;
+			}
+		}		
+		return cant2;
+	}
+
+	public String[] getListaInd(String[] listaInd) {
+		// TODO Auto-generated method stub
+		int cant=cantidad();
+		int cant2=1;
+		List<BenchmarkingIndica> aux=repository.findAll();
+		for(int i=0;i<cant;i++) {
+			BenchmarkingIndica dato1=aux.get(i);
+			if(i>0) {
+				BenchmarkingIndica dato2=aux.get(i-1);
+				if(!dato1.getCategoriaPregunta().equals(dato2.getCategoriaPregunta())) {
+					//System.out.println("datos--------"+cant2+"<<<<<<<<"+dato1.getCategoriaPregunta());
+					listaInd[cant2]=new String();
+					listaInd[cant2]=dato1.getCategoriaPregunta();
+					cant2++;
+				}
+			}else if(i==0) {
+				listaInd[0]=new String();
+				listaInd[0]=dato1.getCategoriaPregunta();
+			}
+		}		
+		return listaInd;
+	}
+
+	public void deleteIndicador(long indicadorId) {
+		// TODO Auto-generated method stub
+		BenchmarkingIndica del=repository.findByIdBenchIndica(indicadorId);
+		repository.delete(del);
 	}
 
 

@@ -16,7 +16,7 @@
           <b-form-select
           id="input-5"
           v-model="form.nombre"
-          :options="asignatura"
+          :options="items"
           required
         ></b-form-select>
         </b-form-group>
@@ -25,7 +25,7 @@
           <b-form-input
             id="input-1"
             v-model="form.pregunta"
-            placeholder="Nombres y apellidos"
+            placeholder="Número de pregunta"
             required
           ></b-form-input>
         </b-form-group>
@@ -54,6 +54,8 @@
             pregunta: '',
             nombre: ''
         },
+        items: [
+        {nombre: null }]
       }      
     },
     components: {
@@ -61,11 +63,26 @@
     },
     created() {
       this.admService = new admService();
+      this.getIndBench();
     },
-    methods: {      
+    methods: { 
+        getIndBench() {
+            this.admService.getLIndicadores().then(data => {
+                this.items = data.data;
+                console.log("gj-----");
+            });
+            console.log("gj-----");
+        },     
         onSubmit(event) {
             event.preventDefault()
-            alert(JSON.stringify(this.form))
+            //alert(JSON.stringify(this.form))
+            
+            this.admService.saveInd(this.form).
+            then(function(response) {
+                alert("Indicador agregado");//console.log(response.data);
+            }).catch(function(error) {
+                alert(error);//console.log(error);
+            });
         },
         onReset(event) {
             event.preventDefault()

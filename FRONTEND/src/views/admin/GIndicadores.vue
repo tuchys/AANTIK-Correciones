@@ -19,7 +19,7 @@
         <div>
           <b-table striped hover id="pages-table" :items="items" :fields="fields2">
             <template #cell(Eliminar)="row">
-              <b-button class="mr-2">Eliminar
+              <b-button @click="deleteInd(row.item.id)" class="mr-2">Eliminar
               </b-button>
             </template>
           </b-table>
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       items: [
-        {nombre: null,
+        {id:null,nombre: null,
           pregunta:null }
       ],
       fields2: [
@@ -71,6 +71,10 @@ export default {
       });
       console.log("gj-----");
     },
+    deleteInd(idBorr){
+      window.location.reload();
+      this.admService.borraInd(idBorr);
+    }
   }
 }
 </script>
