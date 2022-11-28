@@ -377,7 +377,7 @@ const routes = [
     component: () => import('../views/admin/organizacionAdmin.vue')
   },
   {
-    path: '/orgEdit:id',
+    path: '/orgEdit',
     name: 'orgEdit',
     component: () => import('../views/admin/organizacionEdit.vue')
   },
@@ -431,6 +431,7 @@ const routes = [
     name: 'addEmp',
     component: () => import('../views/admin/addEmp.vue')
   },
+  
 
 
   //EMPRENDIMIENTO

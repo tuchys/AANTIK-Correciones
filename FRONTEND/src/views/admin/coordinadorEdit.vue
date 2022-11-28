@@ -11,170 +11,24 @@
     <h3>Diligencie el siguiente formulario con los datos del 
     coordinador</h3>
     <br><br>
+    <h2>{{ idOC }}</h2><br>
     <div>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <b-form-group id="input-group-1" label="Nombres y apellidos:" label-for="input-1">     
-          <b-form-input
-            id="input-1"
-            v-model="form.name"
-            placeholder="Nombres y apellidos"
-            required
-          ></b-form-input>
-        </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Vinculación:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.vinculacion"
-            type="email"
-            placeholder="Vinculación"
-            required
-          ></b-form-input>
-        </b-form-group>
+        <b-form-group id="input-group-3" label="Nombre:" label-for="input-3">
+                  <b-form-input id="input-3" v-model="form.nombre" placeholder="Nombre" required></b-form-input>
+                </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="título profesional:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.titulo"
-            type="email"
-            placeholder="título profesional"
-            required
-          ></b-form-input>
-        </b-form-group>
+                <b-form-group id="input-group-4" label="Correo:" label-for="input-4">
+                  <b-form-input id="input-4" v-model="form.correo" placeholder="Correo" required></b-form-input>
+                </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="especialidad:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.especialidad"
-            type="email"
-            placeholder="especialidad"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="input-group-2"
-          label="Correo institucional:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.email"
-            type="email"
-            placeholder="Correo institucional"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-3" label="ID docente:" label-for="input-3">     
-          <b-form-input
-            id="input-3"
-            v-model="form.idEst"
-            placeholder="ID docente"
-            required
-          ></b-form-input>
-        </b-form-group>
-        
-        <b-form-group id="input-group-4" label="Telefono:" label-for="input-4">     
-          <b-form-input
-            id="input-4"
-            v-model="form.telefono"
-            placeholder="telefono"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-5" label="Asignatura a la que pertenece:" label-for="input-5">     
-          <b-form-select
-          id="input-5"
-          v-model="form.asignatura"
-          :options="asignatura"
-          required
-        ></b-form-select>
-        </b-form-group>
-
-        <b-form-group
-          id="input-group-2"
-          label="oficina:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.oficina"
-            type="email"
-            placeholder="oficina"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="input-group-2"
-          label="dirección de residencia:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.direccion"
-            type="email"
-            placeholder="dirección de residencia"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="input-group-2"
-          label="Localidad/Municipio:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.localidad"
-            type="email"
-            placeholder="Localidad/Municipio"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-7" label="Sector económico de experiencia:" label-for="input-7">     
-          <b-form-input
-            id="input-7"
-            v-model="form.sector"
-            placeholder="Sector económico"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="input-group-5" label="Cuenta con experiencia en asesoría:" label-for="input-5">     
-          <b-form-select
-          id="input-5"
-          v-model="form.opcionExp"
-          :options="opcionYN"
-          required
-        ></b-form-select>
-        </b-form-group>
-
-        <b-form-group id="input-group-5" label="Medio de comunicación que prefiere:" label-for="input-5">     
-          <b-form-select
-          id="input-5"
-          v-model="form.comunicacion"
-          :options="comunicacion"
-          required
-        ></b-form-select>
-        </b-form-group>
-
-        <b-button type="submit" variant="primary">Guardar</b-button>
+                <b-form-group id="input-group-5" label="Asignatura:" label-for="input-5">
+                  <b-form-select id="input-5" v-model="form.localidad" :selected="form.localidad" :options="localidad" required>
+                    <option :selected="form.asignatura">{{form.asignatura}}</option>
+                  </b-form-select>
+                </b-form-group>
+        <b-button type="submit" variant="primary" @click="actualizar(form)">Actualizar</b-button>
         <b-button type="reset" variant="danger">Cancelar</b-button>
       </b-form>
       
@@ -189,48 +43,69 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBar.vue"
+//import admService from "@/service/adminServices";
 
-  export default {
-    data() {
-      return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        asignatura: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
-        show: true,
-        comunicacion: [{ text: 'Selecione una', value: null }, 'Whatsapp', 'Teams','Correo','Llamada'],
-        
-        show: true,
-        opcionYN: [{ text: 'Selecione una', value: null }, 'Si', 'No'],
-        show: true
-      }
-    },
-    components: {
-    SidebarMenuAkahon,
-    },
-    methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
+export default {
+  props: {
+    idCO: String
+  },
+  data() {
+    return {
+      form: {
+        nombre: 'hj',
+        correo: 'hhh',
+        asignatura: '12/5/2',
       },
-      onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
+
+      asignatura: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
+      show: true,
     }
+  },
+  components: {
+    SidebarMenuAkahon,
+  }, 
+  created() {
+        //this.admService = new admService();
+        this.getCoord(this.idCO);
+  },
+  methods: {
+    getOS(idorgs) {
+            console.log("gj-----",idorgs);
+        /*this.admService.getOS(idorgs).then(data => {
+          this.form = data.data;
+          console.log("gj-----");
+          console.log("key-----",typeof data.headers);
+        });     */   
+    },
+    actualizar(formR){
+      console.log(formR.nombre);
+    },
+    onSubmit() {
+      /*this.admService.getActualizacion(this.form,this.idCO).
+      then(function(response) {
+          console.log(response.data);
+      }).catch(function(error) {
+          console.log(error);
+      });*/
+    },
+
+
+    onReset(event) {
+      event.preventDefault()
+      // Reset our form values
+      this.form.nombre= ''
+      this.form.correo = ''
+      this.form.asignatura = null
+
+      this.form.checked = []
+      // Trick to reset/clear native browser form validation state
+      this.show = false
+      this.$nextTick(() => {
+        this.show = true
+      })
+    },
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -238,14 +113,17 @@ import SidebarMenuAkahon from "@/components/SideBar.vue"
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }

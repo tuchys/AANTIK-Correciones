@@ -32,8 +32,9 @@
             
               <template #cell(Editar)="data">
 
-                  <router-link id = data.item.id :to="{ path: '/coordEdit'+ data.item.id}" v-bind:tooltip=data.item.id append>
-                  <b-button class="mr-2">Editar/Ver
+                  <!--<router-link id = data.item.id :to="{ path: '/coordEdit'+ data.item.id}" v-bind:tooltip=data.item.id append>-->
+                    <router-link :to="{name: 'coordEdit', params: {idCO:data.item.id}}">
+                      <b-button class="mr-2" @click="message(data.item.id)">Editar/Ver
                   </b-button></router-link>
 
               </template>
@@ -54,12 +55,14 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBar.vue"
+import editCoord from "@/views/admin/coordinadorEdit.vue"
 import axios from 'axios';
 
 
 export default {
   components: {
     SidebarMenuAkahon,
+    editCoord,
   },
 
 
@@ -89,7 +92,7 @@ export default {
         },
         {
           key: "asignatura",
-          label: "Interlocutor"
+          label: "Asignatiura"
         },
         {
           key: "correo",
@@ -115,7 +118,7 @@ export default {
     );
   },
   methods: {
-    empDelete: function (id, index) {
+    coordDelete: function (id, index) {
       window.location.reload();
       console.log(index)
       console.log(id)
@@ -124,7 +127,10 @@ export default {
       });
 
     },
-
+    message(idrec){
+      this.msg=idrec;
+      console.log("inicial---",idrec);
+    },
     handleInput(value, data) { },
   },
 };
