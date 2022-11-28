@@ -61,8 +61,8 @@ public class PreguntasExcelReader {
     
               switch (cellIdx) {
               case 0:
-                tutorial.setIndicaid((String) currentCell.getStringCellValue());
-                
+                tutorial.setIndicaid(currentCell.getStringCellValue());
+                System.out.println(currentCell.getStringCellValue());
                 break;
     
               case 1:

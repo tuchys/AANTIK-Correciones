@@ -195,6 +195,12 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: '/BenchDefiniciones',
+    name: 'BenchDefini',
+    component: () => import('../views/BenchDefiniciones.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: '/CargaMasiva',
     name: 'CargaMasiva',
     component: () => import('../views/CargasMasivas.vue')
