@@ -72,8 +72,6 @@
             // Reset our form values
             this.form.nombre = ''
             this.form.pregunta = ''
-            // Trick to reset/clear native browser form validation state
-    
         }
     }
   }

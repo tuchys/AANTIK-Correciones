@@ -341,6 +341,18 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: '/addInd',
+    name: 'addInd',
+    component: () => import('../views/admin/addIndicador.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/gesCiclos',
+    name: 'gesCiclos',
+    component: () => import('../views/admin/GCiclos.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: '/gesCoordinador',
     name: 'gesCoordinador',
     component: () => import('../views/admin/GCoordinador.vue')
