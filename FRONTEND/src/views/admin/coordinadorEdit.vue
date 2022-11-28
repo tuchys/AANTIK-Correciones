@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     onSubmit() {
-
+      window.location.reload();
       axios.post("http://localhost:8080/editCoord", {
         id: this.$route.params.id,
         nombre: this.form.nombre,

@@ -353,6 +353,7 @@ export default {
     if( error.response ){
         console.log(error.response.data); // => the response payload 
     }
+    window.location.reload();
 });
 
     },

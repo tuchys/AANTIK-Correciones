@@ -154,5 +154,12 @@ public class EstController {
 		}
     }
     
+	 @PostMapping("/stuEdit")
+		public ResponseEntity<?> empStu(@RequestBody ModEstudiante est) {
+
+			 servcioEst.actualizar(est);
+		    return ResponseEntity.ok("ok");	    
+		 }
+    
 
 }

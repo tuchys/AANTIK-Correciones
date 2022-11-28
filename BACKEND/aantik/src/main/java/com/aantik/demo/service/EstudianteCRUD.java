@@ -3,6 +3,8 @@ package com.aantik.demo.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -297,6 +299,49 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	public Iterable<Estudiante> getpreins() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void actualizar(ModEstudiante ests) {
+		// TODO Auto-generated method stub
+	    Estudiante est=repository.getById(ests.id);
+	    if(ests != null) {
+	        est.setNombre (ests.nombre) ;                                                   
+	        est.setGenero (ests.genero) ;                                                         
+	        est.setCorreo (ests.correo) ;
+	        est.setDocumento (ests.documento) ;                                                   
+	        est.setTelefono (ests.telefono) ;                                                         
+	        est.setCiudad (ests.ciudad) ;
+	        est.setLocalidad (ests.localidad) ;
+	        est.setBarrio (ests.barrio) ;                                                   
+	        est.setDireccion (ests.direccion) ;                                                         
+	        est.setActividadExtra (ests.actividadExtra) ;  
+	        est.setExperiencia (ests.experiencia) ;                                                   
+	        est.setLimitacion (ests.limitacion) ;                                                         
+	        est.setLimitLocalidad (ests.limitLocalidad) ;  
+	        est.setTransporte (ests.transporte) ;                                                   
+	        est.setAsignatura (ests.asignatura) ;                                                         
+	        est.setDocentePref (ests.docentePref) ;  
+	        est.setPromedio (ests.promedio) ;                                                   
+	        est.setEnfasis (ests.enfasis) ;                                                         
+	        est.setContacto (ests.contacto) ;  
+	        est.setLinAccion (ests.linAccion) ;                                                   
+	        est.setModalidad (ests.modalidad) ;                                                         
+	        est.setDisponibilidad (ests.disponibilidad) ;  
+	        est.setNotificaciones (ests.notificaciones) ;                                                         
+	        est.setTipoOrg (ests.tipoOrg) ;  
+	        est.setTipoEmp (ests.tipoEmp) ;                                                   
+	        est.setActividadEco (ests.actividadEco) ;                                                         
+	        est.setComunidad (ests.comunidad) ; 
+
+  
+	        try {
+	            repository.save(est);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+		
 	}
 
 }
