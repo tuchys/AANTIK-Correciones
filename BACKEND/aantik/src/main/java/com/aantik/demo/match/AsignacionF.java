@@ -36,7 +36,7 @@ public class AsignacionF {
 
 	int cantEst=100;
 	int cantEmp=100;
-	int asignados=0;
+	public int asignados=0;
 	public ModAsig asig[] = new ModAsig[20];
 	int estu[][][]= new int[cantEst][cantEmp+1][2] ;
 	int asignaciones[][]= new int[cantEst][2];

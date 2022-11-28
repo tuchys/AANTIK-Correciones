@@ -1,9 +1,7 @@
 <template>
   <b-container>  
        <div>
-          <sidebar-menu-akahon 
-            @search-input-emit="search"
-          />
+          <sidebar-menu-akahon/>
         </div> 
     <b-row>
       <b-col>
@@ -15,63 +13,49 @@
         RESULTADOS 
         <br><br>
         Listado de sugerencias
-           
+          
         <br>
         <div>
-
-
-          <b-table striped hover :items="users" :fields="fields">
+          <b-table striped hover :items="users" :fields="fields1">
             <template #cell(asignar)="row">
               <b-button class="mr-2">Asignar
               </b-button>
             </template>
           </b-table>
 
-
         </div>
         <br>
-       
-              </b-col>
-              <b-col>
-                
-              </b-col>
-            </b-row>
-          </b-container>   
-        </template>
+        <br>
+        <router-link to="/histoAsig">
+          <button type="submit" class="btn btn-dark btn-lg btn-inline">
+            <h2><b-icon-clock-history></b-icon-clock-history></h2>  
+            Ver historial
+        </button></router-link>
+      </b-col>
+    </b-row>
+  </b-container>   
+</template>
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
 import axios from "axios";
+import {BIconClockHistory } from 'bootstrap-vue'
 export default {
-
 
    components: {
     SidebarMenuAkahon,
+    BIconClockHistory
   },
-
   name: 'estudiantesCord',
-
   data() {
-    
     return {
-      users: {
-
-        id: null,
-
+      users: [{
         nombre: null,
-
         correo: null,
-
         emprendimiento: null,
-
-        asignar: null,
-
-
-} ,
-      fields: [
-        {
-          key: "id",
-        },
+        id1: null,
+      }] ,
+      fields1: [
         {
           key: "nombre",
         },
@@ -86,27 +70,21 @@ export default {
         },
         
       ],
-
       form: {
           estado: '',
-
         },
-
-        estado: [{ text: 'Selecione una', value: null }, 'Pendiente', 'Satisfecho'],
-        show: true
-      }
-    },
+      estado: [{ text: 'Selecione una', value: null }, 'Pendiente', 'Satisfecho'],
+      show: true
+    }
+  },
   mounted() {
-
-axios.get("http://localhost:8080/api/asignacionNueva").then(
-
-(response) => {
-
-this.users= response.data;
-console.log(this.users)
-}
-);
-},
+    axios.get("http://localhost:8080/api/asignacionNueva").then(
+      (response) => {
+        this.users= response.data;
+        console.log(this.users)
+      }
+    );
+  },
   methods: {
     handleInput(value, data) {},
   },

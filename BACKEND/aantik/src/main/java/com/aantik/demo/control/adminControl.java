@@ -121,8 +121,7 @@ public class adminControl {
 	}
 	
 	@PostMapping("/estadoCiclo")
-	public ResponseEntity<?> activaCiclo(@RequestParam long cicloId) {
-		
+	public ResponseEntity<?> activaCiclo(@RequestParam long cicloId) {		
 		 System.out.println("actuasliza"+cicloId);
 		 cicloSer.cambiarEstado(cicloId);
 		return new ResponseEntity<Object> (HttpStatus.OK);    

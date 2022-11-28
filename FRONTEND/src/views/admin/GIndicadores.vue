@@ -37,7 +37,7 @@
 <script>
 import SidebarMenuAkahon from "@/components/SideBarAdmin.vue"
 import admService from "@/service/adminServices";
-import { BIcon, BIconArrowUp, BIconNewspaper,BIconPlus } from 'bootstrap-vue'
+import {BIconPlus } from 'bootstrap-vue'
 
 export default {
   data() {
