@@ -1,7 +1,7 @@
 import axios from 'axios';
 export default class FileService {
 
-    url = "http://localhost:8080/";
+    url = "http://localhost:8080/api/benchmarking/upload";
 
     getAll() {
         return axios.get(this.url + "all");
