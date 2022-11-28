@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class PreguntasModeloB {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
   @Column(name = "IndicadoresId")
@@ -38,7 +38,7 @@ public String getIndicaid() {
 }
 
 public void setIndicaid(String indicaid) {
-    indicaid = indicaid;
+    this.indicaid = indicaid;
 }
 
 public String getdescripcion() {

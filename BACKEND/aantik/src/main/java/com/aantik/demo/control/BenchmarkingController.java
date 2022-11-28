@@ -36,7 +36,8 @@ public class BenchmarkingController {
 
     @Autowired
     PreguntasRepository tt;
-    
+
+   
     @Autowired
     DiagnosticoCRUD dgvServ;
     
@@ -81,6 +82,14 @@ public class BenchmarkingController {
 
     message = "Please upload an excel file!";
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+  }
+
+  @GetMapping("/indicadores")
+  public ResponseEntity<?> getPosts(){ //assigment id
+
+	  
+
+  return ResponseEntity.ok(tt.findAll());
   }
 
 	@GetMapping("/benchGet")
