@@ -41,6 +41,8 @@ import com.aantik.demo.HelperClassServices.*;
 import com.aantik.demo.Payload.*;
 import com.aantik.demo.Security.Services.UserDetailsImpl;
 import com.aantik.demo.Security.jwt.*;
+import com.aantik.demo.entidad.Estudiante;
+import com.aantik.demo.repositorio.EstudianteRepositorio;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -50,6 +52,9 @@ public class AuthController {
     
     @Autowired
 	AuthenticationManager authenticationManager;
+
+	@Autowired
+	EstudianteRepositorio repoEst;
 
 	@Autowired
 	UserRepository userRepository;
@@ -158,5 +163,30 @@ public class AuthController {
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("Usuario registrado exitosamente!"));
+	}
+
+	@PostMapping("/agregEst")
+	public ResponseEntity<?> AgregueStu(@Valid @RequestBody Estudiante estud ) {
+
+		System.out.print(estud.getNombre());
+		System.out.print(estud.getDocumento());
+		System.out.print(estud.getAsignatura());
+		System.out.print(estud.getFechaSP());
+		System.out.print(estud.getTelefono());
+		System.out.print(estud.getCorreo());
+		System.out.print(estud.getIdEstudiantil());
+
+		String s=String.valueOf(estud.getIdEstudiantil());
+		long l=Long.parseLong(s);  
+	//	System.out.print("asasa");
+		estud.setIdEstudiantil(s);
+	//	System.out.print("as6asa");
+		if(!repoEst.findByIdEstudiantil(s).isPresent()){
+			repoEst.save(estud);
+			return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
+		}else{
+			return ResponseEntity.ok(new MessageResponse("Estudiante ya se encuentra registrado"));
+		}
+		
 	}
 }
