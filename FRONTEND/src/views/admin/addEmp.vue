@@ -317,7 +317,7 @@ export default {
         console.log(this.form)
 
       axios.post("http://localhost:8080/addemprendimientos", {
-        nombreEmp: this.nombreEmp,
+        nombreEmp: this.form.nombreEmp,
         direccion: this.form.direccion,
         prodServ: this.form.prodServ,
         linAccion: this.form.linAccion,
@@ -331,7 +331,7 @@ export default {
         telefonoIE: this.form.telefonoIE,
         correoIE: this.form.correoIE,
         nombreInterOS: this.form.nombreInterOS,
-        telefonoIOS: this.telefonoIOS,
+        telefonoIOS: this.form.telefonoIOS,
         correoIOS: this.form.correoIOS,
         cupos: this.form.cupos,
         empleados: this.form.empleados,

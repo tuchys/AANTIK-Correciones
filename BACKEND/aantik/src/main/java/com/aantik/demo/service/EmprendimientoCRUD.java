@@ -5,9 +5,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aantik.demo.entidad.Coordinador;
 import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
+import com.aantik.demo.model.ModCoordinador;
 import com.aantik.demo.model.ModEmprendimiento;
 import com.aantik.demo.repositorio.EmprendimientoRepositorio;
 import com.aantik.demo.repositorio.RoleRepositorio;
@@ -177,6 +179,51 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 		repository.delete(emp);
 		
 	}
+
+	public void actualizar(ModEmprendimiento emps) {
+		    // TODO Auto-generated method stub
+		    Emprendimiento emp=repository.getById(emps.id);
+		    if(emps != null) {
+		        emp.setNombreEmp (emps.nombreEmp) ;                                                   
+		        emp.setNitId (emps.nitId) ;                                                         
+		        emp.setFechaCons (emps.fechaCons) ;
+		        emp.setDireccion (emps.direccion) ;                                                   
+		        emp.setOrgSocial (emps.orgSocial) ;                                                         
+		        emp.setLocalidad (emps.localidad) ;  
+		        emp.setBarrio (emps.barrio) ;                                                   
+		        emp.setTemaAsesorar (emps.temaAsesorar) ;                                                         
+		        emp.setInterlocutorEmp (emps.interlocutorEmp) ;  
+		        emp.setTelefonoIOS (emps.telefonoIE) ;                                                   
+		        emp.setCorreoIE (emps.correoIE) ;                                                         
+		        emp.setNombreInterOS (emps.nombreInterOS) ;  
+		        emp.setTelefonoIOS (emps.telefonoIOS) ;                                                   
+		        emp.setCorreoIOS (emps.correoIOS) ;                                                         
+		        emp.setCupos (emps.cupos) ;  
+		        emp.setEmpleados (emps.empleados) ;                                                   
+		        emp.setLinAccion (emps.linAccion) ;                                                         
+		        emp.setActividadEco (emps.actividadEco) ;  
+		        emp.setProdServ (emps.prodServ) ;                                                   
+		        emp.setContacto (emps.contacto) ;                                                         
+		        emp.setExperiencia (emps.experiencia) ;  
+		        emp.setPromedio (emps.promedio) ;                                                         
+		        emp.setHorarioNotif (emps.horarioNotif) ;  
+		        emp.setModalidad (emps.modalidad) ;                                                   
+		        emp.setDisponibilidad (emps.disponibilidad) ;                                                         
+		        emp.setHorarioAtencion (emps.horarioAtencion) ; 
+		        emp.setGenero (emps.genero) ;                                                         
+		        emp.setLimitacion (emps.limitacion) ;  
+		        emp.setComunidad (emps.comunidad) ;                                                   
+		        emp.setTransporte (emps.transporte) ;                                                         
+
+	  
+		        try {
+		            repository.save(emp);
+		        } catch (Exception e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		        }					
+		    }
+		}
 
 
 }

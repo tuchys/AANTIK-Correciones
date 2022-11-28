@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aantik.demo.cargaUsuarios.leerEmprendimientos;
 import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.model.ModBench;
+import com.aantik.demo.model.ModCoordinador;
 import com.aantik.demo.model.ModEmprendimiento;
 import com.aantik.demo.model.ModelBenchAux;
 import com.aantik.demo.model.encuestaPre;
@@ -174,5 +175,13 @@ public class EmpController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 	}
+		
+		 @PostMapping("/empEdit")
+			public ResponseEntity<?> empEdit(@RequestBody ModEmprendimiento emp) {
+
+				 empService.actualizar(emp);
+			    return ResponseEntity.ok("ok");	    
+			 }
+	
     
 }

@@ -407,7 +407,7 @@ const routes = [
     component: () => import('../views/admin/emprendimientoAdmin.vue')
   },
   {
-    path: '/empEdit',
+    path: '/empEdit:id',
     name: 'empEdit',
     component: () => import('../views/admin/emprendimientoEdit.vue')
   },
