@@ -32,8 +32,8 @@
             
               <template #cell(Editar)="data">
 
-                  <!--<router-link id = data.item.id :to="{ path: '/coordEdit'+ data.item.id}" v-bind:tooltip=data.item.id append>-->
-                    <router-link :to="{name: 'coordEdit', params: {idCO:data.item.id}}">
+                  <router-link id = data.item.id :to="{ path: '/coordEdit'+ data.item.id}" v-bind:tooltip=data.item.id append>
+
                       <b-button class="mr-2" @click="message(data.item.id)">Editar/Ver
                   </b-button></router-link>
 

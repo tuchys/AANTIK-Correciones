@@ -16,7 +16,7 @@ import com.aantik.demo.entidad.Coordinador;
 
 import com.aantik.demo.model.ModBench;
 import com.aantik.demo.model.ModCoordinador;
-
+import com.aantik.demo.model.ModOrgSocial;
 import com.aantik.demo.model.ModelBenchAux;
 import com.aantik.demo.model.encuestaPre;
 import com.aantik.demo.repositorio.PreguntasRepository;
@@ -69,5 +69,12 @@ public class CoordController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 	}
+	
+	 @PostMapping("/editCoord")
+	public ResponseEntity<?> editCoord(@RequestBody ModCoordinador coord) {
+
+		 coordService.actualizar(coord);
+	    return ResponseEntity.ok("ok");	    
+	 }
     
 }
