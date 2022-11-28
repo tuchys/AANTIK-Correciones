@@ -23,4 +23,10 @@ export default class diagnosticoService {
         });
     }
 
+    changeCuanti(id,cuanti){
+        return axios.post(this.url + "changeCuant",null,{
+            params: { id, cuanti}
+        });
+    }
+
 }

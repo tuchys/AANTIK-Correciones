@@ -11,4 +11,5 @@ public interface DiagnosticoRepositorio extends CrudRepository<Diagnostico,Long>
 	public Optional<Diagnostico> findByPreguntaCod(String codigo);
 	public Iterable<Diagnostico> findByCorreo(String correo);
 	public Diagnostico getByPreguntaCod(String preguntaCod);
+	public Diagnostico getById(long id);
 }
