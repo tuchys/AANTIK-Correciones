@@ -13,6 +13,7 @@ import com.aantik.demo.model.ModCiclo;
 import com.aantik.demo.model.ModIndicadorBench;
 import com.aantik.demo.model.ModOrgSocial;
 import com.aantik.demo.service.BenchmarkingExcelService;
+import com.aantik.demo.service.CicloCRUD;
 import com.aantik.demo.service.OrgSocialCRUD;
 
 @Controller
@@ -20,6 +21,8 @@ public class adminControl {
 	
 	@Autowired
 	OrgSocialCRUD orgScService;
+	@Autowired
+	CicloCRUD cicloSer;
 	
     @Autowired
     BenchmarkingExcelService BenService;
@@ -86,11 +89,42 @@ public class adminControl {
 	 @GetMapping("/getCiclos")
 	public ResponseEntity<ModCiclo[]> getCiclos( ) { 
 		System.out.println("RECIBIENDO...");
-		ModCiclo[] ciclo=new ModCiclo[2];
+		int tam=cicloSer.getCantidad();
+		ModCiclo[] ciclo=new ModCiclo[tam];
+		ciclo=cicloSer.getAllCiclos();
+		
 		//orgSoc=orgScService.getById(idOS);
 		if(ciclo != null) {
 			return new ResponseEntity<ModCiclo[]>  (ciclo, HttpStatus.OK);
 		}else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+	
+	@PostMapping("/addCiclo")
+	public ResponseEntity<?> addCiclo(@RequestBody ModCiclo cicloAdd) {
+		 try {
+			cicloSer.crearCiclo(cicloAdd);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 System.out.println("actuasliza"+cicloAdd.nombre);
+		return new ResponseEntity<Object> (HttpStatus.OK);    
+	}
+	
+	@PostMapping("/delCiclo")
+	public ResponseEntity<?> borraCiclo(@RequestParam long cicloId) {
+		
+		 System.out.println("actuasliza"+cicloId);
+		 cicloSer.borrarCiclo(cicloId);
+		return new ResponseEntity<Object> (HttpStatus.OK);    
+	}
+	
+	@PostMapping("/estadoCiclo")
+	public ResponseEntity<?> activaCiclo(@RequestParam long cicloId) {
+		
+		 System.out.println("actuasliza"+cicloId);
+		 cicloSer.cambiarEstado(cicloId);
+		return new ResponseEntity<Object> (HttpStatus.OK);    
 	}
 }

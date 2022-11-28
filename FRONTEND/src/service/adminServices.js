@@ -75,4 +75,32 @@ export default class adminServices {
             params: {indicadorId}
         })
     }
+
+    getAllCiclos() {
+        return axios.get(this.url + "getCiclos");
+    }
+
+    saveCiclo(ciclo) {
+        
+        console.log("parametro"+ciclo.nombre);
+        return axios.post(this.url + "addCiclo",{          
+            id:null, 
+            nombre:ciclo.nombre,
+            estado:null
+        })
+    }
+
+    borraCiclo(cicloId){
+        console.log("parametro"+cicloId);
+        return axios.post(this.url + "delCiclo",null,{
+            params: {cicloId}
+        })
+    }
+
+    activaCiclo(cicloId){
+        console.log("parametro"+cicloId);
+        return axios.post(this.url + "estadoCiclo",null,{
+            params: {cicloId}
+        })
+    }
 }

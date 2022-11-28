@@ -11,6 +11,7 @@ import com.aantik.demo.entidad.Ciclo;
 public interface CicloRepositorio extends CrudRepository<Ciclo,String>{
 	public Optional<Ciclo> findById(long id);
 	public Ciclo getById(long id);
+	public Iterable<Ciclo> getByEstado(boolean b);
 
 
 }

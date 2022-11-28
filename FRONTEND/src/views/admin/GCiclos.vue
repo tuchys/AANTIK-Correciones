@@ -12,12 +12,12 @@
          <br>
          Cada vez que se active un ciclo, los demás se desactivan
          <br><br>
-         <b-form @submit="onSubmit" @reset="onReset" >     
+         <b-form @submit="onSubmit">     
 
-        <b-form-group id="input-group-1" label="Ingrese el nombre del ciclo:" label-for="input-1">     
+        <b-form-group id="input-group-1" label="Si desea agregar un nuevo ciclo ingrese el nombre del ciclo:" label-for="input-1">     
           <b-form-input
             id="input-1"
-            v-model="form.pregunta"
+            v-model="form.nombre"
             placeholder="Nombre del ciclo"
             required
           ></b-form-input>
@@ -30,12 +30,12 @@
           <div>
             <b-table striped hover id="pages-table" :items="items" :fields="fields2">
               <template #cell(Eliminar)="row">
-                <b-button @click="deleteInd(row.item.id)" class="mr-2">Eliminar
+                <b-button @click="deleteCiclo(row.item.id)" class="mr-2">Eliminar
                 </b-button>
               </template>
 
               <template #cell(Activar)="row">
-                <b-button @click="deleteInd(row.item.id)" class="mr-2">Activar
+                <b-button @click="activaCiclo(row.item.id)" class="mr-2">Activar
                 </b-button>
               </template>
             </b-table>
@@ -81,19 +81,34 @@
     },
     created() {
       this.admService = new admService();
-      this.getIndBench();
+      this.getCiclos();
     },
     methods: {
-      getIndBench() {
-        this.admService.getAllIndicadores().then(data => {
+      getCiclos() {
+        this.admService.getAllCiclos().then(data => {
           this.items = data.data;
           console.log("gj-----");
         });
         console.log("gj-----");
-      },
-      deleteInd(idBorr){
+      },   
+      onSubmit(event) {
+            event.preventDefault()
+            //alert(JSON.stringify(this.form))
+            this.admService.saveCiclo(this.form).
+            then(function(response) {
+                alert("Ciclo agregado");//console.log(response.data);
+            }).catch(function(error) {
+                alert(error);//console.log(error);
+            });            
         window.location.reload();
-        this.admService.borraInd(idBorr);
+      },
+      deleteCiclo(idCiclo){
+        window.location.reload();
+        this.admService.borraCiclo(idCiclo);
+      },
+      activaCiclo(idCiclo){
+        window.location.reload();
+        this.admService.activaCiclo(idCiclo);
       }
     }
   }
