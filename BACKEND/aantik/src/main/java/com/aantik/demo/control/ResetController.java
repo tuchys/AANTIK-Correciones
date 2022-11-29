@@ -3,11 +3,7 @@ package com.aantik.demo.control;
 //import com.aantik.demo.model.EmailDetails;
 import com.aantik.demo.Services.EmailService;
 
-import java.util.List;
-
 import javax.validation.Valid;
-
-//import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

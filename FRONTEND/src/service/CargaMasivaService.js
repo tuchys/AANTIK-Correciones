@@ -1,4 +1,3 @@
-import http from "../http-common";
 
 class UploadFilesService {
   uploadMasivaDoce(file) { //Cambia a donde se desea enviar
@@ -6,7 +5,7 @@ class UploadFilesService {
 
     formData.append("file", file);
 
-    return http.post("/upiiload", formData, {
+    return http.post("http://localhost:8080/aut/agregEstFile", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }

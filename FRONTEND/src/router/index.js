@@ -207,9 +207,21 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
-    path: '/CargaMasiva',
+    path: '/CargaMasivaDoc',
+    name: 'CargaMasivaDoc',
+    component: () => import('../views/orgSocial/CargaMasivaDocente.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/CargaMasivaPre',
+    name: 'CargaMasivaPre',
+    component: () => import('../views/orgSocial/CargaMasivaPreinscritos.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
+    path: '/CargaMasivaFiles',
     name: 'CargaMasiva',
-    component: () => import('../views/CargasMasivas.vue')
+    component: () => import('../views/CargasMasivasFilesStd.vue')
     ,meta: {requiresAuth: true}
   },
   {

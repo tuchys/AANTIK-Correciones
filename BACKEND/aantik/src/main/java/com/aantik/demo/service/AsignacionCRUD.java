@@ -2,20 +2,14 @@ package com.aantik.demo.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.aantik.demo.entidad.Ciiu_Emp;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.model.ModAsig;
 import com.aantik.demo.entidad.Asignacion;
-import com.aantik.demo.entidad.CIIU;
-import com.aantik.demo.repositorio.CiiuRepositorio;
 import com.aantik.demo.repositorio.EstudianteRepositorio;
 import com.aantik.demo.repositorio.UsuarioRepositorio;
 import com.aantik.demo.repositorio.AsigRepositorio;
-import com.aantik.demo.repositorio.CiiuEmpRepositorio;
 
 @Service
 public class AsignacionCRUD implements AsignacionCRUDLocal{
