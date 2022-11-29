@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.aantik.demo.entidad.OrgSocial;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
+import com.aantik.demo.model.ModEmprendimiento;
 import com.aantik.demo.model.ModOrgSocial;
 import com.aantik.demo.repositorio.OrgSocialRepositorio;
 import com.aantik.demo.repositorio.RoleRepositorio;
@@ -86,7 +87,7 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 		}
 	}
 
-	private void crearOrgSoc(OrgSocial orgS) {
+	public void crearOrgSoc(OrgSocial orgS) {
 		// TODO Auto-generated method stub
 		if(existe(orgS) && existeUser(orgS.getCorreoIOS())) {
 			if(orgS.getCorreoIOS()!=null && orgS.getCorreoIOS().length()>1) {
@@ -264,6 +265,11 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 		for(OrgSocial aux:lista)
 			i++;
 		return i;
+	}
+
+	public ModEmprendimiento[] getOrgSocMatch() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
