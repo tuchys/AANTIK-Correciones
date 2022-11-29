@@ -257,5 +257,14 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 	    }
 	}
 
+	public int getCant() {
+		// TODO Auto-generated method stub
+		Iterable<OrgSocial> lista= repository.findAll();
+		int i=0;
+		for(OrgSocial aux:lista)
+			i++;
+		return i;
+	}
+
 
 }

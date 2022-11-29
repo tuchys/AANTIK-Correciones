@@ -1,32 +1,17 @@
 package com.aantik.demo.match;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import com.aantik.demo.cargaUsuarios.leerEmprendimientos;
 import com.aantik.demo.model.ModEmprendimiento;
-import com.aantik.demo.model.Mpreinscrito;
 
-public class Instancias {
+public class InstanciasBD {
+	public EstudianteM []estudiantes;//=new EstudianteM[40];
+	public ModEmprendimiento []emprendimientos2;//=new ModEmprendimiento[50];
 
-	
-	EstudianteM []estudiantes=new EstudianteM[40];
-//	EmprendimientoM []emprendimientos=new EmprendimientoM[50];
-	ModEmprendimiento []emprendimientos2=new ModEmprendimiento[50];
-	public Mpreinscrito []preinscritos= new Mpreinscrito[500];
-	CSV lectura=new CSV();
-	FileInputStream fis2;
-	leerEmprendimientos excelEmp=new leerEmprendimientos();
+	/*
 	void instanciaEstudiantes(String direccion) {
 		lectura.leerEstudiantes(estudiantes,direccion);		
 		System.out.println(estudiantes[0].disponibilidad);
 	}
-	
-/*	void instanciaEmprendimientos() {
-		lectura.leerEmpredimientos(emprendimientos,"FORMATOEMPR.csv");		 
-		System.out.println(emprendimientos[0].actividadEco);
-	}*/
-	
+
 	void instanciaEmprendimientos2() {
 		try {
 			fis2= new FileInputStream(new File("Datos basicos-formato.xlsx"));
@@ -41,7 +26,7 @@ public class Instancias {
 	public void instanciaPreinscritos(String direccion) {
 		lectura.leerPreinscritos(preinscritos,direccion);		 
 		System.out.println(preinscritos[0].nombre);
-	}
+	}*/
 	
 	int getCantEst() {
 		int cantidad=0;

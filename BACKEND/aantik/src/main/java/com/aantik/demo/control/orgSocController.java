@@ -1,16 +1,8 @@
 package com.aantik.demo.control;
 
 import java.io.File;
-import com.aantik.demo.repositorio.OrgSocialRepositorio;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.aantik.demo.cargaUsuarios.leerEntidades;
-import com.aantik.demo.entidad.Noticia;
 import com.aantik.demo.entidad.OrgSocial;
 import com.aantik.demo.model.ModOrgSocial;
-import com.aantik.demo.model.NoticiaEs;
 import com.aantik.demo.service.OrgSocialCRUD;
 
 @Controller
 public class orgSocController {
 	@Autowired
 	OrgSocialCRUD orgScService;
-	@Autowired
-	OrgSocialRepositorio orgScService2;
 
 	@GetMapping("/orgSCargaM")
 	public ResponseEntity<ModOrgSocial[]> cargaStu() {

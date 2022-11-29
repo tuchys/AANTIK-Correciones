@@ -165,6 +165,12 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: "/histoAsig",
+    name: "histoAsig",
+    component: () => import('../views/coordinador/historicoAsignaciones.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: "/agregarStd",
     name: "agregarStd",
     component: () => import('../views/coordinador/addEstudiante.vue')

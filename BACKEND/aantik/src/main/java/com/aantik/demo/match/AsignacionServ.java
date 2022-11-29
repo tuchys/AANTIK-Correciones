@@ -1,114 +1,50 @@
 package com.aantik.demo.match;
 
-import java.util.Random;
-import java.io.IOException;
+import com.aantik.demo.model.ModAsig;
 import com.aantik.demo.model.ModEmprendimiento;
-import com.jcraft.jsch.Channel;
 
-
-
-public class Match {
-	//se obtienen de leer las tablas
-	int cantEst=100;
-	int cantEmp=100;
-	int asignados=0;
-	
-	int estu[][][]= new int[cantEst][cantEmp+1][2] ;
-	int asignaciones[][]= new int[cantEst][2];
-	int cupos[][] = new int[cantEmp][2];
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class AsignacionServ {
+	int cantEst;
+	int cantEmp;
+	public int asignados=0;
+	public ModAsig asig[];// = new ModAsig[20];
+	int estu[][][];//= new int[cantEst][cantEmp+1][2] ;
+	int asignaciones[][];//= new int[cantEst][2];
+	int cupos[][];// = new int[cantEmp][2];
+	public InstanciasBD ins=new InstanciasBD();
+	public void inicial(int cantSt,int cantEm) {
+		this.cantEst=cantSt;
+		this.cantEmp=cantEm;
+		this.estu= new int[cantSt][cantEm][2] ;
+		this.asignaciones= new int[cantSt][2];
+		this.cupos= new int[cantEm][2];
 		
-		  /*String host="13.66.33.251";
-		    String user="aantik";
-		    String password="+JuGaLi123*";
-		    String command1="cd Aantik";
-		    String command2="ls";
-		    String command3="java HelloWorldApp";
-		    try{
-		    	
-		    	java.util.Properties config = new java.util.Properties(); 
-		    	config.put("StrictHostKeyChecking", "no");
-		    	JSch jsch = new JSch();
-		    	Session session=jsch.getSession(user, host, 22);
-		    	session.setPassword(password);
-		    	session.setConfig(config);
-		    	session.connect();
-		    	System.out.println("Connected");
-		    	
-		    	Channel channel=session.openChannel("exec"); 
-		        ((ChannelExec)channel).setCommand(command1+" && "+command2+" && "+command3); 
-		        channel.setInputStream(null);
-		        ((ChannelExec)channel).setErrStream(System.err);
-				InputStream in=channel.getInputStream();
-				channel.connect();
-		        byte[] tmp=new byte[1024];
-		        while(true){
-					while(in.available()>0){
-					    int i=in.read(tmp, 0, 1024);
-					    if(i<0)break;
-					    System.out.print(new String(tmp, 0, i));
-					  }
-
-		          if(channel.isClosed()){
-		            System.out.println("exit-status: "+channel.getExitStatus());
-		            break;
-		          }
-		          try{Thread.sleep(1000);}catch(Exception ee){}
-		        }
-				
-
-
-		       // respuesta(channel); 
-		        //respuesta(channel);
-		        
-
-		        channel.disconnect();
-		        session.disconnect();
-		        System.out.println("DONE");
-		    }catch(Exception e){
-		    	e.printStackTrace();
-		    }
-		*/
-		Instancias ins=new Instancias();
-		//ins.instanciaPreinscritos("");
 		
-		System.out.println(ins.preinscritos[0]);
-		ins.instanciaEmprendimientos2();
-		String fileEst="test.csv";
-		ins.instanciaEstudiantes(fileEst);
 		
-		Match mt=new Match();
-		mt.calcularPuntaje(ins);
-		mt.llenar2(ins);
-		mt.imprimirD1();
-		mt.imprimirD2();
-		mt.llenarCupos();
-		mt.imprimirCupos();
+		System.out.println("primer stud "+ins.estudiantes[0]);
 
-		mt.operacionInicial();
+		//Asignacion this= this.Class;
+		this.calcularPuntaje(ins);
+		this.llenar2(ins);
+		this.imprimirD1();
+		this.imprimirD2();
+		this.llenarCupos(ins.emprendimientos2);
+		this.imprimirCupos();
+
+		this.operacionInicial();
 		System.out.println("----match inicial---");
-		mt.mathcInicial(ins);
+		this.mathcInicial(ins);
 		System.out.println("----resultado match inicial---");
-		mt.imprimirD2();
+		this.imprimirD2();
 		System.out.println("----match recursivo---");
-		mt.mathc2();
+		this.mathc2();
 		System.out.println("----resultado match---");
-		mt.imprimirD2();
-		mt.asignacion(ins);
+		this.imprimirD2();
+		this.asignacion(ins);
 		
 	}
-	
-	static void respuesta(String command,Channel channel) throws IOException {
-		
-
-
-
-	}
-	
- 
-	void calcularPuntaje(Instancias in) {
+	 
+	void calcularPuntaje(InstanciasBD in) {
 		cantEst=in.getCantEst();
 		System.out.println("----Cantidad de estudiantes "+this.cantEst+"---");
 		cantEmp=in.getCantEmp();
@@ -117,7 +53,7 @@ public class Match {
 		
 	}
 	
-	void llenar2(Instancias in) {
+	void llenar2(InstanciasBD in) {
 		for(int i =0;i<cantEst;i++) {
 			estu[i][0][0]=(int) in.estudiantes[i].id;			
 			estu[i][0][1]=estu[i][0][0];
@@ -131,26 +67,6 @@ public class Match {
 		for(int i = 0;i<cantEst;i++) {
 			for(int j =1;j<cantEmp+1;j++) {
 				estu[i][j][1]=this.match(in.estudiantes[i], in.emprendimientos2[j-1]);
-				estu[i][j][0]=estu[0][j][0];
-			}
-		}
-	}
-	
-	void llenar() { 
-		//generar ids random
-		for(int i =0;i<cantEst;i++) {
-			estu[i][0][0]=i+1;			
-			estu[i][0][1]=estu[i][0][0];
-		}
-		for(int j =1;j<cantEmp+1;j++) {
-			//estu[0][j][0]=new Random().nextInt(30)+11;
-			estu[0][j][0]=cantEst+1+j;
-			cupos[j-1][0]=estu[0][j][0];
-		}
-		//puntajes 
-		for(int i = 0;i<cantEst;i++) {
-			for(int j =1;j<cantEmp+1;j++) {
-				estu[i][j][1]=new Random().nextInt(30)+31;
 				estu[i][j][0]=estu[0][j][0];
 			}
 		}
@@ -184,9 +100,9 @@ public class Match {
 		System.out.println("");
 	}
 	
-	void llenarCupos() {
+	void llenarCupos(ModEmprendimiento[] emprendimientos2) {
 		for(int j =0;j<cantEmp;j++) {
-			cupos[j][1]=new Random().nextInt(3)+1;
+			cupos[j][1]=emprendimientos2[j].cupos;
 		}
 	}
 	
@@ -257,7 +173,7 @@ public class Match {
 	  return val;		   
 	}
 	
-	void mathcInicial(Instancias in) {
+	void mathcInicial(InstanciasBD in) {
 		int mayor=0;
 		int idEst=0;
 		int idemp=0;
@@ -363,7 +279,7 @@ public class Match {
 		
 	}
 	
-	void asignacion(Instancias in) {
+	void asignacion(InstanciasBD in) {
 		int cuposTotales=0;
 		int cuposAsignados=0;
 		System.out.println("----RESULTADOS DE ASIGNACIÓN----");	
@@ -398,6 +314,7 @@ public class Match {
 		}
 		System.out.println("-Asignaciones realizadas-");
 		for(int i=0;i<asignados;i++) {
+			this.asig = new ModAsig[asignados];
 			ModEmprendimiento ret=new ModEmprendimiento();
 			ret=in.getemp(asignaciones[i][1]);
 			String nombreStu = in.nomEst(asignaciones[i][0]);
@@ -407,12 +324,13 @@ public class Match {
 					"\n Asignado a emprendimiento "+asignaciones[i][1]+" "+ret.nombreEmp
 					+"\nUbicado en direccion: "+ret.direccion+" y localidad: "
 					+ret.localidad+"\n\n");
-			/*ModAsig asig[] = new ModAsig[cantEst];
-			asig[i]=new ModAsig();
-			asig[i].setId(asignaciones[i][0]);
-			asig[i].setNombre(nombreStu);
-			asig[i].setCorreo(correoStu);
-			asig[i].setEmprendimiento(ret.nombreEmp);*/
+			asig[i]= new ModAsig();
+			asig[i].id= asignaciones[i][0];
+			asig[i].nombre= (nombreStu);
+			asig[i].correo= (correoStu);
+			asig[i].emprendimiento= (ret.nombreEmp);
+
 		}
 	}
+	
 }

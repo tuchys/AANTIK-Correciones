@@ -1,7 +1,7 @@
 package com.aantik.demo.model;
 
 public class Mpreinscrito {
-
+	public int id;
 	public String nombre;
 	public String correo;
 	public String telefono;

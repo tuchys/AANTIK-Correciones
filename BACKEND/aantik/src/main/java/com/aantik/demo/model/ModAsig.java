@@ -8,7 +8,6 @@ public class ModAsig {
 	public String nombre;
 	public String correo;   
 	public String emprendimiento;
-	public String fecha; 
-	
+	public String fecha; 	
 
 }
