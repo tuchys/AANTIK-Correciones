@@ -1,32 +1,21 @@
 package com.aantik.demo.control;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
-//import javax.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.aantik.demo.cargaUsuarios.leerDocentes;
-import com.aantik.demo.entidad.CIIU;
 import com.aantik.demo.entidad.Profesor;
-import com.aantik.demo.model.ModCiiuXemp;
 import com.aantik.demo.model.ModDocente;
 import com.aantik.demo.model.actDatosDoc;
-import com.aantik.demo.model.tejidoSocial;
 import com.aantik.demo.service.ProfesorCRUD;
-import com.aantik.demo.tejido.leerExcelTejido;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 

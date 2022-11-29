@@ -170,4 +170,13 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 		actualizar.setUserId (empren.getUserId());   
 	}
 
+	public int getCant() {
+		// TODO Auto-generated method stub
+		Iterable<Emprendimiento> lista=repository.findAll();
+		int i=0;
+		for(Emprendimiento aux:lista)
+			i++;
+		return i;
+	}
+
 }

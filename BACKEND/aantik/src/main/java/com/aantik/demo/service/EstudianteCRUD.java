@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
+import com.aantik.demo.match.EstudianteM;
 import com.aantik.demo.model.ModEstudLiv;
 import com.aantik.demo.model.ModEstudiante;
 import com.aantik.demo.model.Mpreinscrito;
@@ -297,6 +298,58 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	public Iterable<Estudiante> getpreins() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int getCantPreins() {
+		// TODO Auto-generated method stub
+		Role rol=repositoryRol.findByName("Preinscrito");
+		Iterable<User> buscar =repositoryUser.getByRoles((long)rol.getId()); 
+		int i=0;
+		for(User user:buscar){
+			Optional<Estudiante> preEncontrado = repository.findByUserId(user.getId());
+			if(preEncontrado.isPresent()) {
+				i++;
+			}
+		}
+		return i;
+	}
+
+	public EstudianteM[] getAllPreinsMatch() {
+		// TODO Auto-generated method stub
+		Role rol=repositoryRol.findByName("Preinscrito");
+		Iterable<User> buscar =repositoryUser.getByRoles((long)rol.getId()); 
+		int cantidad= countUser(buscar);
+		EstudianteM[] preinscritos=new EstudianteM[cantidad];
+		int i=0;
+		for(User user:buscar){
+			Optional<Estudiante> preExis = repository.findByUserId(user.getId());
+			if(preExis.isPresent()) {
+				Estudiante preEncontrado = repository.getByUserId(user.getId());
+				preinscritos[i]=new EstudianteM(); 
+				preinscritos[i].id=preEncontrado.getId();
+				preinscritos[i].genero=preEncontrado.getGenero();
+				preinscritos[i].limitacion=preEncontrado.getLimitacion();
+				preinscritos[i].localidad=preEncontrado.getLocalidad();
+				preinscritos[i].transporte=preEncontrado.getTransporte();
+				preinscritos[i].actividadExtra=preEncontrado.getActividadExtra();
+				preinscritos[i].disponibilidad=preEncontrado.getDisponibilidad();
+				preinscritos[i].tipoOrg=preEncontrado.getTipoOrg();
+				preinscritos[i].tipoEmp=preEncontrado.getTipoEmp();
+				preinscritos[i].actividadEco=preEncontrado.getActividadEco();
+				preinscritos[i].comunidad=preEncontrado.getComunidad();
+				preinscritos[i].enfasis=preEncontrado.getEnfasis();
+				preinscritos[i].modalidad=preEncontrado.getModalidad();
+				preinscritos[i].experiencia=preEncontrado.getExperiencia();
+				preinscritos[i].promedio=preEncontrado.getPromedio();
+				preinscritos[i].contacto=preEncontrado.getContacto();
+				preinscritos[i].limitLocalidad=preEncontrado.getLimitLocalidad();
+				preinscritos[i].correo=preEncontrado.getCorreo();
+				preinscritos[i].nombre=preEncontrado.getNombre();
+								
+				i++;
+			}
+		}
+		return preinscritos;
 	}
 
 }

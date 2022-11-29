@@ -2,10 +2,7 @@ package com.aantik.demo.control;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.ListIterator;  
 import java.util.Date;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.aantik.demo.model.NoticiaEs;
-
 import com.aantik.demo.entidad.Noticia;
-import com.aantik.demo.repositorio.noticiaRepositorio;
 import com.aantik.demo.service.NoticiaCRUD;
-
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)

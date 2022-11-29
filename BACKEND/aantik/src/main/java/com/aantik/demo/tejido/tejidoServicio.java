@@ -4,10 +4,8 @@ import com.aantik.demo.entidad.Ciiu_Emp;
 import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.entidad.OrgSocial;
 import com.aantik.demo.entidad.RedTejido;
-import com.aantik.demo.model.ModCiiuXemp;
 import com.aantik.demo.model.ModRedTejido;
 import com.aantik.demo.model.RedNodoHijo;
-import com.aantik.demo.model.tejidoSocial;
 
 public class tejidoServicio {
 	

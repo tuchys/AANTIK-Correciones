@@ -1,8 +1,6 @@
 package com.aantik.demo.repositorio;
 
 import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.data.repository.CrudRepository;
 import com.aantik.demo.entidad.OrgSocial;
 

@@ -16,12 +16,10 @@ import com.aantik.demo.model.ModBench;
 import com.aantik.demo.model.ModEmprendimiento;
 import com.aantik.demo.model.ModelBenchAux;
 import com.aantik.demo.model.encuestaPre;
-import com.aantik.demo.repositorio.PreguntasRepository;
 import com.aantik.demo.service.BenchmarkingExcelService;
 import com.aantik.demo.service.DiagnosticoCRUD;
 import com.aantik.demo.service.EmprendimientoCRUD;
 import com.aantik.demo.service.PreguntaCRUD;
-import com.aantik.demo.service.PreguntaExcelService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 
