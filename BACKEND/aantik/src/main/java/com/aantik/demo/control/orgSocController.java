@@ -60,7 +60,7 @@ public class orgSocController {
 				update.actividadEco, update.prodServ, update.contacto, update.experiencia, update.promedio,
 				update.horarioNotif, update.modalidad, update.disponibilidad, update.horarioAtencion, update.genero,
 				update.limitacion, update.comunidad, update.transporte);
-		orgScService.crearOrganizacion(org);
+		orgScService.crearOrgSoc(org);
 
 		return ResponseEntity.ok("ok");
 	}
