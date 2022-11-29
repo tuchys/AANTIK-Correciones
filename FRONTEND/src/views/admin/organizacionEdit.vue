@@ -17,7 +17,7 @@
             <b-container>
               <b-col>
                 <b-form-group id="input-group-1" label="Nombres de la organización social:" label-for="input-1">
-                  <b-form-input id="input-1" v-model="form.nombreEmp" required></b-form-input>
+                  <b-form-input id="input-1" v-model="form.nombreEmp" placeholder="Nombre" required></b-form-input>
                   <br>
                 NIT de la organización social:
                   <b-form-input id="input-1" v-model="form.nitId" placeholder="NIT" required></b-form-input>
@@ -187,9 +187,9 @@ export default {
   data() {
     return {
       form: {
-        nombreEmp: 'hj',
-        nitId: 'hhh',
-        fechaCons: '12/5/2',
+        nombreEmp: '',
+        nitId: '',
+        fechaCons: '',
         direccion: '',
         localidad: '',
         barrio: '',

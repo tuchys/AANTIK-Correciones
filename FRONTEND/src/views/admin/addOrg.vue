@@ -290,7 +290,7 @@ export default {
         this.form.modalidad = "p";
       } else
         this.form.modalidad = "m";
-
+        window.location.reload();
       axios.post("http://localhost:8080/addOrgSoc", {
         nombreEmp: this.form.nombreEmp,
         nitId: this.form.nitId,
