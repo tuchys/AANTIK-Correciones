@@ -78,7 +78,7 @@ public class AsigController {
 		    asigna.ins.estudiantes=new EstudianteM[totalPreins];
 		    asigna.ins.emprendimientos2=new ModEmprendimiento[totalEmpAses];
 		    asigna.ins.estudiantes=servcioEst.getAllPreinsMatch();
-		    //asigna.ins.emprendimientos2=orgScService.getOrgSocMatch();
+		    asigna.ins.emprendimientos2=orgScService.getOrgSocMatch();
 		    //asigna.ins.emprendimientos2=empService.getemprMatch(asigna.ins.emprendimientos2);
 		    //calcular match
 		    asigna.inicial(totalPreins,totalEmpAses); 
