@@ -5,8 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.aantik.demo.model.ModAsig;
+import com.aantik.demo.model.ModCoordinador;
 import com.aantik.demo.model.ModEmprendimiento;
 import com.aantik.demo.service.AsignacionCRUD;
 import com.aantik.demo.service.EmprendimientoCRUD;
@@ -96,4 +99,13 @@ public class AsigController {
 		}
     
     }
+    @PostMapping("/asignarSTU")
+    public ResponseEntity<?> asignarSTU(@RequestBody ModAsig asig) {
+    
+    	System.out.println("correo "+asig.correo);
+		    asigRepositorio.asignarr(asig);
+		    return ResponseEntity.ok("ok");
+
+    }
+    
 }

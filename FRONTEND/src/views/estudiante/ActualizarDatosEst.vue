@@ -12,7 +12,7 @@
     <div>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
 
-        <b-form-group id="input-group-1" label="Nombre:" label-for="input-1">     
+        <b-form-group id="input-group-1" label="Correo:" label-for="input-1">     
           <b-form-input
             id="input-1"
             v-model="form.nada"
@@ -33,7 +33,7 @@
         <b-form-group id="input-group-1" label="Municipio:" label-for="input-3">     
           <b-form-input
             id="input-3"
-            v-model="form.municipio"
+            v-model="form.ciudad"
             placeholder="Municipio"
             required
           ></b-form-input>
@@ -74,21 +74,12 @@
           ></b-form-select>
         </b-form-group>
 
-        <b-form-group id="input-group-5" label="¿Tiene alguna limitación para realizar su práctica social en alguna localidad de Bogotá?" label-for="input-8">     
-          <b-form-select
-          id="input-8"
-          v-model="form.localidadrest"
-          :options="localidad"
-          required
-        ></b-form-select>
-        </b-form-group>
-
 
         <b-form-group id="input-group-4" label="Seleccione los horarios en los que desea recibir notificaciones relacionadas con su proyecto social universitario o CDIO
 " label-for="input-9">     
           <b-form-select
             id="input-9"
-            v-model="form.notif"
+            v-model="form.notificaiones"
             :options="notif"
             required
           ></b-form-select>
@@ -118,15 +109,14 @@ import AuthService from "@/service/auth.service"
   export default {
     data() {
       return {
-        encargado: AuthService.getUser(),
+        encargado: AuthService.getCorreo(),
         form: {
           telefono: '',
-          municipio: '',
+          ciudad: '',
           localidad: null,
           barrio: '',
           direccion: '',
           limitacion: null,
-          localidadrest: null,
           notif: null,
 
         },
@@ -146,14 +136,13 @@ import AuthService from "@/service/auth.service"
       onSubmit() {
         axios.post("http://localhost:8080/datosEs",{
           telefono: this.form.telefono,
-          municipio: this.form.municipio,
+          ciudad: this.form.ciudad,
           localidad: this.form.localidad,
           barrio: this.form.barrio,
           direccion: this.form.direccion,
           limitacion: this.form.limitacion,
-          localidadrest: this.form.localidadrest,
-          notif: this.form.notif,
-          nombre: AuthService.getUser(),
+          notificaciones: this.form.notificaciones,
+          correo: AuthService.getCorreo(),
           //id: AuthService.getUser(),
 
         });

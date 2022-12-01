@@ -4,11 +4,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aantik.demo.entidad.Coordinador;
 import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
 import com.aantik.demo.match.EstudianteM;
+import com.aantik.demo.model.ModCoordinador;
 import com.aantik.demo.model.ModEstudLiv;
 import com.aantik.demo.model.ModEstudiante;
 import com.aantik.demo.model.Mpreinscrito;
@@ -342,6 +344,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	            e.printStackTrace();
 	        }					
 	    }
+	}
 		
 	public int getCantPreins() {
 		// TODO Auto-generated method stub
@@ -394,5 +397,27 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 		}
 		return preinscritos;
 	}
+	public void actualizar2(ModEstudiante ests) {
+		// TODO Auto-generated method stub
+	    Estudiante est=repository.getByCorreo(ests.correo);
+	    if(ests != null) {                                                
+	        est.setTelefono (ests.telefono) ;                                                         
+	        est.setCiudad (ests.ciudad) ;
+	        est.setLocalidad (ests.localidad) ;
+	        est.setBarrio (ests.barrio) ;                                                   
+	        est.setDireccion (ests.direccion) ;                                                                                                           
+	        est.setLimitacion (ests.limitacion) ;                                                           
+	        est.setNotificaciones (ests.notificaciones) ;                                                        
+
+  
+	        try {
+	            repository.save(est);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+	}
+
 
 }

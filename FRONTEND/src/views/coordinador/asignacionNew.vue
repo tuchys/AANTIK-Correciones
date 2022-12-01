@@ -17,8 +17,8 @@
         <br>
         <div>
           <b-table striped hover :items="users" :fields="fields1">
-            <template #cell(asignar)="row">
-              <b-button class="mr-2">Asignar
+            <template #cell(asignar)="data">                            
+              <b-button class="mr-2" @click="asignarSTU(data.item)">Asignar
               </b-button>
             </template>
           </b-table>
@@ -86,6 +86,23 @@ export default {
     );
   },
   methods: {
+    asignarSTU: function (cosa) {
+      //window.location.reload();
+      console.log(cosa)
+      console.log(cosa.correo)
+      axios.post("http://localhost:8080/api/asignarSTU", {
+        nombre: cosa.nombre,
+        correo: cosa.correo,
+        emprendimiento: cosa.emprendimiento,
+        fecha: cosa.fecha
+        
+        }).catch((error) => {
+        if (error.response) {
+          console.log(error.response.data); // => the response payload 
+        }
+      });
+        console.log(cosa.nombre)
+      },
     handleInput(value, data) {},
   },
 };

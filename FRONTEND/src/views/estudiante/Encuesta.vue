@@ -72,11 +72,12 @@
         ></b-form-select>
         </b-form-group>
 
-        <b-form-group id="input-group-5" label="Localidad:" label-for="input-10">     
+        <b-form-group id="input-group-5" label="Seleccione su localidad o la localidad mas cercana:" label-for="input-10">     
           <b-form-select
           id="input-10"
           v-model="form.localidad"
           :options="localidad"
+          required
         ></b-form-select>
         </b-form-group>
 
@@ -216,15 +217,7 @@
           ></b-form-select>
         </b-form-group>
 
-        <b-form-timepicker id="input-group-4" label="¿Cuáles son los días que cuenta con mayor disponibilidad para comunicarse con el interlocutor e ir al espacio de trabajo?" label-for="input-26">     
-          <b-form-select
-            id="input-26********************************************************************"
-            v-model="form.dia"
-            :options="modalidad"
-            required
-          ></b-form-select>
-        </b-form-timepicker>
-        
+         
         <b-form-group id="input-group-4" label="Seleccione el tipo de organización social a la que le interesa ser asignado" label-for="input-27">     
           <b-form-select
             id="input-27"
@@ -265,24 +258,6 @@
           <b-form-select
             id="input-31"
             v-model="form.nivel"
-            :options="nivel"
-            required
-          ></b-form-select>
-        </b-form-group>
-
-        <b-form-group id="input-group-4" label="Cual es el segundo factor mas importanta para usted al momento de elegir la entidad" label-for="input-32">     
-          <b-form-select
-            id="input-32"
-            v-model="form.nivel2"
-            :options="nivel"
-            required
-          ></b-form-select>
-        </b-form-group>
-
-        <b-form-group id="input-group-4" label="Cual es el factor menos importanta para usted al momento de elegir la entidad" label-for="input-33">     
-          <b-form-select
-            id="input-33"
-            v-model="form.nivel3"
             :options="nivel"
             required
           ></b-form-select>
@@ -356,7 +331,7 @@ import SidebarMenuAkahon from "@/components/SideBarPreIns.vue"
         },
         asignatura: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
         genero: [{ text: 'Selecione una', value: null }, 'Masculino', 'Femenino', 'Otro'],
-        municipio: [{ text: 'Selecione una', value: null }, 'Bogota D.C.', 'Otro'],
+        municipio: [{ text: 'Selecione una', value: null }, 'Bogota D.C.', 'Área metropolitana Norte', 'Área metropolitana Sur', 'Área metropolitana Este', 'Área metropolitana Oeste'],
         localidad: [{ text: 'Selecione una', value: null }, 'Usaquén', 'Chapinero', 'Santa Fe', 'San Cristóbal', 'Usme', 'Tunjuelito', 'Bosa', 'Kennedy', 'Fontibón', 'Engativá', 'Suba', 'Barrios Unidos', 'Teusaquillo', '	Los Mártires', 'Antonio Nariño', 'Puente Aranda', 'La Candelaria', 'Rafael Uribe Uribe', 'Ciudad Bolívar', 'Sumapaz'],
         actividad: [{ text: 'Selecione una', value: null }, 'Si', 'No'],
         experiencia: [{ text: 'Selecione una', value: null }, 'Monitoria en la javeriana', 'Trabajo social o voluntariado', 'No'],
@@ -371,7 +346,7 @@ import SidebarMenuAkahon from "@/components/SideBarPreIns.vue"
         tipoorg: [{ text: 'Selecione una', value: null }, 'Fundación', 'Cooperativas', 'Colegios','Fondos de empleados','Asociaciones','Corporaciones','Hospitales'],
         tipoemp: [{ text: 'Selecione una', value: null }, 'Microempresas', 'Emprendimiento familiar', 'Emprendimiento potencial','Emprendimiento grandes empresas','Emprendimiento social','Emprendimiento pequeñas empresas'],
         eco: [{ text: 'Selecione una', value: null }, 'Manufactura - confecciones', 'Manufactura - alimentos', 'Manufactura - artículos decorativos','Servicios','Otro'],
-        comun: [{ text: 'Selecione una', value: null }, 'Ancianos', 'Jóvenes', 'Niños','Adultos'],
+        comun: [{ text: 'Selecione una', value: null }, 'Niños de 0-3', 'Niños de 3-7', 'Niños de 7-12','Adolescentes de 13-18', 'Jovenes de 18 a 30', 'Adultos de 30-60','Ancianos mas de 60', 'Familias', 'Mujeres y niñas','Toda la comunidad'],
         nivel: [{ text: 'Selecione una', value: null }, 'Ubicación', 'Disponibilidad', 'Actividad económica','Tipo de organización','Comunidad a beneficiar'],
         selected: [],
         show: true

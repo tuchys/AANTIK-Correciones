@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.aantik.demo.entidad.Asignacion;
+import com.aantik.demo.entidad.Estudiante;
 
 public interface AsigRepositorio extends CrudRepository<Asignacion,Long>{
 	public Optional<Asignacion> findById(Long id);

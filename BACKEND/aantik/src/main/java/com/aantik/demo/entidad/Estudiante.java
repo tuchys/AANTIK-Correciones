@@ -99,6 +99,8 @@ public class Estudiante implements Serializable{
 	public String actividadEco;
 	@Column
 	public String comunidad;
+	@Column
+	public String emprendimiento;
 	
 	
 	@JoinTable(name = "user",
@@ -400,6 +402,14 @@ public class Estudiante implements Serializable{
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+	
+	public String getEmprendimiento() {
+		return emprendimiento;
+	}
+
+	public void setEmprendimiento(String emprendimiento) {
+		this.emprendimiento = emprendimiento;
 	}
 
 	@Override

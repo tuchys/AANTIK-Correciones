@@ -35,4 +35,5 @@ public class ModEstudiante {
 		public int pActividad;
 		public int pTipoOrg;
 		public int pComunidad;
+		public String emprendimiento;
 }

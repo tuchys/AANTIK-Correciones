@@ -95,5 +95,20 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 		}
 		return asig;
 	}
+	
+	public void asignarr(ModAsig asi) {
+	    // TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(asi.correo);
+	    if(asi != null && stu.getCorreo() != null) {
+	        stu.setEmprendimiento(asi.emprendimiento) ;                                                                                                                                                          
+  
+	        try {
+	            repositorySt.save(stu);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+	}
 
 }
