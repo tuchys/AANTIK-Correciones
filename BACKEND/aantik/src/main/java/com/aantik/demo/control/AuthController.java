@@ -62,6 +62,8 @@ import com.aantik.demo.repositorio.EstudianteRepositorio;
 import com.aantik.demo.entidad.Profesor;
 import com.aantik.demo.repositorio.ProfesorRepositorio;
 
+import net.bytebuddy.utility.RandomString;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/aut")
@@ -208,6 +210,18 @@ public class AuthController {
 	//	System.out.print("as6asa");
 		if(!repoEst.findByIdEstudiantil(s).isPresent()){
 			repoEst.save(estud);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	String token = RandomString.make(10);
+	UserG user = new UserG(estud.getCorreo(), 
+	encoder.encode(token));
+	System.out.println("Contrasena nueva es: " + token);
+	Set<RoleG> roles = new HashSet<>();
+	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
+	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+	roles.add(userRole);
+	user.setRoles(roles);
+	userRepository.save(user);		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 		}else{
 			return ResponseEntity.ok(new MessageResponse("Estudiante ya se encuentra registrado"));
