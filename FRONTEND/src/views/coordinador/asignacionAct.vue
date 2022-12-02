@@ -59,9 +59,6 @@
         </div> 
         <br>
       </b-col>
-      <b-col>
-      
-      </b-col>
     </b-row>
   </b-container>   
 </template>
@@ -80,16 +77,7 @@ export default {
   },
   data() {
     return {
-      items: [
-        { ID: 40, Nombres: 'Dickerson', Clase:'2230' , Emprendimiento: 'emprendimiento 2' },
-        { ID: 40, Nombres: 'Dickerson', Clase:'2230' , Emprendimiento: 'emprendimiento 2' },
-        { ID: 40, Nombres: 'Dickerson', Clase:'2230' , Emprendimiento: 'emprendimiento 2' }
-      ],
-      items2: [
-        { ID: 40, Nombres: 'Dickerson', Clase:'2230', Requisitos:'si'},
-        { ID: 40, Nombres: 'Dickerson', Clase:'2230', Requisitos:'si'},
-        { ID: 40, Nombres: 'Dickerson', Clase:'2230', Requisitos:'No'}
-      ],items3: [
+      items3: [
         { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'},
         { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'},
         { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'}

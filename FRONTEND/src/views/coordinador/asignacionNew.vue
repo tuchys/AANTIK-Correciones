@@ -30,7 +30,14 @@
           <button type="submit" class="btn btn-dark btn-lg btn-inline">
             <h2><b-icon-clock-history></b-icon-clock-history></h2>  
             Ver historial
-        </button></router-link>
+        </button></router-link>&nbsp
+        <router-link :to="{name: 'detalles', params: {fecha:'hola'}}">
+          <b-button class="mr-2" @click="message('hola')">
+            <h2><b-icon-clipboard-check></b-icon-clipboard-check></h2>  
+            Ver detalles
+        </b-button></router-link>
+        
+        <br><br>
       </b-col>
     </b-row>
   </b-container>   
@@ -39,16 +46,20 @@
 <script>
 import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
 import axios from "axios";
-import {BIconClockHistory } from 'bootstrap-vue'
+import detallesAs from "@/views/coordinador/detallesAsignacion.vue"
+import {BIconClockHistory,BIconClipboardCheck } from 'bootstrap-vue'
 export default {
 
    components: {
     SidebarMenuAkahon,
-    BIconClockHistory
+    BIconClockHistory,
+    BIconClipboardCheck,
+    detallesAs
   },
   name: 'estudiantesCord',
   data() {
     return {
+      fechaP: '23/22/2222',
       users: [{
         nombre: null,
         correo: null,
@@ -87,6 +98,11 @@ export default {
   },
   methods: {
     handleInput(value, data) {},
+    message(idrec){
+      this.msg=idrec;
+      console.log("inicial---",idrec);
+
+    },
   },
 };
 

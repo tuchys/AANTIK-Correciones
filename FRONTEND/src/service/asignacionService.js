@@ -17,9 +17,9 @@ export default class asignacionService {
         return axios.get(this.url + "api/infoAsigAct");
     }
 
-    getRespDiag(correo){
+    getDetalles(fecha){
         return axios.post(this.url + "getResDG",null,{
-            params: { correo}
+            params: { fecha}
         });
     }
 

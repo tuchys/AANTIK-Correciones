@@ -201,6 +201,12 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: '/detalles/:fecha',
+    name: 'detalles',
+    component: () => import('../views/coordinador/detallesAsignacion.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: '/BenchDefiniciones',
     name: 'BenchDefini',
     component: () => import('../views/BenchDefiniciones.vue')
