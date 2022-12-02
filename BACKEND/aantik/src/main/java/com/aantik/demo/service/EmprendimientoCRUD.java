@@ -112,8 +112,10 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 			}
 		}else {
 			Emprendimiento actualizar=repository.getByCorreoIE(empren.getCorreoIE());
+			if(actualizar!=null) {
 			mapear(empren,actualizar);
 			repository.save(actualizar);
+			}
 		}
 	}
 
@@ -177,6 +179,44 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 		for(Emprendimiento aux:lista)
 			i++;
 		return i;
+	}
+
+	public ModEmprendimiento[] getemprMatch(ModEmprendimiento[] emprendimientos2) {
+		// TODO Auto-generated method stub
+		Iterable<Emprendimiento> lista=repository.findAll();
+		int cantidad=getCant(),i=0;
+		for(Emprendimiento aux:lista) {
+			if(emprendimientos2[i]==null) {
+				emprendimientos2[i]= new ModEmprendimiento();
+				emprendimientos2[i].nombreEmp=aux.getNombreEmp();
+				emprendimientos2[i].fechaCons=aux.getFechaCons();
+				emprendimientos2[i].direccion=aux.getDireccion();
+				emprendimientos2[i].localidad=aux.getLocalidad();//****
+				emprendimientos2[i].barrio=aux.getBarrio();
+				emprendimientos2[i].temaAsesorar=aux.getTemaAsesorar();
+				emprendimientos2[i].nombreInterOS=aux.getNombreInterOS();
+				emprendimientos2[i].telefonoIOS=aux.getTelefonoIOS();
+				emprendimientos2[i].correoIOS=aux.getCorreoIOS();
+				emprendimientos2[i].cupos=aux.getCupos();
+				emprendimientos2[i].empleados=aux.getEmpleados();
+				emprendimientos2[i].linAccion=aux.getLinAccion();
+				emprendimientos2[i].actividadEco=aux.getActividadEco();
+				emprendimientos2[i].prodServ=aux.getProdServ();
+				emprendimientos2[i].contacto=aux.getContacto();
+				emprendimientos2[i].experiencia=aux.isExperiencia();//**
+				emprendimientos2[i].promedio=aux.isPromedio();//**
+				emprendimientos2[i].horarioNotif=aux.getHorarioNotif();
+				emprendimientos2[i].modalidad=aux.getModalidad();//**
+				emprendimientos2[i].disponibilidad=aux.getDisponibilidad();
+				emprendimientos2[i].horarioAtencion=aux.getHorarioAtencion();
+				emprendimientos2[i].genero=aux.getGenero();//**
+				emprendimientos2[i].limitacion=aux.isLimitacion();
+				emprendimientos2[i].comunidad=aux.getComunidad();
+				emprendimientos2[i].transporte=aux.isTransporte();//*p
+			}
+			i++;
+		}
+		return emprendimientos2;
 	}
 
 }

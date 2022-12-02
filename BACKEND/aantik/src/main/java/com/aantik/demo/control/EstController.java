@@ -58,7 +58,7 @@ public class EstController {
 			try {
 				fis2 = new FileInputStream(new File("preinscritos.xlsx"));
 				//tejido.leerTejido(fis2,CIIUlista);
-				excelStu.getPreinscritos(fis2,preLista);
+				cant=excelStu.getPreinscritos(fis2,preLista);
 				System.out.println(cant);
 				
 			} catch (FileNotFoundException e) {

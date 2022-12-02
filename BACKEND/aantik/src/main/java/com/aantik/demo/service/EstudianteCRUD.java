@@ -116,7 +116,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	public void saveAllPre(Mpreinscrito[] preLista, int cant) {
 		Estudiante preins=new Estudiante();
 		System.out.println("VERIFICANDO "+preLista.length);
-		for(int i =0;i<preLista.length;i++) {
+		for(int i =0;i<cant;i++) {
 			preins=new Estudiante();
 			if(preLista[i]!=null) {
 				preins.setNombre(preLista[i].nombre);
@@ -351,5 +351,42 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 		}
 		return preinscritos;
 	}
-
+	
+	public EstudianteM[] getAllinsMatch() {
+		// TODO Auto-generated method stub
+		Role rol=repositoryRol.findByName("Estudiante");
+		Iterable<User> buscar =repositoryUser.getByRoles((long)rol.getId()); 
+		int cantidad= countUser(buscar);
+		EstudianteM[] preinscritos=new EstudianteM[cantidad];
+		int i=0;
+		for(User user:buscar){
+			Optional<Estudiante> preExis = repository.findByUserId(user.getId());
+			if(preExis.isPresent()) {
+				Estudiante preEncontrado = repository.getByUserId(user.getId());
+				preinscritos[i]=new EstudianteM(); 
+				preinscritos[i].id=preEncontrado.getId();
+				preinscritos[i].genero=preEncontrado.getGenero();
+				preinscritos[i].limitacion=preEncontrado.getLimitacion();
+				preinscritos[i].localidad=preEncontrado.getLocalidad();
+				preinscritos[i].transporte=preEncontrado.getTransporte();
+				preinscritos[i].actividadExtra=preEncontrado.getActividadExtra();
+				preinscritos[i].disponibilidad=preEncontrado.getDisponibilidad();
+				preinscritos[i].tipoOrg=preEncontrado.getTipoOrg();
+				preinscritos[i].tipoEmp=preEncontrado.getTipoEmp();
+				preinscritos[i].actividadEco=preEncontrado.getActividadEco();
+				preinscritos[i].comunidad=preEncontrado.getComunidad();
+				preinscritos[i].enfasis=preEncontrado.getEnfasis();
+				preinscritos[i].modalidad=preEncontrado.getModalidad();
+				preinscritos[i].experiencia=preEncontrado.getExperiencia();
+				preinscritos[i].promedio=preEncontrado.getPromedio();
+				preinscritos[i].contacto=preEncontrado.getContacto();
+				preinscritos[i].limitLocalidad=preEncontrado.getLimitLocalidad();
+				preinscritos[i].correo=preEncontrado.getCorreo();
+				preinscritos[i].nombre=preEncontrado.getNombre();
+								
+				i++;
+			}
+		}
+		return preinscritos;
+	}
 }

@@ -67,6 +67,27 @@ public class AsigController {
     
     }
     
+    @GetMapping("/infoAsigAct")
+    public ResponseEntity<EstudianteM[][]> asigancionesActuales() {
+    	try {	
+		    //cantidad en BD
+		    int totalPreins=servcioEst.getCantPreins();
+		   //instancia de datos de BD
+		    EstudianteM[][] lists=new EstudianteM[2][];
+		    lists[1]=servcioEst.getAllPreinsMatch();
+		    lists[0]=servcioEst.getAllinsMatch();
+ 
+		    //String fecha=asigRepositorio.crearAsignacion(asig); 
+		    //asig2=asigRepositorio.getAsigActual(asig2,fecha);
+		    //Iterable<Asignacion> res = asigRepositorio.getAll();
+		    return new ResponseEntity<EstudianteM[][]>  (lists, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println("Usuario no existe"+e);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+    
+    }
+    
     @GetMapping("/asignacionBD")
     public ResponseEntity<ModAsig[]> asigancionBD() {
     	try {	
@@ -78,9 +99,10 @@ public class AsigController {
 		    asigna.ins.estudiantes=new EstudianteM[totalPreins];
 		    asigna.ins.emprendimientos2=new ModEmprendimiento[totalEmpAses];
 		    asigna.ins.estudiantes=servcioEst.getAllPreinsMatch();
-		    asigna.ins.emprendimientos2=orgScService.getOrgSocMatch();
-		    //asigna.ins.emprendimientos2=empService.getemprMatch(asigna.ins.emprendimientos2);
+		    asigna.ins.emprendimientos2=orgScService.getOrgSocMatch(asigna.ins.emprendimientos2);
+		    asigna.ins.emprendimientos2=empService.getemprMatch(asigna.ins.emprendimientos2);
 		    //calcular match
+		    System.out.println("totasl de entidades a asignar: "+totalEmpAses+"-"+orgScService.getCant()+"-"+empService.getCant());
 		    asigna.inicial(totalPreins,totalEmpAses); 
 		    
 		    ModAsig asig[] = new ModAsig[asigna.asignados];		    
@@ -89,7 +111,7 @@ public class AsigController {
 		    //String fecha=asigRepositorio.crearAsignacion(asig); 
 		    //asig2=asigRepositorio.getAsigActual(asig2,fecha);
 		    //Iterable<Asignacion> res = asigRepositorio.getAll();
-		    return new ResponseEntity<ModAsig[]>  (asig, HttpStatus.OK);
+		    return new ResponseEntity<ModAsig[]>  (asigna.asig, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println("Usuario no existe"+e);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

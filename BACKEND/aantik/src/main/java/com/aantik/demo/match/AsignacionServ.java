@@ -21,7 +21,8 @@ public class AsignacionServ {
 		
 		
 		
-		System.out.println("primer stud "+ins.estudiantes[0]);
+		System.out.println("primer stud "+ins.estudiantes[0].nombre);
+		System.out.println("primer worgsoc "+ins.emprendimientos2[0].nombreEmp);
 
 		//Asignacion this= this.Class;
 		this.calcularPuntaje(ins);
@@ -111,12 +112,14 @@ public class AsignacionServ {
 	  String em;
 	  es= est.disponibilidad;
 	  em = emp.disponibilidad;
+	  if(es !=null) {
 	  for(int i = 0; i < es.length(); i=i+4){
 	    for(int j = 0; j < em.length(); j=j+4){//sacar sub string de 3 char
 	      if(es.equals(em) ){
 	        return true;
 	        }
 	    }
+	  }
 	  }
 	  return false;
 	}
@@ -125,9 +128,13 @@ public class AsignacionServ {
 	  int val = 0;
 	  if(est.genero != emp.genero && emp.genero != 'I'){
 	    return -999;
-	  }else if(est.limitacion==true && emp.limitacion==false){
-	    return val-999;
+	  }else {
+		val+=1;  
 	  }
+	  if(est.limitacion==true && emp.limitacion==false){
+		  return val-999;
+	  }else
+		val+=1; 
 	  if(est.localidad == emp.localidad){
 	    val += est.pUbicacion*2;
 	  }
@@ -307,14 +314,19 @@ public class AsignacionServ {
 		
 		if(asignados<cantEst) {
 			System.out.println("-Estudiantes sin asignar-");
+			int sin=0;
 			for(int i=0;i<cantEst;i++) {
-				if(estu[i][0][1]!=0)
+				if(estu[i][0][1]!=0) {
 					System.out.println(estu[i][0][1]);
+				sin +=1;
+				}
 			}
+
+			System.out.println("sin asignar "+sin+"---2 forma-"+(cantEst-asignados));
 		}
 		System.out.println("-Asignaciones realizadas-");
+		this.asig = new ModAsig[asignados];
 		for(int i=0;i<asignados;i++) {
-			this.asig = new ModAsig[asignados];
 			ModEmprendimiento ret=new ModEmprendimiento();
 			ret=in.getemp(asignaciones[i][1]);
 			String nombreStu = in.nomEst(asignaciones[i][0]);
@@ -329,7 +341,6 @@ public class AsignacionServ {
 			asig[i].nombre= (nombreStu);
 			asig[i].correo= (correoStu);
 			asig[i].emprendimiento= (ret.nombreEmp);
-
 		}
 	}
 	

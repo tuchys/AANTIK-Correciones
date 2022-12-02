@@ -267,9 +267,43 @@ public class OrgSocialCRUD implements OrgSocialCRUDLocal{
 		return i;
 	}
 
-	public ModEmprendimiento[] getOrgSocMatch() {
+	public ModEmprendimiento[] getOrgSocMatch(ModEmprendimiento[] OrgSocR) {
 		// TODO Auto-generated method stub
-		return null;
+		Iterable<OrgSocial> lista= repository.findAll();
+		int cantidad=getCant(),i=0;
+		//ModEmprendimiento[] OrgSocR = new ModEmprendimiento[cantidad];
+		for(OrgSocial aux:lista) {
+			OrgSocR[i]= new ModEmprendimiento();
+			OrgSocR[i].id=(int) aux.getUserId();
+			OrgSocR[i].nombreEmp=aux.getNombreEmp();
+			OrgSocR[i].NIT=aux.getNitId();
+			OrgSocR[i].fechaCons=aux.getFechaCons();
+			OrgSocR[i].direccion=aux.getDireccion();
+			OrgSocR[i].localidad=aux.getLocalidad();//****
+			OrgSocR[i].barrio=aux.getBarrio();
+			OrgSocR[i].temaAsesorar=aux.getTemaAsesorar();
+			OrgSocR[i].nombreInterOS=aux.getNombreInterOS();
+			OrgSocR[i].telefonoIOS=aux.getTelefonoIOS();
+			OrgSocR[i].correoIOS=aux.getCorreoIOS();
+			OrgSocR[i].cupos=aux.getCupos();
+			OrgSocR[i].empleados=aux.getEmpleados();
+			OrgSocR[i].linAccion=aux.getLinAccion();
+			OrgSocR[i].actividadEco=aux.getActividadEco();
+			OrgSocR[i].prodServ=aux.getProdServ();
+			OrgSocR[i].contacto=aux.getContacto();
+			OrgSocR[i].experiencia=aux.isExperiencia();//**
+			OrgSocR[i].promedio=aux.isPromedio();//**
+			OrgSocR[i].horarioNotif=aux.getHorarioNotif();
+			OrgSocR[i].modalidad=aux.getModalidad();//**
+			OrgSocR[i].disponibilidad=aux.getDisponibilidad();
+			OrgSocR[i].horarioAtencion=aux.getHorarioAtencion();
+			OrgSocR[i].genero=aux.getGenero();//**
+			OrgSocR[i].limitacion=aux.isLimitacion();
+			OrgSocR[i].comunidad=aux.getComunidad();
+			OrgSocR[i].transporte=aux.isTransporte();//*p
+			i++;
+		}
+		return OrgSocR;
 	}
 
 
