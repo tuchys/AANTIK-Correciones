@@ -1,12 +1,8 @@
 package com.aantik.demo.match;
 import java.util.Stack;
-
 import com.aantik.demo.model.ModEmprendimiento;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
-
 import java.util.Random;
 
 public class jmain {
@@ -62,7 +58,7 @@ public class jmain {
 	
 	void llenar2(Instancias in) {
 		for(int i =0;i<cantEst;i++) {
-			estu[i][0][0]=in.estudiantes[i].id;			
+			estu[i][0][0]=(int) in.estudiantes[i].id;			
 			estu[i][0][1]=estu[i][0][0];
 		}
 		for(int j =1;j<cantEmp+1;j++) {

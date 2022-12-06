@@ -18,7 +18,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.aantik.demo.Security.Services.UserDetailsServiceImpl;
-import com.aantik.demo.Security.Services.UserDetailsImpl;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired

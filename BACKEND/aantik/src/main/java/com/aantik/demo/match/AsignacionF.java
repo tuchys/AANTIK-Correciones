@@ -1,42 +1,17 @@
 package com.aantik.demo.match;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.aantik.demo.entidad.Coordinador;
-import com.aantik.demo.repositorio.CoordinadorRepositorio;
 import java.util.Random;
 import java.io.IOException;
-import java.io.InputStream;
-
 import com.aantik.demo.model.ModAsig;
 import com.aantik.demo.model.ModEmprendimiento;
 import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.aantik.demo.cargaUsuarios.leerEmprendimientos;
-import com.aantik.demo.entidad.Estudiante;
-import com.aantik.demo.model.ModEmprendimiento;
-import com.aantik.demo.model.Mpreinscrito;
-import com.aantik.demo.service.UserCRUD;
 
 
 public class AsignacionF {
 
 	int cantEst=100;
 	int cantEmp=100;
-	int asignados=0;
+	public int asignados=0;
 	public ModAsig asig[] = new ModAsig[20];
 	int estu[][][]= new int[cantEst][cantEmp+1][2] ;
 	int asignaciones[][]= new int[cantEst][2];
@@ -91,7 +66,7 @@ public class AsignacionF {
 	
 	void llenar2(Instancias in) {
 		for(int i =0;i<cantEst;i++) {
-			estu[i][0][0]=in.estudiantes[i].id;			
+			estu[i][0][0]=(int) in.estudiantes[i].id;			
 			estu[i][0][1]=estu[i][0][0];
 		}
 		for(int j =1;j<cantEmp+1;j++) {

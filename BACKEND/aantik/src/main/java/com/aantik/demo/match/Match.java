@@ -2,15 +2,8 @@ package com.aantik.demo.match;
 
 import java.util.Random;
 import java.io.IOException;
-import java.io.InputStream;
-
-//import com.aantik.demo.model.ModAsig;
 import com.aantik.demo.model.ModEmprendimiento;
 import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
 
 
 
@@ -126,7 +119,7 @@ public class Match {
 	
 	void llenar2(Instancias in) {
 		for(int i =0;i<cantEst;i++) {
-			estu[i][0][0]=in.estudiantes[i].id;			
+			estu[i][0][0]=(int) in.estudiantes[i].id;			
 			estu[i][0][1]=estu[i][0][0];
 		}
 		for(int j =1;j<cantEmp+1;j++) {

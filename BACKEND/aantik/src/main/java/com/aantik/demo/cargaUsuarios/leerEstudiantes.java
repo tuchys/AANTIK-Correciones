@@ -16,7 +16,7 @@ import com.aantik.demo.model.Mpreinscrito;
 
 public class leerEstudiantes {
 	
-	  public void getPreinscritos(InputStream is, Mpreinscrito[] lista) {
+	  public int getPreinscritos(InputStream is, Mpreinscrito[] lista) {
 		  	String actividad= null;
 		  	try {
 		    Workbook workbook = new XSSFWorkbook(is);
@@ -93,7 +93,7 @@ public class leerEstudiantes {
 		      }
 
 	    	//  System.out.println("CLOSE: "+rowDatos);	
-    		return;// rowDatos;
+    		return rowDatos;// rowDatos;
 		    } catch (IOException e) {
 		      throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
 		    }

@@ -27,10 +27,11 @@
                 <b-form-select
                 id="inline-form-custom-select-pref"
                 class="mb-2 mr-sm-2 mb-sm-0"
+                v-model="valCuanti"
                 :options="[{ text: '0', value: null }, '1', '2', '3','4','5']"
                 :value="null"
             ></b-form-select>
-            <b-button class="mr-2"  @click="enviar(row)">Editar
+            <b-button class="mr-2"  @click="actualiza(row.item.id,valCuanti)">Editar
                             </b-button>
     
             </b-form>
@@ -59,15 +60,17 @@ import serviceD from "@/service/diagnosticoService"
     data() {
       return{
         resp:[{
+          id:null,
           pregunta:null,
           respuesta:null,
           puntaje:null
         }],
-  
+        valCuanti: null,
         campos: [
           { key: "pregunta" },
           { key: "respuesta" },
-          { key: "puntaje"},
+          { key: "puntaje",
+          sortable: true},
           { key: "Editar" }
         ],
         entidad: "yku",
@@ -102,8 +105,10 @@ import serviceD from "@/service/diagnosticoService"
         console.log("gj-----");
         console.log(this.resp.pregunta);
       },
-      enviar(roww){
-        console.log("id cargaqdo",roww)
+      actualiza(roww,valCuanti){
+        console.log("id resp ",roww," nueva cuanti ",valCuanti);
+        this.serviceD.changeCuanti(roww,valCuanti);
+        window.location.reload();
       }
     },
 }

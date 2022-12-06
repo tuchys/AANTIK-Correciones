@@ -15,7 +15,7 @@
         Agregar organizaciones sociales</button>
     </router-link><br>
     Ingrese aquí para agregar una organizacion social de forma individual
-    <router-link to="/addOrg">
+    <router-link to="/agregarOrgSoc">
       <button type="submit" class="btn btn-dark btn-lg btn-block">
         Agregar organizacion social</button>
     </router-link><br>
@@ -28,19 +28,23 @@
 
         <br>
         <div>
-          <b-table striped hover id="pages-table" :items="users" :fields="fields" :key="field">
+          <b-table striped hover id="pages-table" :items="users" :fields="fields2" >
             
               <template #cell(Editar)="data">
-
-                  <router-link id = data.item.id :to="{ path: '/orgEdit'+ data.item.id}" v-bind:tooltip=data.item.id append>
-                  <b-button class="mr-2">Editar/Ver
-                  </b-button></router-link>
+                <router-link :to="{name: 'orgEdit', params: {idOS:data.item.id}}">
+                 <b-button class="mr-2" @click="message(data.item.id)">Editar/Ver
+                   
+                  </b-button>
+                </router-link>
+  
+                 
 
               </template>
 
               <template #cell(Eliminar)="data">
                 <router-link to="/orgAdmin">
                 <b-button @click="orgDelete(data.item.id, data.index)" class="mr-2">Eliminar
+                  
                 </b-button></router-link>
               </template>
           </b-table>
@@ -55,43 +59,27 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBar.vue"
+import editOrgSoc from "@/views/admin/organizacionEdit.vue"
 import axios from 'axios';
 
 
 export default {
   components: {
     SidebarMenuAkahon,
+    editOrgSoc
   },
-
-
-
-
   name: 'orgS',
-
   data() {
-
     return {
       users: [{
-
         id: null,
-
         nombreEmp: null,
-
         nombreInterOS: null,
-
         tipoOS: null,
-
         actividadEco: null,
-
         prodServ: null,
-
       }],
-
-      fields: [
-        {
-          key: "id",
-          label: "id"
-        },
+      fields2: [
         {
           key: "nombreEmp",
           label: "Nombre"
@@ -139,6 +127,11 @@ export default {
       axios.post("http://localhost:8080/orgDelete", {
         id
       });
+
+    },
+    message(idrec){
+      this.msg=idrec;
+      console.log("inicial---",idrec);
 
     },
 

@@ -67,9 +67,9 @@
      components: {
       SidebarMenuAkahon,
       BIcon,
-    BIconArrowUp,
-    BIconNewspaper,
-    BIconChatQuote
+      BIconArrowUp,
+      BIconNewspaper,
+      BIconChatQuote
     },
     methods: {
       search() {

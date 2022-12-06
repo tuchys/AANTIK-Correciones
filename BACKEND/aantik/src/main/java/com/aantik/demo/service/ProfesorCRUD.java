@@ -3,8 +3,6 @@ package com.aantik.demo.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.aantik.demo.entidad.OrgSocial;
 import com.aantik.demo.entidad.Profesor;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -73,7 +71,6 @@ public class ProfesorCRUD implements ProfesorCRUDLocal{
 		// TODO Auto-generated method stub
 		Profesor docente=new Profesor();
 		for(int i =0;i<cantRed;i++) {
-			docente.setId((long) docLista[i].id);
 			docente.setNombre(docLista[i].nombre);
 			docente.setVinculacion(docLista[i].vinculacion);
 			docente.setTitulo(docLista[i].titulo);

@@ -2,7 +2,6 @@
   <b-container>  
       <div>
         <sidebar-menu-akahon 
-          @search-input-emit="search"
         />
       </div> 
   <b-row>
@@ -16,7 +15,7 @@
         <b-form-group id="input-group-1" label="Nombres y apellidos:" label-for="input-1">     
           <b-form-input
             id="input-1"
-            v-model="form.name"
+            v-model="nombre"
             placeholder="Nombres y apellidos"
             required
           ></b-form-input>
@@ -29,8 +28,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.vinculacion"
-            type="email"
+            v-model="vinculacion"
             placeholder="Vinculación"
             required
           ></b-form-input>
@@ -43,8 +41,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.titulo"
-            type="email"
+            v-model="titulo"
             placeholder="título profesional"
             required
           ></b-form-input>
@@ -57,8 +54,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.especialidad"
-            type="email"
+            v-model="especialidad"
             placeholder="especialidad"
             required
           ></b-form-input>
@@ -71,7 +67,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.email"
+            v-model="correo"
             type="email"
             placeholder="Correo institucional"
             required
@@ -81,7 +77,7 @@
         <b-form-group id="input-group-3" label="ID docente:" label-for="input-3">     
           <b-form-input
             id="input-3"
-            v-model="form.idEst"
+            v-model="id"
             placeholder="ID docente"
             required
           ></b-form-input>
@@ -90,7 +86,7 @@
         <b-form-group id="input-group-4" label="Telefono:" label-for="input-4">     
           <b-form-input
             id="input-4"
-            v-model="form.telefono"
+            v-model="telefono"
             placeholder="telefono"
             required
           ></b-form-input>
@@ -99,8 +95,8 @@
         <b-form-group id="input-group-5" label="Asignatura a la que pertenece:" label-for="input-5">     
           <b-form-select
           id="input-5"
-          v-model="form.asignatura"
-          :options="asignatura"
+          v-model="asignatura"
+          :options="asignaturas"
           required
         ></b-form-select>
         </b-form-group>
@@ -112,8 +108,7 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.oficina"
-            type="email"
+            v-model="oficina"
             placeholder="oficina"
             required
           ></b-form-input>
@@ -126,31 +121,20 @@
         >
           <b-form-input
             id="input-2"
-            v-model="form.direccion"
-            type="email"
+            v-model="direcRes"
             placeholder="dirección de residencia"
             required
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group
-          id="input-group-2"
-          label="Localidad/Municipio:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.localidad"
-            type="email"
-            placeholder="Localidad/Municipio"
-            required
-          ></b-form-input>
-        </b-form-group>
+        <b-form-group id="input-group-2" label="Localidad/Municipio:" label-for="input-2">
+              <b-form-select id="input-2" v-model="localidad" :options="localidades" required></b-form-select>
+            </b-form-group>
 
         <b-form-group id="input-group-7" label="Sector económico de experiencia:" label-for="input-7">     
           <b-form-input
             id="input-7"
-            v-model="form.sector"
+            v-model="sectoEc"
             placeholder="Sector económico"
             required
           ></b-form-input>
@@ -159,7 +143,7 @@
         <b-form-group id="input-group-5" label="Cuenta con experiencia en asesoría:" label-for="input-5">     
           <b-form-select
           id="input-5"
-          v-model="form.opcionExp"
+          v-model="expe"
           :options="opcionYN"
           required
         ></b-form-select>
@@ -168,7 +152,7 @@
         <b-form-group id="input-group-5" label="Medio de comunicación que prefiere:" label-for="input-5">     
           <b-form-select
           id="input-5"
-          v-model="form.comunicacion"
+          v-model="contacto"
           :options="comunicacion"
           required
         ></b-form-select>
@@ -177,7 +161,9 @@
         <b-button type="submit" variant="primary">Guardar</b-button>
         <b-button type="reset" variant="danger">Cancelar</b-button>
       </b-form>
-      
+      <div class="s" margin-top>
+          <div v-if="message" class="alert alert-primary" role="alert">{{message}} </div>
+        </div>
     </div>
   </b-col>
       <b-col>
@@ -189,22 +175,31 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
-
+import axios from 'axios'
   export default {
     data() {
       return {
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          checked: []
-        },
-        asignatura: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
-        show: true,
+        message:'',
+        nombre: '',
+        id:"",////
+        vinculacion: '',
+        titulo: '',
+        especialidad: '',
+        telefono: '',
+        correo: '',
+        oficina: '',
+        expe:"",////
+        direcRes: '',
+        localidad: '',
+        sectoEc: '',
+        tipoOS: "",
+        asignatura: [],
+        asignaturas: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
+        contacto: [],
         comunicacion: [{ text: 'Selecione una', value: null }, 'Whatsapp', 'Teams','Correo','Llamada'],
-        
         show: true,
         opcionYN: [{ text: 'Selecione una', value: null }, 'Si', 'No'],
+        localidades: [{ text: 'Selecione una', value: null }, 'Usaquén', 'Chapinero', 'Santa Fe', 'San Cristóbal', 'Usme', 'Tunjuelito', 'Bosa', 'Kennedy', 'Fontibón', 'Engativá', 'Suba', 'Barrios Unidos', 'Teusaquillo', '	Los Mártires', 'Antonio Nariño', 'Puente Aranda', 'La Candelaria', 'Rafael Uribe Uribe', 'Ciudad Bolívar', 'Sumapaz'],
         show: true
       }
     },
@@ -212,9 +207,37 @@ import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
     SidebarMenuAkahon,
     },
     methods: {
-      onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
+      onSubmit() {
+        axios.post("http://localhost:8080/aut/EditTeacher",{//
+          nombre:this.nombre,
+          vinculacion:this.vinculacion,
+          titulo:this.titulo,
+          especialidad:this.especialidad,
+          telefono:this.telefono,
+          correo:this.correo,
+          oficina:this.oficina,
+          direcRes:this.direcRes,
+          localidad:this.localidad,
+          sectoEc:this.sectoEc,
+          tipoOS:this.tipoOS,
+          asignatura:this.asignatura,
+          contacto:this.contacto,
+        }).then((response)=>{
+          this.message=response.data.message;
+          this.nombre="",
+          this.vinculacion="",
+          this.titulo="",
+          this.especialidad="",
+          this.telefono="",
+          this.correo="",
+          this.oficina="",
+          this.direcRes="",
+          this.localidad="",
+          this.sectoEc="",
+          this.tipoOS="",
+          this.asignatura="",
+          this.contacto=""
+        })
       },
       onReset(event) {
         event.preventDefault()

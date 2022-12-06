@@ -24,8 +24,7 @@ public class Emprendimiento implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native",strategy="native")
-    @Column(name = "id")
-	private Long id;
+	private long id;
 	@Column
 	private String nombreEmp;
 	@Column
@@ -93,11 +92,11 @@ public class Emprendimiento implements Serializable{
 			inverseJoinColumns=@JoinColumn(name="userId"))
 	private long userId;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

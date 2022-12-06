@@ -3,14 +3,9 @@ package com.aantik.demo.match;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.aantik.demo.cargaUsuarios.leerEmprendimientos;
-import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.model.ModEmprendimiento;
 import com.aantik.demo.model.Mpreinscrito;
-import com.aantik.demo.service.UserCRUD;
 
 public class Instancias {
 

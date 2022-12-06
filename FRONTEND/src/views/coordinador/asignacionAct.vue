@@ -1,9 +1,7 @@
 <template>
   <b-container>  
        <div>
-          <sidebar-menu-akahon 
-            @search-input-emit="search"
-          />
+          <sidebar-menu-akahon/>
         </div> 
     <b-row>
       <b-col>
@@ -24,7 +22,7 @@
            
         <br>
         <div>
-          <b-table striped hover id="pages-table" :items="items" :fields="fields">
+          <b-table striped hover id="pages-table" :items="actual.preinscritos" :fields="fields1">
             <template #cell(Editar)="row">
               <b-button class="mr-2">Editar
               </b-button>
@@ -39,15 +37,8 @@
         Listado de estudiantes no asignados
         <br>
         <div>
-          <b-table striped hover :items="items2" :fields="fields2">
-            <template #cell(Editar)="row">
-              <b-button class="mr-2">Editar
-              </b-button>
-            </template>
-            <template #cell(Eliminar)="row">
-              <b-button class="mr-2">Elminar
-              </b-button>
-            </template>
+          <b-table striped hover :items="actual.inscritos" :fields="fields2">
+           
           </b-table>
         </div>
         <br>
@@ -67,16 +58,14 @@
           </b-table>
         </div> 
         <br>
-              </b-col>
-              <b-col>
-              
-              </b-col>
-            </b-row>
-          </b-container>   
-        </template>
+      </b-col>
+    </b-row>
+  </b-container>   
+</template>
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
+import AsignacionService from "@/service/asignacionService";
 
 export default {
   name: 'estudiantesCord',
@@ -86,9 +75,66 @@ export default {
    components: {
     SidebarMenuAkahon,
   },
+  data() {
+    return {
+      items3: [
+        { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'},
+        { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'},
+        { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'}
+      ],fields1: [
+        {key: "nombre"},
+        { key: "correo" }
+      ],fields2: [
+        {key: "nombre"},
+        { key: "correo" }
+      ],fields3: [
+        {
+          key: "ID",
+          label: "ID",
+          sortable: true
+        },
+        { key: "Emprendimiento" },
+        { key: "Cuposd", label:"Cupos disponibles" },
+        { key: "cuposT", label:"Cupos totales"  }
+      ],
+      actual:{
+        preinscritos:[{          
+          correo:null,
+          nombre:null,
+        }],
+        inscritos:[{
+          nombre:null,
+          correo:null
+        }]
+      },
+      aux :null     
+    }
+  }, 
+  mounted() {
+    this.AsignacionService = new AsignacionService();
+    this.getAll()
+  },
   methods: {
     search() {
       
+    },
+    getAll() {
+      try{
+        this.AsignacionService.getActual()
+        .then(data => {
+          this.actual.preinscritos = data.data[0];
+          this.actual.inscritos = data.data[1];
+            console.log(data);
+            console.log(data.headers);
+        }).catch(function(error) {
+            console.log(error);
+        });   
+      } catch (error) {
+        console.log(error);
+      }
+      
+      console.log("gj-----");
+      console.log(this.actual.preinscritos);
     },
     update(data) {
       // I need to disable the button here
@@ -97,51 +143,6 @@ export default {
       this.$refs["btn" + data.index].disabled = true      
     }
   },
-  data() {
-      return {
-        items: [
-          { ID: 40, Nombres: 'Dickerson', Clase:'2230' , Emprendimiento: 'emprendimiento 2' },
-          { ID: 40, Nombres: 'Dickerson', Clase:'2230' , Emprendimiento: 'emprendimiento 2' },
-          { ID: 40, Nombres: 'Dickerson', Clase:'2230' , Emprendimiento: 'emprendimiento 2' }
-        ],
-        items2: [
-          { ID: 40, Nombres: 'Dickerson', Clase:'2230', Requisitos:'si'},
-          { ID: 40, Nombres: 'Dickerson', Clase:'2230', Requisitos:'si'},
-          { ID: 40, Nombres: 'Dickerson', Clase:'2230', Requisitos:'No'}
-        ],items3: [
-          { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'},
-          { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'},
-          { ID: 40, Emprendimiento: 'Dickerson', Cuposd:'3', cuposT:'1'}
-        ],fields: [
-          {
-            key: "ID",
-            label: "ID",
-            sortable: true
-          },
-          { key: "Nombres" },
-          { key: "Clase" },
-          { key: "Emprendimiento" }
-        ],fields2: [
-          {
-            key: "ID",
-            label: "ID",
-            sortable: true
-          },
-          { key: "Nombres" },
-          { key: "Clase" },
-          { key: "Requisitos" }
-        ],fields3: [
-          {
-            key: "ID",
-            label: "ID",
-            sortable: true
-          },
-          { key: "Emprendimiento" },
-          { key: "Cuposd", label:"Cupos disponibles" },
-          { key: "cuposT", label:"Cupos totales"  }
-        ]
-      }      
-  }
 }
 </script>
 

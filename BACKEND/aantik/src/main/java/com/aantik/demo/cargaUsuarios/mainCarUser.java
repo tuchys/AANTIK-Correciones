@@ -15,7 +15,7 @@ public class mainCarUser {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Mpreinscrito [] preLista = new Mpreinscrito[500];
-		ModEmprendimiento [] empLista = new ModEmprendimiento[500];
+		ModEmprendimiento [] empLista = new ModEmprendimiento[500];                
 		ModOrgSocial [] orgLista = new ModOrgSocial[50];
 		ModDocente [] docLista = new ModDocente[50];
 		ModEstudiante [] estLista = new ModEstudiante[500];
@@ -28,7 +28,8 @@ public class mainCarUser {
 		try {
 			fis2 = new FileInputStream(new File("preinscritos.xlsx"));
 			//tejido.leerTejido(fis2,CIIUlista);
-			excelStu.getPreinscritos(fis2,preLista);
+			int cantP=excelStu.getPreinscritos(fis2,preLista);
+			System.out.println("cantidad de preinscritos" + cantP);
 			fis2 = new FileInputStream(new File("Datos basicos-formato.xlsx"));
 			excelEmp.getEmprendimientos(fis2,empLista);
 			fis2 = new FileInputStream(new File("resEncuesta.xlsx"));

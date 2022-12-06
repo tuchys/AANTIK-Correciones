@@ -2,7 +2,6 @@
   <b-container>  
        <div>
           <sidebar-menu-akahon 
-            @search-input-emit="search"
           />
         </div> 
     <b-row>
