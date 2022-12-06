@@ -30,9 +30,9 @@ public class ProfesorCRUD implements ProfesorCRUDLocal{
 		return true;
 	}
 	
-	@Override
+ 	@Override
 	public void crearProfesor(Profesor addProf) throws Exception {
-		if(existe(addProf)) {
+	/*	if(existe(addProf)) {
 			if(addProf.getCorreo()!=null && addProf.getCorreo().length()>1) {
 				User userDoc=new User();
 				userDoc.setUsername(addProf.getCorreo());
@@ -48,7 +48,7 @@ public class ProfesorCRUD implements ProfesorCRUDLocal{
 				addProf = repository.save(addProf);
 				System.out.println("insertando docente");
 			}
-		}
+		}*/
 		//return addProf;
 	}
 

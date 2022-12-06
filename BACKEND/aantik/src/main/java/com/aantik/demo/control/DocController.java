@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import com.aantik.demo.HelperClassServices.AddUsers;
 import com.aantik.demo.cargaUsuarios.leerDocentes;
 import com.aantik.demo.entidad.Profesor;
 import com.aantik.demo.model.ModDocente;
 import com.aantik.demo.model.actDatosDoc;
+import com.aantik.demo.model.tejidoSocial;
+import com.aantik.demo.repositorio.ProfesorRepositorio;
 import com.aantik.demo.service.ProfesorCRUD;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -23,6 +26,12 @@ import com.aantik.demo.service.ProfesorCRUD;
 public class DocController {
 	@Autowired
 	ProfesorCRUD servDoc;
+
+	@Autowired
+	ProfesorRepositorio RepoDoc;
+
+	@Autowired
+	AddUsers addUsers;
 	
     @PostMapping("/datosDoc")
     public ResponseEntity<?> processForgotPassword(@RequestBody actDatosDoc update) {
@@ -66,8 +75,7 @@ public class DocController {
 		}
 	}
 	
-@PostMapping("/addDoc")
-	
+    @PostMapping("/addDoc")
 	public ResponseEntity<?> addDoc(@RequestBody ModDocente update) throws Exception {
 
 		
@@ -77,7 +85,9 @@ public class DocController {
 				update.secEco2, update.tipoOS, update.horarioNotif, update.horarioAtencion, update.nOdisponibilidad,
 				update.limitacion);
 		
-		servDoc.crearProfesor(pro);
+		RepoDoc.save(pro);
+		addUsers.addUserProfesor(update.correo);
+		//	servDoc.crearProfesor(pro);
 		return ResponseEntity.ok("ok");
 	}
 	

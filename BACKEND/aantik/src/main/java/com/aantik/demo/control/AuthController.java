@@ -74,9 +74,11 @@ public class AuthController {
 	AuthenticationManager authenticationManager;
 
 	@Autowired
-	ProfesorRepositorio ProfeRepo;
+	AddUsers agregStd;
 
 	@Autowired
+	ProfesorRepositorio ProfeRepo;
+
 	EstudianteRepositorio repoEst;
 
 	@Autowired
@@ -195,23 +197,15 @@ public class AuthController {
 	@PostMapping("/agregEst")
 	public ResponseEntity<?> AgregueStu(@Valid @RequestBody Estudiante estud ) {
 
-		System.out.print(estud.getNombre());
-		System.out.print(estud.getDocumento());
-		System.out.print(estud.getAsignatura());
-		System.out.print(estud.getFechaSP());
-		System.out.print(estud.getTelefono());
-		System.out.print(estud.getCorreo());
-		System.out.print(estud.getIdEstudiantil());
-
 		String s=String.valueOf(estud.getIdEstudiantil());
 		long l=Long.parseLong(s);  
-	//	System.out.print("asasa");
 		estud.setIdEstudiantil(s);
-	//	System.out.print("as6asa");
 		if(!repoEst.findByIdEstudiantil(s).isPresent()){
 			repoEst.save(estud);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			agregStd.addUserStudent(estud.getCorreo());
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	String token = RandomString.make(10);
+/* 	String token = RandomString.make(10);
 	UserG user = new UserG(estud.getCorreo(), 
 	encoder.encode(token));
 	System.out.println("Contrasena nueva es: " + token);
@@ -220,7 +214,7 @@ public class AuthController {
 	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
 	roles.add(userRole);
 	user.setRoles(roles);
-	userRepository.save(user);		
+	userRepository.save(user);	*/	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 		}else{
@@ -228,8 +222,10 @@ public class AuthController {
 		}
 		
 	}
+	
 	@PostMapping("/agregEstFile")
-	public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<ResponseMessage> uploadFile(@RequestBody @RequestParam("file")  MultipartFile file) {
+
 		String message = "";
 		try {
 		  storageService.store(file);
@@ -264,6 +260,5 @@ public class AuthController {
 		//}*/
 	//	return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 	}
-
 
 }

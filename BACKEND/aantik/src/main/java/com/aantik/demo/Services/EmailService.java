@@ -10,4 +10,9 @@ public interface EmailService {
     // To send an email with attachment
     String sendMailWithAttachment(String email,String token);
 
+    // Method
+    // To send an email with user details
+    String sendMailForUsers(String email,String Password);
+    
+
 }
