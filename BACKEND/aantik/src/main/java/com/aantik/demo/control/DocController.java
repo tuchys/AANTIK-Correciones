@@ -18,13 +18,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
+<<<<<<< Updated upstream
+=======
+import com.aantik.demo.HelperClassServices.AddUsers;
+>>>>>>> Stashed changes
 import com.aantik.demo.cargaUsuarios.leerDocentes;
 import com.aantik.demo.entidad.CIIU;
 import com.aantik.demo.entidad.Profesor;
 import com.aantik.demo.model.ModCiiuXemp;
 import com.aantik.demo.model.ModDocente;
 import com.aantik.demo.model.actDatosDoc;
+<<<<<<< Updated upstream
 import com.aantik.demo.model.tejidoSocial;
+=======
+import com.aantik.demo.repositorio.ProfesorRepositorio;
+>>>>>>> Stashed changes
 import com.aantik.demo.service.ProfesorCRUD;
 import com.aantik.demo.tejido.leerExcelTejido;
 
@@ -34,6 +42,12 @@ import com.aantik.demo.tejido.leerExcelTejido;
 public class DocController {
 	@Autowired
 	ProfesorCRUD servDoc;
+
+	@Autowired
+	ProfesorRepositorio RepoDoc;
+
+	@Autowired
+	AddUsers addUsers;
 	
     @PostMapping("/datosDoc")
     public ResponseEntity<?> processForgotPassword(@RequestBody actDatosDoc update) {
@@ -77,8 +91,7 @@ public class DocController {
 		}
 	}
 	
-@PostMapping("/addDoc")
-	
+    @PostMapping("/addDoc")
 	public ResponseEntity<?> addDoc(@RequestBody ModDocente update) throws Exception {
 
 		
@@ -88,7 +101,9 @@ public class DocController {
 				update.secEco2, update.tipoOS, update.horarioNotif, update.horarioAtencion, update.nOdisponibilidad,
 				update.limitacion);
 		
-		servDoc.crearProfesor(pro);
+		RepoDoc.save(pro);
+		addUsers.addUserProfesor(update.correo);
+		//	servDoc.crearProfesor(pro);
 		return ResponseEntity.ok("ok");
 	}
 	

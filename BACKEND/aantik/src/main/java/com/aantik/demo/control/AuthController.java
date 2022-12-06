@@ -56,6 +56,15 @@ public class AuthController {
 	AuthenticationManager authenticationManager;
 
 	@Autowired
+<<<<<<< Updated upstream
+=======
+	AddUsers agregStd;
+
+	@Autowired
+	ProfesorRepositorio ProfeRepo;
+
+	@Autowired
+>>>>>>> Stashed changes
 	EstudianteRepositorio repoEst;
 
 	@Autowired
@@ -170,23 +179,15 @@ public class AuthController {
 	@PostMapping("/agregEst")
 	public ResponseEntity<?> AgregueStu(@Valid @RequestBody Estudiante estud ) {
 
-		System.out.print(estud.getNombre());
-		System.out.print(estud.getDocumento());
-		System.out.print(estud.getAsignatura());
-		System.out.print(estud.getFechaSP());
-		System.out.print(estud.getTelefono());
-		System.out.print(estud.getCorreo());
-		System.out.print(estud.getIdEstudiantil());
-
 		String s=String.valueOf(estud.getIdEstudiantil());
 		long l=Long.parseLong(s);  
-	//	System.out.print("asasa");
 		estud.setIdEstudiantil(s);
-	//	System.out.print("as6asa");
 		if(!repoEst.findByIdEstudiantil(s).isPresent()){
 			repoEst.save(estud);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			agregStd.addUserStudent(estud.getCorreo());
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	String token = RandomString.make(10);
+/* 	String token = RandomString.make(10);
 	UserG user = new UserG(estud.getCorreo(), 
 	encoder.encode(token));
 	System.out.println("Contrasena nueva es: " + token);
@@ -195,7 +196,7 @@ public class AuthController {
 	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
 	roles.add(userRole);
 	user.setRoles(roles);
-	userRepository.save(user);		
+	userRepository.save(user);	*/	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 		}else{
@@ -203,4 +204,46 @@ public class AuthController {
 		}
 		
 	}
+<<<<<<< Updated upstream
+=======
+	
+	@PostMapping("/agregEstFile")
+	public ResponseEntity<ResponseMessage> uploadFile(@RequestBody @RequestParam("file")  MultipartFile file) {
+		String message = "";
+		try {
+		  storageService.store(file);
+	
+		  message = "Uploaded the file successfully: " + file.getOriginalFilename();
+		  return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+		} catch (Exception e) {
+		  message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+		  return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+		}
+	  }
+
+	  @PostMapping("/EditTeacher")
+	public ResponseEntity<?> EditPro(@Valid @RequestBody Profesor estud ) {
+
+		System.out.print(estud.getNombre());
+		//System.out.print(estud.getDocumento());
+		System.out.print(estud.getAsignatura());
+		//System.out.print(estud.getFechaSP());
+		System.out.print(estud.getTelefono());
+		System.out.print(estud.getCorreo());
+		//System.out.print(estud.getIdEstudiantil());
+
+		//String s=String.valueOf(estud.getIdEstudiantil());
+		//long l=Long.parseLong(s);  
+		//estud.setIdEstudiantil(s);
+		//if(!repoEst.findByIdEstudiantil(s).isPresent()){
+			ProfeRepo.save(estud);
+			return ResponseEntity.ok(new MessageResponse("Profesor actalizado exitosamente!"));
+		//}else{
+		//	return ResponseEntity.ok(new MessageResponse("Estudiante ya se encuentra registrado"));
+		//}*/
+	//	return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
+	}
+
+
+>>>>>>> Stashed changes
 }
