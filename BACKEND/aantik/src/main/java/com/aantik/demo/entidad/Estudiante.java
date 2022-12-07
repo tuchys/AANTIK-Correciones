@@ -99,12 +99,24 @@ public class Estudiante implements Serializable{
 	public String actividadEco;
 	@Column
 	public String comunidad;
+	@Column
+	public Integer status; //0 pre - 1 estudiante
 	
 	
 	@JoinTable(name = "user",
 	joinColumns=@JoinColumn(name="id"),
 	inverseJoinColumns=@JoinColumn(name="id"))
 	private long userId;
+
+	
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public Long getId() {
 		return id;

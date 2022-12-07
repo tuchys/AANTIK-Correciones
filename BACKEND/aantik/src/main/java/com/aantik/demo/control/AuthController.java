@@ -2,6 +2,7 @@ package com.aantik.demo.control;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
@@ -79,6 +80,7 @@ public class AuthController {
 	@Autowired
 	ProfesorRepositorio ProfeRepo;
 
+	@Autowired
 	EstudianteRepositorio repoEst;
 
 	@Autowired
@@ -200,6 +202,7 @@ public class AuthController {
 		String s=String.valueOf(estud.getIdEstudiantil());
 		long l=Long.parseLong(s);  
 		estud.setIdEstudiantil(s);
+		estud.setStatus(0);
 		if(!repoEst.findByIdEstudiantil(s).isPresent()){
 			repoEst.save(estud);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
@@ -238,7 +241,7 @@ public class AuthController {
 		}
 	  }
 
-	  @PostMapping("/EditTeacher")
+	@PostMapping("/EditTeacher")
 	public ResponseEntity<?> EditPro(@Valid @RequestBody Profesor estud ) {
 
 		System.out.print(estud.getNombre());
@@ -253,7 +256,7 @@ public class AuthController {
 		//long l=Long.parseLong(s);  
 		//estud.setIdEstudiantil(s);
 		//if(!repoEst.findByIdEstudiantil(s).isPresent()){
-			
+
 			ProfeRepo.save(estud);
 			return ResponseEntity.ok(new MessageResponse("Profesor actalizado exitosamente!"));
 		//}else{
@@ -262,4 +265,15 @@ public class AuthController {
 	//	return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 	}
 
+	@GetMapping("/getStudent")
+	public ResponseEntity<?> GetStud(){
+
+		return ResponseEntity.ok(repoEst.findByStatus(1));
+	}
+	@GetMapping("/getPreinsc")
+	public ResponseEntity<?> GetPre(){
+
+		
+		return ResponseEntity.ok(repoEst.findByStatus(0));
+	}
 }

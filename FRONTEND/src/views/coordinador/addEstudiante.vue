@@ -65,8 +65,8 @@
         <b-form-group id="input-group-6" label="Fecha en que asistió a charla sentido de mi práctica:" label-for="input-6">     
           <b-form-input
             id="input-6"
-            v-model="fechaSP"
-            placeholder="dd/mm/aaaa"
+            type="date"
+            v-model="fechaSP"          
             required
           ></b-form-input>
         </b-form-group>
