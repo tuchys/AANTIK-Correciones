@@ -58,6 +58,7 @@ import com.aantik.demo.HelperClassServices.*;
 import com.aantik.demo.Payload.*;
 import com.aantik.demo.Security.Services.UserDetailsImpl;
 import com.aantik.demo.Security.jwt.*;
+import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.repositorio.EstudianteRepositorio;
 import com.aantik.demo.entidad.Profesor;
@@ -93,6 +94,9 @@ public class AuthController {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	RoleRepository roleRepo;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -310,4 +314,17 @@ public class AuthController {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
   }
 
+    @PostMapping("/deletePreinsc")
+	public ResponseEntity<?> DeletePreinsc(@Valid @RequestBody Estudiante estu ){
+		System.out.println(estu.getId());
+	
+		Estudiante emp = repoEst.findById(estu.getId()).get();
+		System.out.println("POOOOOOOOOOROROROROROROROOROROR " + emp.getUserId());
+		int intnum = (int)emp.getUserId();
+		//roleRepo.deleteById(intnum);
+		
+		userRepository.deleteById(emp.getUserId());
+		repoEst.deleteById(estu.getId());
+		return ResponseEntity.ok(repoEst.findByStatus(0));
+	}
 }
