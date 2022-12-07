@@ -106,4 +106,22 @@ public String addEMP(String correo){
 	return "ya esxite";
 }
 
+public String ChangePretoStud(String correo){
+    
+	if(!userRepository.existsByUsername(correo)){
+
+	UserG user = userRepository.findByUsername(correo).get();
+	Set<RoleG> roles = new HashSet<>();
+	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
+	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+	roles.add(userRole);
+	user.setRoles(roles);	
+    
+    return "agrego";
+	}
+	return "ya esxite";
+}
+
+
+
 }

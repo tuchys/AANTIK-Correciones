@@ -253,6 +253,7 @@ public class AuthController {
 		//long l=Long.parseLong(s);  
 		//estud.setIdEstudiantil(s);
 		//if(!repoEst.findByIdEstudiantil(s).isPresent()){
+			
 			ProfeRepo.save(estud);
 			return ResponseEntity.ok(new MessageResponse("Profesor actalizado exitosamente!"));
 		//}else{
