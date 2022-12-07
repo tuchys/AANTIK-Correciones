@@ -119,7 +119,7 @@ import axios from 'axios'
       onSubmit() {
         console.log(this.asig)
       
-        axios.post("http://localhost:8080/aut/agregEst",{
+        axios.post("http://localhost:8080/aut/agregPreEst",{
           correo:this.correo,
           documento:this.documento,
           nombre:this.nombre,

@@ -14,10 +14,23 @@
         <router-link to="/subirFile">
         <button type="submit" class="btn btn-dark btn-lg btn-block">
         Agregar estudiantes preinscritos</button></router-link><br>
-        Ingrese aquí para agregar un estudiante individual
+
+        Ingrese aquí para agregar estudiantes inscritos de forma masiva
+        por medio de un archivo .xls (excel)
+        <router-link to="/subirFile">
+        <button type="submit" class="btn btn-dark btn-lg btn-block">
+        Agregar estudiantes inscritos</button></router-link><br> 
+
+        Ingrese aquí para agregar un estudiante preinscrito de forma individual
         <router-link to="/agregarStd">
         <button type="submit" class="btn btn-dark btn-lg btn-block">
-        Agregar estudiante</button></router-link><br>
+        Agregar estudiante preinscrito</button></router-link><br>
+        <br>
+
+        Ingrese aquí para agregar un estudiante inscrito de forma individual
+        <router-link to="/agregarStdInsc">
+        <button type="submit" class="btn btn-dark btn-lg btn-block">
+        Agregar estudiante inscrito</button></router-link><br>
         <br>
 
         Listado de estudiantes preinscritos

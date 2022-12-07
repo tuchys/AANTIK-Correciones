@@ -202,11 +202,41 @@ public class AuthController {
 		String s=String.valueOf(estud.getIdEstudiantil());
 		long l=Long.parseLong(s);  
 		estud.setIdEstudiantil(s);
-		estud.setStatus(0);
+		estud.setStatus(1);
 		if(!repoEst.findByIdEstudiantil(s).isPresent()){
 			repoEst.save(estud);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 			agregStd.addUserStudent(estud.getCorreo());
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* 	String token = RandomString.make(10);
+	UserG user = new UserG(estud.getCorreo(), 
+	encoder.encode(token));
+	System.out.println("Contrasena nueva es: " + token);
+	Set<RoleG> roles = new HashSet<>();
+	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
+	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+	roles.add(userRole);
+	user.setRoles(roles);
+	userRepository.save(user);	*/	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
+		}else{
+			return ResponseEntity.ok(new MessageResponse("Estudiante ya se encuentra registrado"));
+		}
+		
+	}
+
+	@PostMapping("/agregPreEst")
+	public ResponseEntity<?> AgreguePreStu(@Valid @RequestBody Estudiante estud ) {
+
+		String s=String.valueOf(estud.getIdEstudiantil());
+		long l=Long.parseLong(s);  
+		estud.setIdEstudiantil(s);
+		estud.setStatus(0);
+		if(!repoEst.findByIdEstudiantil(s).isPresent()){
+			repoEst.save(estud);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			agregStd.addPreinsc(estud.getCorreo());
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* 	String token = RandomString.make(10);
 	UserG user = new UserG(estud.getCorreo(), 
