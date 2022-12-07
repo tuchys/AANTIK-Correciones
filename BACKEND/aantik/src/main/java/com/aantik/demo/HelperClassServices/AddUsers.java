@@ -22,6 +22,7 @@ public class AddUsers {
 
     @Autowired
 	UserRepository userRepository;
+	
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -77,9 +78,11 @@ public String addPreinsc(String correo){
 	Set<RoleG> roles = new HashSet<>();
 	RoleG userRole = roleRepository.findByName(ERole.ROLE_PREINSCRITO)
 	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+	System.out.println("Aca se agrega: " + correo);
 	roles.add(userRole);
 	user.setRoles(roles);
-	userRepository.save(user);		
+	userRepository.save(user);	
+		
     //notificarEmail.sendMailForUsers(correo, token);
     return "agrego";
 	}
@@ -105,5 +108,23 @@ public String addEMP(String correo){
 	}
 	return "ya esxite";
 }
+
+public String ChangePretoStud(String correo){
+    
+	if(!userRepository.existsByUsername(correo)){
+
+	UserG user = userRepository.findByUsername(correo).get();
+	Set<RoleG> roles = new HashSet<>();
+	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
+	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+	roles.add(userRole);
+	user.setRoles(roles);	
+    
+    return "agrego";
+	}
+	return "ya esxite";
+}
+
+
 
 }

@@ -132,6 +132,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 				preins.setTallerSP(preLista[i].tallerSP);
 				preins.setFechaSP(preLista[i].fechaSP);
 				preins.setInfografia(preLista[i].infografia);
+				preins.setStatus(0);
 				try {
 					addUsers.addPreinsc(preLista[i].correo);
 					//crearPreins(preins);
@@ -207,6 +208,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 				insc.setTelefono(estLista[i].telefono);
 				insc.setTipoEmp(estLista[i].tipoEmp);
 				insc.setTransporte(estLista[i].transporte);
+				insc.setStatus(1);
 				try {
 					addUsers.addUserStudent(estLista[i].correo);
 					//crearEstudiante(insc);

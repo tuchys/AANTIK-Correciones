@@ -177,6 +177,12 @@ const routes = [
     ,meta: {requiresAuth: true}
   },
   {
+    path: "/agregarStdInsc",
+    name: "agregarStdInsc",
+    component: () => import('../views/coordinador/addEstudianteInscrito.vue')
+    ,meta: {requiresAuth: true}
+  },
+  {
     path: "/datosCord",
     name: "datosCord",
     component: () => import('../views/coordinador/datosCoord.vue')
