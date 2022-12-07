@@ -3,6 +3,8 @@ package com.aantik.demo.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.aantik.demo.HelperClassServices.AddUsers;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -24,12 +26,13 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	UsuarioRepositorio repositoryUser;
 	@Autowired
 	RoleRepositorio repositoryRol;
-	
+	@Autowired
+	AddUsers addUsers;
 
 	
 	@Override
 	public void crearEstudiante(Estudiante estd) throws Exception {
-		if(existe(estd) && existeUser(estd.getCorreo())) {
+		/*if(existe(estd) && existeUser(estd.getCorreo())) {
 			if(estd.getCorreo()!=null && estd.getCorreo().length()>1) {
 				User userDoc=new User();
 				userDoc.setUsername(estd.getCorreo());
@@ -49,7 +52,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 			Estudiante actualizar=repository.getByCorreo(estd.getCorreo());
 			mapear(estd,actualizar);
 			repository.save(actualizar);
-		}
+		}*/
 		
 		
 	}
@@ -130,7 +133,8 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 				preins.setFechaSP(preLista[i].fechaSP);
 				preins.setInfografia(preLista[i].infografia);
 				try {
-					crearPreins(preins);
+					addUsers.addPreinsc(preLista[i].correo);
+					//crearPreins(preins);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -141,7 +145,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	}
 
 	public void crearPreins(Estudiante preins) {
-		if(existe(preins)) {
+		/*if(existe(preins)) {
 			if(preins.getCorreo()!=null && preins.getCorreo().length()>1) {
 				User userDoc=new User();
 				userDoc.setUsername(preins.getCorreo());
@@ -157,7 +161,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 				preins = repository.save(preins);
 				System.out.println("insertando preinscrito");
 			}
-		}
+		}*/
 	}
 
 	private boolean existe(Estudiante preins) {
@@ -204,7 +208,8 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 				insc.setTipoEmp(estLista[i].tipoEmp);
 				insc.setTransporte(estLista[i].transporte);
 				try {
-					crearEstudiante(insc);
+					addUsers.addUserStudent(estLista[i].correo);
+					//crearEstudiante(insc);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -3,6 +3,8 @@ package com.aantik.demo.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.aantik.demo.HelperClassServices.AddUsers;
 import com.aantik.demo.entidad.Profesor;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -20,6 +22,8 @@ public class ProfesorCRUD implements ProfesorCRUDLocal{
 	UsuarioRepositorio repositoryUser;
 	@Autowired
 	RoleRepositorio repositoryRol;
+	@Autowired
+	AddUsers addUsers;
 	
 	@SuppressWarnings("unused")
 	private boolean checkUsuarioExiste(Profesor profesor) throws Exception {
@@ -51,12 +55,10 @@ public class ProfesorCRUD implements ProfesorCRUDLocal{
 		}*/
 		//return addProf;
 	}
-
 	@Override
 	public Iterable<Profesor> getAll() {
         return repository.findAll();
 	}
-
 	@Override
 	public boolean existe(Profesor docente) throws Exception {
 		Optional<Profesor> docEncontrado = repository.findByNombre(docente.getNombre());
@@ -92,7 +94,8 @@ public class ProfesorCRUD implements ProfesorCRUDLocal{
 			docente.setNOdisponibilidad(docLista[i].nOdisponibilidad);
 			docente.setLimitacion(docLista[i].limitacion);
 			try {
-				crearProfesor(docente);
+				addUsers.addUserProfesor(docLista[i].correo);
+				//crearProfesor(docente);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

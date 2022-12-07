@@ -7,7 +7,7 @@
     <b-row>
       <b-col>
         <div class="hello">
-          <h3>Docente 'nombre'</h3>
+          <h3>Docente {{Username}}</h3>
        </div>
         <br>
         Aquí puede entrar a ver los archivos subidos por los estudiantes.
@@ -47,9 +47,14 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBarDocente.vue"
-
+import service from "@/service/auth.service"
 export default {
   name: 'Homecoordinador',
+  data(){
+    return{
+  Username:service.getUser(),
+}
+},
   props: {
     msg: String
   },
