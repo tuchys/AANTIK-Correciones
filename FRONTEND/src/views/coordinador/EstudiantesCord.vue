@@ -10,16 +10,10 @@
           <h3>Gestor de estudiantes</h3>
         </div>
         Ingrese aquí para agregar estudiantes preinscritos de forma masiva
-        por medio de un archivo .xls (excel)
+        por medio de un archivo .xlsx (excel)
         <router-link to="/subirFile">
         <button type="submit" class="btn btn-dark btn-lg btn-block">
         Agregar estudiantes preinscritos</button></router-link><br>
-
-        Ingrese aquí para agregar estudiantes inscritos de forma masiva
-        por medio de un archivo .xls (excel)
-        <router-link to="/subirFile">
-        <button type="submit" class="btn btn-dark btn-lg btn-block">
-        Agregar estudiantes inscritos</button></router-link><br> 
 
         Ingrese aquí para agregar un estudiante preinscrito de forma individual
         <router-link to="/agregarStd">
@@ -37,13 +31,13 @@
         <br>
         <div>
          <b-table striped hover :items="this.preinsc" :fields="fieldPre">
-            <template #cell(Editar)="row">
+            <!--<template #cell(Editar)="row">
               <router-link to="/CpreEdit">
               <b-button class="mr-2">Editar
               </b-button></router-link>
-            </template>
+            </template>-->
             <template #cell(Eliminar)="row">
-              <b-button class="mr-2">Eliminar
+              <b-button size="sm" @click="Eliminate(row.item.id)" class="mr-2"> Eliminar
               </b-button>
             </template>
           </b-table>
@@ -84,12 +78,10 @@ export default {
    components: {
     SidebarMenuAkahon,
   },
-  methods: {
-  },
+
   data() {
       return {
         student: [],
-        status:1,
         preinsc:[],
         fieldPre:[
           {
@@ -161,7 +153,17 @@ export default {
       this.preinsc=response.data;
       console.log(this.student)
     })
-  }
+  },
+    methods: {
+    Eliminate(id){
+      console.log(id)
+       axios.post("http://localhost:8080/aut/deletePreinsc", { 
+        id:id,
+    }).then((response) => {
+      this.preinsc=response.data;
+    })
+    }
+  },
 }
 </script>
 
