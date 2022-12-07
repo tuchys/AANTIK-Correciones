@@ -319,9 +319,6 @@ public class AuthController {
 		System.out.println(estu.getId());
 	
 		Estudiante emp = repoEst.findById(estu.getId()).get();
-		System.out.println("POOOOOOOOOOROROROROROROROOROROR " + emp.getUserId());
-		int intnum = (int)emp.getUserId();
-		//roleRepo.deleteById(intnum);
 		
 		userRepository.deleteById(emp.getUserId());
 		repoEst.deleteById(estu.getId());
