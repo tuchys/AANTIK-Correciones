@@ -85,7 +85,7 @@ public class EstController {
 	public ResponseEntity<Estudiante[]> cargaStu() {
 		Estudiante est[] = new Estudiante[2];
 		try {
-			ModEstudiante [] estLista = new ModEstudiante[500];
+			ModEstudiante [] estLista = new ModEstudiante[500]; //
 			leerEstudiantes excelStu = new leerEstudiantes();
 			FileInputStream fis2;
 			int cant=0;

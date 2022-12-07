@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aantik.demo.HelperClassServices.AddUsers;
 import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -22,6 +23,8 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 	UsuarioRepositorio repositoryUser;
 	@Autowired
 	RoleRepositorio repositoryRol;
+	@Autowired
+	AddUsers addUsers;
 	
 	private boolean checkEmprendimientoExiste(Emprendimiento empren) throws Exception {
 		Optional<Emprendimiento> emprenEncontrado = repository.findById(empren.getId());
@@ -82,7 +85,20 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 				empren.setTemaAsesorar (empLista[i].temaAsesorar) ;                                                   
 				empren.setTransporte (empLista[i].transporte) ;                                            
 				try {
-					crearEmpr(empren);
+					//if(repository.)
+					//crearEmpr(empren);
+					addUsers.addEMP(empLista[i].correoIE);
+					if(empren.getNombreEmp() !=null) {
+						empren = repository.save(empren);
+						System.out.println("insertando emp");
+					
+				}else {
+					Emprendimiento actualizar=repository.getByCorreoIE(empren.getCorreoIE());
+					if(actualizar!=null) {
+					mapear(empren,actualizar);
+					repository.save(actualizar);
+					}
+				}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -93,9 +109,9 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 	}
 
 	private void crearEmpr(Emprendimiento empren) {
-		// TODO Auto-generated method stub
+	 	// TODO Auto-generated method stub
 		if(existe(empren) && existeUser(empren.getCorreoIE())) {
-			if(empren.getCorreoIE()!=null && empren.getCorreoIE().length()>1) {
+			/*if(empren.getCorreoIE()!=null && empren.getCorreoIE().length()>1) {
 				User userDoc=new User();
 				userDoc.setUsername(empren.getCorreoIE());
 				userDoc.setPassword("1236");
@@ -105,10 +121,10 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 				repositoryUser.save(userDoc);
 				System.out.println("insertando usuario");
 				empren.setUserId(userDoc.getId());
-			}
+			}*/
 			if(empren.getNombreEmp() !=null) {
 				empren = repository.save(empren);
-				System.out.println("insertando estudiante");
+				System.out.println("insertando emp");
 			}
 		}else {
 			Emprendimiento actualizar=repository.getByCorreoIE(empren.getCorreoIE());
