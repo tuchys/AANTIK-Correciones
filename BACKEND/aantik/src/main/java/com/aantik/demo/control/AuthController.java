@@ -62,6 +62,8 @@ import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.repositorio.EstudianteRepositorio;
 import com.aantik.demo.entidad.Profesor;
 import com.aantik.demo.repositorio.ProfesorRepositorio;
+import com.aantik.demo.service.PreinscExcelReader;
+import com.aantik.demo.service.PreinscexcelService;
 
 import net.bytebuddy.utility.RandomString;
 
@@ -84,6 +86,9 @@ public class AuthController {
 	EstudianteRepositorio repoEst;
 
 	@Autowired
+	PreinscexcelService preinsMass;
+
+	@Autowired
   	private FileStorageService storageService;
 
 	@Autowired
@@ -99,7 +104,7 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
-    @PostMapping("/login2")
+    @PostMapping("/login2") //Solved
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
@@ -119,7 +124,7 @@ public class AuthController {
 												 roles));
 	}
 
-    @PostMapping("/registro")
+    @PostMapping("/registro") //Solved
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity
@@ -196,29 +201,18 @@ public class AuthController {
 		return ResponseEntity.ok(new MessageResponse("Usuario registrado exitosamente!"));
 	}
 
-	@PostMapping("/agregEst")
+	@PostMapping("/agregEst") //Solved
 	public ResponseEntity<?> AgregueStu(@Valid @RequestBody Estudiante estud ) {
 
 		String s=String.valueOf(estud.getIdEstudiantil());
 		long l=Long.parseLong(s);  
 		estud.setIdEstudiantil(s);
 		estud.setStatus(1);
-		if(!repoEst.findByIdEstudiantil(s).isPresent()){
-			repoEst.save(estud);
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+		if(!repoEst.findByIdEstudiantil(s).isPresent()){		
 			agregStd.addUserStudent(estud.getCorreo());
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* 	String token = RandomString.make(10);
-	UserG user = new UserG(estud.getCorreo(), 
-	encoder.encode(token));
-	System.out.println("Contrasena nueva es: " + token);
-	Set<RoleG> roles = new HashSet<>();
-	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
-	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-	roles.add(userRole);
-	user.setRoles(roles);
-	userRepository.save(user);	*/	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			UserG recien = userRepository.findByUsername(estud.getCorreo()).get();
+			estud.setUserId(recien.getId());
+			repoEst.save(estud);	
 			return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 		}else{
 			return ResponseEntity.ok(new MessageResponse("Estudiante ya se encuentra registrado"));
@@ -226,29 +220,18 @@ public class AuthController {
 		
 	}
 
-	@PostMapping("/agregPreEst")
+	@PostMapping("/agregPreEst") //Solved
 	public ResponseEntity<?> AgreguePreStu(@Valid @RequestBody Estudiante estud ) {
 
 		String s=String.valueOf(estud.getIdEstudiantil());
 		long l=Long.parseLong(s);  
 		estud.setIdEstudiantil(s);
 		estud.setStatus(0);
-		if(!repoEst.findByIdEstudiantil(s).isPresent()){
-			repoEst.save(estud);
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+		if(!repoEst.findByIdEstudiantil(s).isPresent()){			
 			agregStd.addPreinsc(estud.getCorreo());
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* 	String token = RandomString.make(10);
-	UserG user = new UserG(estud.getCorreo(), 
-	encoder.encode(token));
-	System.out.println("Contrasena nueva es: " + token);
-	Set<RoleG> roles = new HashSet<>();
-	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
-	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-	roles.add(userRole);
-	user.setRoles(roles);
-	userRepository.save(user);	*/	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			UserG recien = userRepository.findByUsername(estud.getCorreo()).get();
+			estud.setUserId(recien.getId());
+			repoEst.save(estud);	
 			return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 		}else{
 			return ResponseEntity.ok(new MessageResponse("Estudiante ya se encuentra registrado"));
@@ -256,7 +239,7 @@ public class AuthController {
 		
 	}
 	
-	@PostMapping("/agregEstFile")
+	@PostMapping("/agregEstFile") //Pending
 	public ResponseEntity<ResponseMessage> uploadFile(@RequestBody @RequestParam("file")  MultipartFile file) {
 
 		String message = "";
@@ -271,7 +254,7 @@ public class AuthController {
 		}
 	  }
 
-	@PostMapping("/EditTeacher")
+	@PostMapping("/EditTeacher") //Pending
 	public ResponseEntity<?> EditPro(@Valid @RequestBody Profesor estud ) {
 
 		System.out.print(estud.getNombre());
@@ -295,15 +278,36 @@ public class AuthController {
 	//	return ResponseEntity.ok(new MessageResponse("Estudiante registrado exitosamente!"));
 	}
 
-	@GetMapping("/getStudent")
+	@GetMapping("/getStudent") //Solved
 	public ResponseEntity<?> GetStud(){
 
 		return ResponseEntity.ok(repoEst.findByStatus(1));
 	}
-	@GetMapping("/getPreinsc")
+	
+	@GetMapping("/getPreinsc") //Solved
 	public ResponseEntity<?> GetPre(){
 
 		
 		return ResponseEntity.ok(repoEst.findByStatus(0));
 	}
+
+	@PostMapping("/upload") //Solved
+  	public ResponseEntity<ResponseMessage> uploadFilePre(@RequestParam("file") MultipartFile file) {
+    String message = "";
+
+    if (PreinscExcelReader.hasExcelFormat(file)) {
+      try {
+        preinsMass.save(file);
+        message = "Uploaded the file successfully: " + file.getOriginalFilename();
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+      } catch (Exception e) {
+        message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+      }
+    }
+
+    message = "Please upload an excel file!";
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+  }
+
 }

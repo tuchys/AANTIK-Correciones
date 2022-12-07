@@ -7,87 +7,91 @@
     <b-row>
       <b-col>
         <div class="hello" >
-          <h3>Gestor de carga</h3>
+          <h3>Gestor de carga para estudiantes pre-inscritos</h3>
           <br>
           <p align=left>
-          Debe seleccionar el archivo .csv que cumpla con los parametros del sistema.
-          
+          Debe seleccionar el archivo .xlsx que cumpla con los parametros del sistema.
            <br>
           <router-link to="/ayuda">Revisar parametros</router-link>
           <br></p>
         </div>
-          <!-- Styled -->
-          <b-form-file
-            v-model="file1"
-            :state="Boolean(file1)"
-            placeholder="Seleccione un archivo o arrastrelo aquí..."
-            drop-placeholder="Drop file here..."
-          ></b-form-file>
-          <div class="mt-3">Archivo seleccionado: {{ file1 ? file1.name : '' }}</div>
-          <button type="submit" class="btn btn-dark btn-lg btn-block" @click="send(file1)">
-          Procesar datos</button>
-          <!-- Plain mode 
-          <b-form-file v-model="file2" class="mt-3" plain></b-form-file>
-          <div class="mt-3">Archivo seleccionado: {{ file2 ? file2.name : '' }}</div>-->
-       
-      </b-col>
-      <b-col>
-      
-      </b-col>
+  <div>
+    <div v-if="currentFile" class="progress">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        :aria-valuenow="progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        :style="{ width: progress + '%' }"
+      >
+        {{ progress }}%
+      </div>
+    </div>
+
+    <label class="btn btn-default">
+      <input type="file" ref="file" @change="selectFile" />
+    </label>
+
+    <button class="btn btn-success" :disabled="!selectedFiles" @click="upload">
+      Subir
+    </button>
+
+    <div class="alert alert-light" role="alert">{{ message }}</div>
+
+  </div>
+</b-col>
     </b-row>
   </b-container>   
 </template>
-
-<script>
-import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
-import FileService from "@/service/FileService";
-export default {
+  <script>
+  import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
+  import UploadFileService from "@/service/CargaMasivaService"
+  import auth from "@/service/auth.service"
+  import axios from "axios";
+  export default {
+  name: "upload-files",
   components: {
-    SidebarMenuAkahon,
+      SidebarMenuAkahon,
+    },
+  data() {
+    return {
+      selectedFiles: undefined,
+      currentFile: undefined,
+      user:auth.getUser,
+      progress: 0,
+      message: "",
+
+      fileInfos: []
+    };
   },
-    data() {
-      return {
-        file1: null,
-        file2: null
-      }
+  methods: {
+    selectFile() {
+      this.selectedFiles = this.$refs.file.files;
     },
-    fileService: null,
-    created() {
-      this.fileService = new FileService();
-    },
-    methods: {
-    async send() {
-      var data = {
-        csv: this.file1
-      };
-      try {
+    upload() {
+      this.progress = 0;
+      this.currentFile = this.selectedFiles.item(0);
+      let formData = new FormData();
+      formData.append("file", this.currentFile);
 
-        let self = this;
-        let InstFormData = new FormData();
-        InstFormData.append('archivo' , this.cvs);
-        console.log('enviando ',InstFormData);
-        await this.fileService.sendStudents(this.cvs)
-        .then(function(response) {
-          console.log(response.data); // DISPLAYS THE DATA I WANT
-         // user = response.data; // THROWS TYPE ERROR: Cannot set property 'thoughtWallet' of undefined at eval
-        //  self.$router.push({name:'estudiantesCord' })
-        }).catch(function(error) {
-          console.log(error);
-        });
-
-      } catch (error) {
-        console.log(error);
+    return axios.post("http://localhost:8080/aut/upload", formData, {       //change method
+      headers: {
+        "Content-Type": "multipart/form-data"
       }
-    },
-      print() {
-        console.log("Esto es un método"+this.persona.email);
+    })
+        .then(response => {
+          this.message = response.data.message;
+          this.progress= 100
+        })
+     // this.selectedFiles = undefined;
     }
-  }  
   }
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+  }
+  </script>
+  
+  <!-- Add "scoped" attribute to limit CSS to this component only -->
+  <style scoped>
 h3 {
   margin: 40px 0 0;
 }
@@ -101,6 +105,9 @@ li {
 }
 a {
   color: #1410dd;
+}
+.hello{
+    text-align: center;
 }
 .custom-file-input ~ .custom-file-label::after {
     content: "Elegir";
