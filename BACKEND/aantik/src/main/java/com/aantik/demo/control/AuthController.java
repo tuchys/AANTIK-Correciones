@@ -314,7 +314,7 @@ public class AuthController {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
   }
 
-    @PostMapping("/deletePreinsc")
+    @PostMapping("/deletePreinsc")//Solved
 	public ResponseEntity<?> DeletePreinsc(@Valid @RequestBody Estudiante estu ){
 		System.out.println(estu.getId());
 	
