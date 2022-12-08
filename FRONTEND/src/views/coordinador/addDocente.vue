@@ -111,6 +111,9 @@
           </b-container>
           </b-form>
           
+          <div class="s" margin-top>
+          <div v-if="message" class="alert alert-primary" role="alert">{{message}} </div>
+        </div>
 
         </div>
       </b-col>
@@ -128,6 +131,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      message:"",
       fields: [
         { key: "nombre" },
         { key: "vinculacion" },
@@ -216,10 +220,7 @@ items: [
     onSubmit() {
       
       console.log(this.form.nombre)
-      if (this.form.limitacion == 'Si') {
-        this.form.limitacion = true;
-      } else
-        this.form.limitacion = false;
+      console.log(this.form.asignatura)
 
 
       axios.post("http://localhost:8080/addDoc", {
@@ -243,8 +244,10 @@ items: [
         horarioAtencion: this.form.horarioAtencion,
         nOdisponibilidad: this.form.nOdisponibiliada,
         limitacion: this.form.limitacion,
+      }).then((response)=>{
+          this.message=response.data.message
 
-      });
+  })} 
 
     },
   onReset(event) {
@@ -277,7 +280,7 @@ items: [
     })
   }
 }
-}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -26,7 +26,7 @@
         <br>
         <div>
           <b-table striped hover id="pages-table" :items="items" :fields="fields">
-            <template #cell(Editar)="row">
+           <!-- <template #cell(Editar)="row">
               <router-link to="/CdocEdit">
               <b-button class="mr-2">Editar/Ver
               </b-button></router-link>
@@ -34,7 +34,7 @@
             <template #cell(Eliminar)="row">
               <b-button class="mr-2">Eliminar
               </b-button>
-            </template>
+            </template>-->
           </b-table>
         </div>
         <br>
@@ -49,7 +49,7 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
-
+import axios from 'axios'
 export default {
   name: 'docentesCord',
   props: {
@@ -59,9 +59,6 @@ export default {
     SidebarMenuAkahon,
   },
   methods: {
-    search() {
-      
-    },
     update(data) {
       // I need to disable the button here
       this.output = data;
@@ -71,28 +68,27 @@ export default {
   },
   data() {
       return {
-        items: [
-          { ID: 40, Nombres: 'Dickerson', Apellido: 'Macdonald', Asignatura: 'PSU', Vinc: 'Planta', Especialidad: 'Mercadeo+ SC' },
-          { ID: 21, Nombres: 'Larsen', Apellido: 'Shaw', Asignatura: 'PSU', Vinc: 'Catedra', Especialidad:'Calidad' },
-          { ID: 89, Nombres: 'Geneva', Apellido: 'Wilson', Asignatura: 'CDIO', Vinc: 'Planta', Especialidad: 'Geociencias-Meteorologia' },
-          { ID: 38, Nombres: 'Jami', Apellido: 'Carney', Asignatura: 'CDIO', Vinc: 'Catedra', Especialidad: 'Calidad'}
-        ],
+        items: [],
         fields: [
           {
-            key: "ID",
+            key: "id",
             label: "ID",
             sortable: true
           },
-          { key: "Nombres" },
-          { key: "Apellido" },
-          { key: "Asignatura" },
-          { key: "Vinc", label:"Vinculación" },
-          { key: "Especialidad" },
-          { key: "Editar" },
-          { key: "Eliminar" }
+          { key: "nombre" },
+          { key: "correo" },
+          { key: "asignatura" },
+          { key: "vinculacion", label:"Vinculación" }
         ]
       }      
-  }
+  },
+  mounted(){
+    axios.get("http://localhost:8080/getDoc").then((response)=>{
+     console.log(response)
+      this.items=response.data;
+      
+    });
+},
 }
 </script>
 

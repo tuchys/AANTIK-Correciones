@@ -87,7 +87,8 @@ export default {
           {
             key:"id",
             label:"Id",
-            thStyle: { width: "5%" }
+            thStyle: { width: "5%" },
+            sortable: true
           },
           {
             key:"nombre",
@@ -97,7 +98,8 @@ export default {
           {
             key:"correo",
             label:"Correo",
-            thStyle: { width: "5%" }
+            thStyle: { width: "5%" },
+            sortable: true
           },
           {
             key:"asignatura",
@@ -115,17 +117,20 @@ export default {
           {
             key:"id",
             label:"Id",
-            thStyle: { width: "5%" }
+            thStyle: { width: "5%" },
+            sortable: true
           },
           {
             key:"nombre",
             label:"Nombre",
-            thStyle: { width: "5%" }
+            thStyle: { width: "5%" },
+            sortable: true
           },
           {
             key:"correo",
             label:"Correo",
-            thStyle: { width: "5%" }
+            thStyle: { width: "5%" },
+            sortable: true
           },
           {
             key:"asignatura",

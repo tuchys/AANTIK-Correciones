@@ -88,7 +88,6 @@ public String addPreinsc(String correo){
 	}
 	return "ya esxite";
 }
-
 public String addEMP(String correo){
     
 	if(!userRepository.existsByUsername(correo)){
@@ -108,7 +107,6 @@ public String addEMP(String correo){
 	}
 	return "ya esxite";
 }
-
 public String ChangePretoStud(String correo){
     
 	if(!userRepository.existsByUsername(correo)){

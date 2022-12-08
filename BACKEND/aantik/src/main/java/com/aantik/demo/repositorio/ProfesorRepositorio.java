@@ -11,4 +11,5 @@ public interface ProfesorRepositorio extends CrudRepository<Profesor,Long>{
 	public Optional<Profesor> getUserById(Long id) throws Exception;
 	public Optional<Profesor> findByNombre(String nombre);
 	public Profesor getById(long id);
+	public boolean existsByCorreo(String correo);
 }

@@ -324,4 +324,24 @@ public class AuthController {
 		repoEst.deleteById(estu.getId());
 		return ResponseEntity.ok(repoEst.findByStatus(0));
 	}
+
+	@PostMapping("/AgregarDocente")
+	public ResponseEntity<?> AgregarDocente(@Valid @RequestBody Profesor prof ){
+
+		System.out.println(prof.getCorreo());
+
+		if(!ProfeRepo.existsByCorreo(prof.getCorreo())){
+			agregStd.addUserProfesor(prof.getCorreo());
+			UserG recien = userRepository.findByUsername(prof.getCorreo()).get();
+			System.out.println(recien.getId());
+			prof.setUserId(recien.getId());
+			ProfeRepo.save(prof);
+			return ResponseEntity.ok("Profesor agregado con exito");
+		}else{
+			return ResponseEntity.ok("Ya existe");
+		}
+
+
+	
+	}
 }
