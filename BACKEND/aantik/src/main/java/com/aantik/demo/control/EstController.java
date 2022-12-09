@@ -130,20 +130,4 @@ public class EstController {
 		}
     }
     
-    @GetMapping("/getStudent") //Solved
-	public ResponseEntity<?> GetStud(){
-    	//cantidad en BD
-
-		//return ResponseEntity.ok(repoEst.findByStatus(1));
-	}
-	
-	@GetMapping("/getPreinsc") //Solved
-	public ResponseEntity<EstudianteM[]> GetPre(){
-		EstudianteM [] lista;
-	    int totalPreins=servcioEst.getCantPreins();
-	    lista=new EstudianteM[totalPreins];
-	    lista=servcioEst.getAllPreinsMatch();
-	    return new ResponseEntity<EstudianteM[]>  (lista, HttpStatus.OK);
-	}
-    
 }
