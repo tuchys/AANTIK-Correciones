@@ -130,15 +130,17 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	public void rol(String correo) {
 		// TODO Auto-generated method stub
 	    Estudiante stu = repositorySt.getByCorreo(correo);
-	    //Estudiante asignado
-	    if(stu.emprendimiento != null) {
-	    	User rol = repositoryUser.getByUsername(correo);
+	    //User use = repositoryUser.getByUsername(correo);
+	    //Role rol = repositoryRole.getById(use.id);
 
-	        rol.setRoles(2) ;
+	    if(stu.emprendimiento != null) {
+	    	
+
+	        //rol.setRoles(2) ;
 	    	
 	        try {
 
-	            repositoryUser.save(rol);
+	            //repositoryUser.save(rol);
 	        } catch (Exception e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
@@ -146,32 +148,18 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	    }else
 	    	//Estudiante pre
 	    if(stu.emprendimiento == null) {
-	    	User rol = repositoryUser.getByUsername(correo);
 
-	        rol.setRoles(8) ;
+
+	        //rol.setRoles(8) ;
 	    	
 	        try {
 
-	            repositoryUser.save(rol);
+	            //repositoryUser.save(rol);
 	        } catch (Exception e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }					
-	    }else
-	    	//Estudiante sin asig
-		    if(stu.emprendimiento == "0") {
-		    	User rol = repositoryUser.getByUsername(correo);
-
-		        rol.setRoles(2) ;
-		    	
-		        try {
-
-		            repositoryUser.save(rol);
-		        } catch (Exception e) {
-		            // TODO Auto-generated catch block
-		            e.printStackTrace();
-		        }					
-		    }
+	    }
 				
 	}
 

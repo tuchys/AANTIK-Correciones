@@ -151,16 +151,50 @@ public class AsignacionF {
 	  }
 	  return false;
 	}
-
+		
 	int match(EstudianteM est, ModEmprendimiento emp){
 	  int val = 0;
+		ShortestPath t = new ShortestPath();
+		int ini = -1;
+		int end = -1;
+		String arr[] = { 
+				"Usaquén",
+				"Chapinero",
+				"Santa Fe",
+				"San Cristóbal",
+				"Usme",
+				"Tunjuelito",
+				"Bosa",
+				"Kennedy",
+				"Fontibón",
+				"Engativá",
+				"Suba",
+				"Barrios Unidos",
+				"Teusaquillo",
+				"Los Mártires",
+				"Antonio Nariño",
+				"Puente Aranda",
+				"La Candelaria",
+				"Rafael Uribe Uribe",
+				"Ciudad Bolívar",
+				"Sumapaz"
+				};
+		
+		  for(int i=0; i<20; i++) {
+			  if (arr[i]==est.localidad)
+				  ini = i;
+			  if (arr[i]==emp.localidad)
+				  end = i;
+			  }
+
 	  if(est.genero != emp.genero && emp.genero != 'I'){
 	    return -999;
 	  }else if(est.limitacion==true && emp.limitacion==false){
 	    return val-999;
 	  }
-	  if(est.localidad == emp.localidad){
-	    val += est.pUbicacion*2;
+
+	  if(ini + end > -1){ 		  
+	    val += 20 - t.dijkstra( ini, end)*3;
 	  }
 	  if(est.transporte==true){
 	    val += -2;
