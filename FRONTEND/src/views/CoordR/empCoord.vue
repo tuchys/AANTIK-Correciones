@@ -6,42 +6,40 @@
 
 
     <div class="hello">
-      <h3>Gestor de Coordinadores</h3>
+      <h3>Gestor de Emprendimientos</h3>
     </div>
-    Ingrese aquí para agregar coordinadores de forma masiva
+    Ingrese aquí para agregar emprendimiento de forma masiva
     por medio de un archivo .csv
-    <router-link to="/subirCoord">
+    <router-link to="/subirEmp">
       <button type="submit" class="btn btn-dark btn-lg btn-block">
-        Agregar Coordinadoress</button>
+        Agregar organizaciones sociales</button>
     </router-link><br>
-    Ingrese aquí para agregar un coordinador de forma individual
-    <router-link to="/addCoord">
+    Ingrese aquí para agregar un emprendimiento de forma individual
+    <router-link to="/addEmp">
       <button type="submit" class="btn btn-dark btn-lg btn-block">
-        Agregar Coordinador</button>
+        Agregar Emprendmiento</button>
     </router-link><br>
     <br>
 
 
     <b-row>
       <b-col>
-        Listado de Coordinadores inscritos
+        Listado de emprendimientoss inscritos
 
         <br>
         <div>
-          <b-table striped hover id="pages-table" :items="users" :fields="fields2">
+          <b-table striped hover id="pages-table" :items="users" :fields="fields" :key="field">
             
               <template #cell(Editar)="data">
-                <router-link id = data.item.id :to="{ path: '/coordEdit/'+ data.item.id}" v-bind:tooltip=data.item.id append>
 
-                <!--<router-link :to="{name: 'coordEdit', params: {idCO:data.item.id}}">-->
-
-                  <b-button class="mr-2" @click="message(data.item.id)">Editar/Ver
+                  <router-link id = data.item.id :to="{ path: '/empEdit'+ data.item.id}" v-bind:tooltip=data.item.id append>
+                  <b-button class="mr-2">Editar/Ver
                   </b-button></router-link>
 
               </template>
 
               <template #cell(Eliminar)="data">
-                <b-button @click="coordDelete(data.item.id, data.index)" class="mr-2">Eliminar
+                <b-button @click="empDelete(data.item.id, data.index)" class="mr-2">Eliminar
                 </b-button>
               </template>
           </b-table>
@@ -56,17 +54,18 @@
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBar.vue"
-import editCoord from "@/views/admin/coordinadorEdit.vue"
 import axios from 'axios';
 
 
 export default {
   components: {
     SidebarMenuAkahon,
-    editCoord
   },
 
-  name: 'coord',
+
+
+
+  name: 'orgS',
 
   data() {
 
@@ -75,27 +74,40 @@ export default {
 
         id: null,
 
-        nombre: null,
+        nombreEmp: null,
 
-        asignatura: null,
+        nombreInterOS: null,
 
-        correo: null,
+        tipoOS: null,
+
+        actividadEco: null,
+
+        prodServ: null,
 
       }],
 
-      fields2: [
+      fields: [
         {
-          key: "nombre",
+          key: "nombreEmp",
           label: "Nombre"
         },
         {
-          key: "asignatura",
-          label: "Asignatiura"
+          key: "nombreInterOS",
+          label: "Interlocutor"
         },
         {
-          key: "correo",
+          key: "correoIE",
           label: "Correo"
         },
+        {
+          key: "correoIE",
+          label: "TelefonoIE"
+        },
+        {
+          key: "orgSocial",
+          label: "Organizacion",
+        },
+
         { key: "Editar" },
         { key: "Eliminar" },
 
@@ -106,7 +118,7 @@ export default {
   id2: null,
   mounted() {
 
-    axios.get("http://localhost:8080/getCoord").then(
+    axios.get("http://localhost:8080/getEmp").then(
 
       (response) => {
 
@@ -116,20 +128,16 @@ export default {
     );
   },
   methods: {
-    coordDelete: function (id, index) {
+    empDelete: function (id, index) {
       window.location.reload();
       console.log(index)
       console.log(id)
-      axios.post("http://localhost:8080/coordDelete", {
+      axios.post("http://localhost:8080/empDelete", {
         id
       });
 
     },
-    message(idrec){
-      this.msg=idrec;
-      console.log("inicial---",idrec);
 
-    },
     handleInput(value, data) { },
   },
 };

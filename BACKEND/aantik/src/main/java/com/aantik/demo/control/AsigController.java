@@ -99,13 +99,22 @@ public class AsigController {
 		}
     
     }
-    @PostMapping("/asignarSTU")
+    @GetMapping("/asignarSTU")
     public ResponseEntity<?> asignarSTU(@RequestBody ModAsig asig) {
     
     	System.out.println("correo "+asig.correo);
 		    asigRepositorio.asignarr(asig);
+		    asigRepositorio.rol(asig.correo);
 		    return ResponseEntity.ok("ok");
 
     }
+    @GetMapping("/DasignarSTU")
+    public ResponseEntity<?> desasignarSTU(@RequestBody ModAsig asig) {
     
-}
+    	System.out.println("correo "+asig.correo);
+		    asigRepositorio.dasignarr(asig);
+		    asigRepositorio.rol(asig.correo);
+		    return ResponseEntity.ok("ok");
+
+    }
+    }

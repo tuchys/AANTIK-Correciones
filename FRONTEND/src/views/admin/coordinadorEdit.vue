@@ -8,7 +8,7 @@
         <br><br>
         <h3>Diligencie el siguiente formulario con los datos del coordinador con ID: </h3>
         
-        <h3>{{ this.$route.params.id }}</h3><br>
+        <h3>{{ this.$route.params.idCO }}</h3><br>
         <br><br>
         <div>
           <b-form @submit="onSubmit" @reset="onReset" v-if="show">
@@ -26,12 +26,13 @@
 
                 <b-form-group id="input-group-5" label="Asignatura:" label-for="input-5">
                   <b-form-select id="input-5" v-model="form.asignatura" :options="asignatura" required></b-form-select>
+                  <option :selected="form.asignatura">{{form.asignatura}}</option>
                 </b-form-group>
 
 
 
               </b-col>
-              <b-button type="submit" variant="primary">Guardar</b-button>
+              <b-button type="submit" variant="primary" @click="actualizar(form)" >Guardar</b-button>
               <b-button type="reset" variant="danger">Cancelar</b-button>
 
             </b-container>
@@ -47,54 +48,55 @@
 </template>
 
 <script>
-import SidebarMenuAkahon from "@/components/SideBar.vue";
-import axios from 'axios';
+import SidebarMenuAkahon from "@/components/SideBarAdmin.vue"
+import admService from "@/service/adminServices";
 
 export default {
+  props: {
+    idCO: String
+  },
   data() {
     return {
-      fields: [
-        { key: "nombre" },
-        { key: "correo" },
-        { key: "asignatura" },
-      ],
       form: {
         nombre: '',
         correo: '',
         asignatura: '',
       },
-      show: true,
-
-      asignatura: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
+        asignatura: [{ text: 'Selecione una', value: null }, 'PSU', 'CDIO'],
 
       show: true,
     }
   },
-  items: [
-    {
-      label: "Refrescar",
-      icon: "pi pi-fw pi-refresh",
-      command: () => {
-        this.getAll();
-      }
-    }
-  ],
-
 
   components: {
     SidebarMenuAkahon,
   },
+ 
+  created() {
+        this.admService = new admService();
+        this.getCO(this.$route.params.idCO);
+
+  },
+
   methods: {
+    getCO(idCoord) {
+            console.log("gj-----",idCoord);
+        this.admService.getCO(idCoord).then(data => {
+          this.form = data.data;
+          console.log("gj-----");
+          console.log("key-----",typeof data.headers);
+        });        
+    },
+    actualizar(formR){
+    },
+
     onSubmit() {
-      window.location.reload();
-      axios.post("http://localhost:8080/editCoord", {
-        id: this.$route.params.id,
-        nombre: this.form.nombre,
-        correo: this.form.correo,
-        asignatura: this.form.asignatura,
-
+      this.admService.getActCO(this.form,this.$route.params.idCO).
+      then(function(response) {
+          console.log(response.data);
+      }).catch(function(error) {
+          console.log(error);
       });
-
     },
 
 

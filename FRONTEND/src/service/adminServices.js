@@ -12,6 +12,22 @@ export default class adminServices {
             correo: correoS
         })
     }
+    getCO(idCO) {
+        console.log("parametro"+idCO);
+        return axios.post(this.url + "getCO-adm"
+        ,null,{
+            params: {idCO}
+        });
+    }
+
+    getActCO(formulario,idCO){
+        return axios.post(this.url + "editCoord",{
+            id: idCO,
+            nombre: formulario.nombre,
+            correo: formulario.correo,
+            asignatura: formulario.asignatura,
+        });
+    }
 
     getOS(idOrg) {
         console.log("parametro"+idOrg);
@@ -103,4 +119,5 @@ export default class adminServices {
             params: {cicloId}
         })
     }
+
 }

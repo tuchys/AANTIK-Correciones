@@ -39,11 +39,13 @@ public class EstController {
 	EstudianteCRUD servcioEst;
 	
 	@PostMapping("/datosEs")
-	public ResponseEntity<?> processForgotPassword(@RequestBody actualizarDatosEs update) {
+	public ResponseEntity<?> actualizar2(@RequestBody ModEstudiante update) {
 
-	System.out.println("Tel: " + update.getTelefono());
+	System.out.println("Tel: " + update.telefono);
+	
 
-    System.out.println("Localidad: " + update.getNotif());
+    System.out.println("Localidad: " + update.notificaciones);
+    servcioEst.actualizar2(update);
 	return ResponseEntity.ok("ok");
 	}
 	
@@ -134,6 +136,8 @@ public class EstController {
 			 servcioEst.actualizar(est);
 		    return ResponseEntity.ok("ok");	    
 		 }
+	 
+
     
 
 }

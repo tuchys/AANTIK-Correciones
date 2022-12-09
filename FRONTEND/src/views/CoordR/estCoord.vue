@@ -15,7 +15,7 @@
         <button type="submit" class="btn btn-dark btn-lg w-100">
         Agregar estudiantes preinscritos</button></router-link><br>
         Ingrese aquí para agregar un estudiante individual
-        <router-link to="/agregarStd">
+        <router-link to="/addStu">
         <button type="submit" class="btn btn-dark btn-lg w-100">
         Agregar estudiante</button></router-link><br>
         <br>
@@ -59,7 +59,7 @@
 
 <script>
 import axios from "axios";
-import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
+import SidebarMenuAkahon from "@/components/SideBarAdmin.vue"
 //import service from "@/service/studentData"
 export default {
   components: {

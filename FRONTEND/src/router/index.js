@@ -455,7 +455,7 @@ const routes = [
     component: () => import('../views/admin/emprendimientoEdit.vue')
   },
   {
-    path: '/coordEdit:id',
+    path: '/coordEdit/:idCO',
     name: 'coordEdit',
     component: () => import('../views/admin/coordinadorEdit.vue')
   },
@@ -598,6 +598,97 @@ const routes = [
       name: 'Benchmarking',
       component: () => import("@/views/PreguntaBenchmarking.vue")
     }*/
+    /*
+    {
+      path: '/homeCoord',
+      name: 'homeCoord',
+      component: () => import('../views/CoordR/homeCoord.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/addEmp',
+      name: 'addEmp',
+      component: () => import('../views/CoordR/addEmp.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/addOrg',
+      name: 'addOrg',
+      component: () => import('../views/CoordR/addOrg.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/empCoord',
+      name: 'empCoord',
+      component: () => import('../views/CoordR/empCoord.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/empEdit',
+      name: 'empEdit',
+      component: () => import('../views/CoordR/empEdit.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/estCoord',
+      name: 'estCoord',
+      component: () => import('../views/CoordR/estCoord.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/estEdit',
+      name: 'estEdit',
+      component: () => import('../views/CoordR/estEdit.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/orgCoord',
+      name: 'orgCoord',
+      component: () => import('../views/CoordR/orgCoord.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/orgEdit',
+      name: 'orgEdit',
+      component: () => import('../views/CoordR/orgEdit.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/preEdit',
+      name: 'preEdit',
+      component: () => import('../views/CoordR/preEdit.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/asig',
+      name: 'asig',
+      component: () => import('../views/CoordR/asig.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/asigN',
+      name: 'asigN',
+      component: () => import('../views/CoordR/asigN.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/asigH',
+      name: 'asigH',
+      component: () => import('../views/CoordR/asigH.vue')
+      //,meta: {requiresAuth: true}
+    },
+    {
+      path: '/asigM',
+      name: 'asigM',
+      component: () => import('../views/CoordR/asigM.vue')
+      //,meta: {requiresAuth: true}
+    },    {
+      path: '/asigN',
+      name: 'asigN',
+      component: () => import('../views/CoordR/asigN.vue')
+      //,meta: {requiresAuth: true}
+    },*/
+
 ]
 
 const router = new VueRouter({

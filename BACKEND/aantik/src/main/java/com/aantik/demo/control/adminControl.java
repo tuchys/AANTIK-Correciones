@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aantik.demo.model.ModCiclo;
+import com.aantik.demo.model.ModCoordinador;
 import com.aantik.demo.model.ModIndicadorBench;
 import com.aantik.demo.model.ModOrgSocial;
 import com.aantik.demo.service.BenchmarkingExcelService;
 import com.aantik.demo.service.CicloCRUD;
+import com.aantik.demo.service.CoordinadorCRUD;
 import com.aantik.demo.service.OrgSocialCRUD;
 
 @Controller
@@ -23,6 +25,8 @@ public class adminControl {
 	OrgSocialCRUD orgScService;
 	@Autowired
 	CicloCRUD cicloSer;
+	@Autowired
+	CoordinadorCRUD coordService;
 	
     @Autowired
     BenchmarkingExcelService BenService;
@@ -126,4 +130,23 @@ public class adminControl {
 		 cicloSer.cambiarEstado(cicloId);
 		return new ResponseEntity<Object> (HttpStatus.OK);    
 	}
+	
+	@PostMapping("/getCO-adm")
+	public ResponseEntity<ModCoordinador> sendCoordinador(@RequestParam String idCoord) { 
+		long idCO=Long.parseLong(idCoord);
+		System.out.println("RECIBIENDO..."+idCoord);
+		ModCoordinador coord=new ModCoordinador();
+		coord=coordService.getById(idCO);
+		if(coord != null) {
+		System.out.println("enviando organizacion social a front");
+			return new ResponseEntity<ModCoordinador>  (coord, HttpStatus.OK);
+		}else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+	 @PostMapping("/editCoord")
+	public ResponseEntity<?> editCoord(@RequestBody ModCoordinador coord) {
+
+		 coordService.actualizar(coord);
+	    return ResponseEntity.ok("ok");	    
+	 }
 }

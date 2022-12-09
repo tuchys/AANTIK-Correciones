@@ -11,4 +11,5 @@ public interface UsuarioRepositorio extends CrudRepository<User,Long>{
 	public Optional<User> getUserById(Long id) throws Exception;
 	public Optional<User> findByUsername(String username);
 	public Iterable<User> getByRoles(long id);
+	public User getByUsername(String username);
 }

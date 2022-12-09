@@ -120,6 +120,12 @@ public class AsignacionServ {
 	  }
 	  return false;
 	}
+	String arr[] = {"Usaquén", "Chapinero", "Santa Fe",
+			"San Cristóbal", "Usme", "Tunjuelito", "Bosa",
+			"Kennedy", "Fontibón", "Engativá", "Suba", "Barrios Unidos",
+			"Teusaquillo", "Los Mártires", "Antonio Nariño", 
+			"Puente Aranda", "La Candelaria", "Rafael Uribe Uribe", 
+			"Ciudad Bolívar", "Sumapaz"};
 
 	int match(EstudianteM est, ModEmprendimiento emp){
 	  int val = 0;
@@ -128,8 +134,21 @@ public class AsignacionServ {
 	  }else if(est.limitacion==true && emp.limitacion==false){
 	    return val-999;
 	  }
-	  if(est.localidad == emp.localidad){
-	    val += est.pUbicacion*2;
+	  if(est.localidad != null && emp.localidad != null){
+		int ini = -1;
+		int end = -1;
+		for(int x=0; x<20; x++) {
+			if(est.localidad == arr[x])
+				ini = x;			
+		}
+		for(int x=0; x<20; x++) {
+			if(emp.localidad == arr[x])
+				end = x;			
+		}				  
+	        ShortestPath t = new ShortestPath();
+	        System.out.println(t.dijkstra( ini, end));
+
+	    val += 20 - t.dijkstra( ini, end)*3;
 	  }
 	  if(est.transporte==true){
 	    val += -2;

@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.aantik.demo.entidad.Estudiante;
+import com.aantik.demo.entidad.User;
 import com.aantik.demo.model.ModAsig;
 import com.aantik.demo.entidad.Asignacion;
 import com.aantik.demo.repositorio.EstudianteRepositorio;
@@ -109,6 +110,69 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	            e.printStackTrace();
 	        }					
 	    }
+	}
+	
+	public void dasignarr(ModAsig asi) {
+	    // TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(asi.correo);
+	    if(asi != null && stu.getCorreo() != null) {
+	        stu.setEmprendimiento("0") ;                                                                                                                                                          
+  
+	        try {
+	            repositorySt.save(stu);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+	}
+
+	public void rol(String correo) {
+		// TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(correo);
+	    //Estudiante asignado
+	    if(stu.emprendimiento != null) {
+	    	User rol = repositoryUser.getByUsername(correo);
+
+	        rol.setRoles(2) ;
+	    	
+	        try {
+
+	            repositoryUser.save(rol);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }else
+	    	//Estudiante pre
+	    if(stu.emprendimiento == null) {
+	    	User rol = repositoryUser.getByUsername(correo);
+
+	        rol.setRoles(8) ;
+	    	
+	        try {
+
+	            repositoryUser.save(rol);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }else
+	    	//Estudiante sin asig
+		    if(stu.emprendimiento == "0") {
+		    	User rol = repositoryUser.getByUsername(correo);
+
+		        rol.setRoles(2) ;
+		    	
+		        try {
+
+		            repositoryUser.save(rol);
+		        } catch (Exception e) {
+		            // TODO Auto-generated catch block
+		            e.printStackTrace();
+		        }					
+		    }
+				
 	}
 
 }
