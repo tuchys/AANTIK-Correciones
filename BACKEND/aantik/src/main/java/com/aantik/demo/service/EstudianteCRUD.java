@@ -280,6 +280,12 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 				resp.preins[i].id=aux.getId();
 				resp.preins[i].nombre=aux.getNombre();
 				resp.preins[i].datoCambiante=aux.getAsignatura();
+				if(aux.getFechaSP()==null)
+					resp.preins[i].fechaSP="-";
+				else
+					resp.preins[i].fechaSP=aux.getFechaSP();
+				resp.preins[i].infografia=aux.getInfografia();
+				resp.preins[i].tallerSP=aux.getTallerSP();
 				i++;	
 				System.out.println("Preinscrito");
 			}

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.aantik.demo.cargaUsuarios.leerEstudiantes;
 import com.aantik.demo.entidad.Estudiante;
+import com.aantik.demo.match.EstudianteM;
+import com.aantik.demo.model.ModAsig;
 import com.aantik.demo.model.ModEstudiante;
 import com.aantik.demo.model.Mpreinscrito;
 import com.aantik.demo.model.actualizarDatosEs;
@@ -127,5 +129,21 @@ public class EstController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
     }
+    
+    @GetMapping("/getStudent") //Solved
+	public ResponseEntity<?> GetStud(){
+    	//cantidad en BD
+
+		//return ResponseEntity.ok(repoEst.findByStatus(1));
+	}
+	
+	@GetMapping("/getPreinsc") //Solved
+	public ResponseEntity<EstudianteM[]> GetPre(){
+		EstudianteM [] lista;
+	    int totalPreins=servcioEst.getCantPreins();
+	    lista=new EstudianteM[totalPreins];
+	    lista=servcioEst.getAllPreinsMatch();
+	    return new ResponseEntity<EstudianteM[]>  (lista, HttpStatus.OK);
+	}
     
 }
