@@ -3,6 +3,8 @@ package com.aantik.demo.match;
 import java.io.*;
 import java.lang.*;
 import java.util.*;
+
+import com.aantik.demo.model.ModEmprendimiento;
  
 class ShortestPath {
 
@@ -100,13 +102,49 @@ class ShortestPath {
     }
  
 }/*
-public class Main
-{
-	public static void main(String[] args) {
-
-        ShortestPath t = new ShortestPath();
-
-        System.out.println(t.dijkstra( 0, 19));
+	int match(EstudianteM est, ModEmprendimiento emp){
+	  int val = 0;
+		ShortestPath t = new ShortestPath();
+		int ini = -1;
+		int end = -1;
+		String arr[] = { 
+				"Usaquén",
+				"Chapinero",
+				"Santa Fe",
+				"San Cristóbal",
+				"Usme",
+				"Tunjuelito",
+				"Bosa",
+				"Kennedy",
+				"Fontibón",
+				"Engativá",
+				"Suba",
+				"Barrios Unidos",
+				"Teusaquillo",
+				"Los Mártires",
+				"Antonio Nariño",
+				"Puente Aranda",
+				"La Candelaria",
+				"Rafael Uribe Uribe",
+				"Ciudad Bolívar",
+				"Sumapaz"
+				};
+		
+		  for(int i=0; i<20; i++) {
+			  if (arr[i]==est.localidad)
+				  ini = i;
+			  if (arr[i]==emp.localidad)
+				  end = i;
+			  }
     }
+    	  if(est.genero != emp.genero && emp.genero != 'I'){
+	    return -999;
+	  }else if(est.limitacion==true && emp.limitacion==false){
+	    return val-999;
+	  }
+
+	  if(ini + end > -1){ 		  
+	    val += 20 - t.dijkstra( ini, end)*3;
+	  }
 	
 }*/
