@@ -95,5 +95,75 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 		}
 		return asig;
 	}
+	
+	public void asignarr(ModAsig asi) {
+	    // TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(asi.correo);
+	    if(asi != null && stu.getCorreo() != null) {
+	        stu.setEmprendimiento(asi.emprendimiento) ;                                                                                                                                                          
+  
+	        try {
+	            repositorySt.save(stu);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+	}
+	
+	public void dasignarr(ModAsig asi) {
+	    // TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(asi.correo);
+	    if(asi != null && stu.getCorreo() != null) {
+	        stu.setEmprendimiento("0") ;                                                                                                                                                          
+  
+	        try {
+	            repositorySt.save(stu);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+	}
+
+	public void rol(String correo) {
+		// TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(correo);
+	    //User use = repositoryUser.getByUsername(correo);
+	    //Role rol = repositoryRole.getById(use.id);
+
+	    if(stu.emprendimiento != null) {
+	    	stu.status = 1;
+
+	        //rol.setRoles(2) ;
+	    	
+	        try {
+	        	repositorySt.save(stu);
+	            //repositoryUser.save(rol);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }else
+	    	//Estudiante pre
+	    if(stu.emprendimiento == null) {
+	    	if(stu.status != 0) {
+	    		stu.status = 0;
+	    		repositorySt.save(stu);
+	    	}
+	    	
+
+	        //rol.setRoles(8) ;
+	    	
+	        try {
+
+	            //repositoryUser.save(rol);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+				
+	}
 
 }

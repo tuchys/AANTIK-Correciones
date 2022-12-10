@@ -101,6 +101,8 @@ public class Estudiante implements Serializable{
 	public String comunidad;
 	@Column
 	public Integer status; //0 pre - 1 estudiante
+	@Column
+	public String emprendimiento;
 	
 	
 	@JoinTable(name = "user",
@@ -109,6 +111,14 @@ public class Estudiante implements Serializable{
 	private long userId;
 
 	
+
+	public String getEmprendimiento() {
+		return emprendimiento;
+	}
+
+	public void setEmprendimiento(String emprendimiento) {
+		this.emprendimiento = emprendimiento;
+	}
 
 	public Integer getStatus() {
 		return status;
