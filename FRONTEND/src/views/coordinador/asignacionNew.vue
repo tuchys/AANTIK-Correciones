@@ -17,8 +17,8 @@
         <br>
         <div>
           <b-table striped hover :items="users" :fields="fields1">
-            <template #cell(asignar)="row">
-              <b-button class="mr-2">Asignar
+            <template #cell(asignar)="data">
+              <b-button class="mr-2"  @click="editarSt(row.item.correo)">Asignar
               </b-button>
             </template>
           </b-table>
