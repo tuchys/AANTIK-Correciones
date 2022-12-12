@@ -103,7 +103,7 @@ public class Estudiante implements Serializable{
 	public Integer status; //0 pre - 1 estudiante
 	@Column
 	public String emprendimiento;
-	
+		
 	
 	@JoinTable(name = "user",
 	joinColumns=@JoinColumn(name="id"),

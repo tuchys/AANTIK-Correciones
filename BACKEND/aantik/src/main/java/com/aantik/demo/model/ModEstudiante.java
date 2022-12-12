@@ -36,4 +36,5 @@ public class ModEstudiante {
 		public int pTipoOrg;
 		public int pComunidad;
 		public int status;
+		public String emprendimiento;
 }

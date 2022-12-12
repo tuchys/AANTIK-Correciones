@@ -104,11 +104,22 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 		return asig;
 	}
 	
-	public void asignarr(ModAsig asi) {
+	public void asignarr(String cor, String emp) {
 	    // TODO Auto-generated method stub
-	    Estudiante stu = repositorySt.getByCorreo(asi.correo);
-	    if(asi != null && stu.getCorreo() != null) {
-	        stu.setEmprendimiento(asi.emprendimiento) ;                                                                                                                                                          
+	    Estudiante stu = repositorySt.getByCorreo(cor);
+	    System.out.println("correo "+cor);
+	    System.out.println("correo "+emp);
+	    if(stu.getCorreo() != null && emp == stu.emprendimiento) {
+	        stu.setEmprendimiento("0");
+        try {
+            repositorySt.save(stu);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+	}
+	    if(stu.getCorreo() != null && emp != null) {
+	        stu.setEmprendimiento(emp) ;                                                                                                                                                          
   
 	        try {
 	            repositorySt.save(stu);
@@ -117,8 +128,9 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	            e.printStackTrace();
 	        }					
 	    }
+
 	}
-	
+	/*
 	public void dasignarr(ModAsig asi) {
 	    // TODO Auto-generated method stub
 	    Estudiante stu = repositorySt.getByCorreo(asi.correo);
@@ -132,7 +144,7 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	            e.printStackTrace();
 	        }					
 	    }
-	}
+	}*/
 
 	public void rol(String correo) {
 		// TODO Auto-generated method stub
@@ -167,17 +179,7 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 		    	roles.add(userRole);
 		    	rol.setRoles(roles);
 	    	}
-	    	
-
-	        //rol.setRoles(8) ;
-	    	
-	        try {
-
-	            //repositoryUser.save(rol);
-	        } catch (Exception e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }					
+				
 	    }
 				
 	}
