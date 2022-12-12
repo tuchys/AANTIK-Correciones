@@ -26,6 +26,8 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	EstudianteRepositorio repositorySt;
 	@Autowired
 	UsuarioRepositorio repositoryUser;
+	@Autowired
+	RoleRepository roleRepository;
 	
 	@Override
 	public String crearAsignacion(ModAsig[] asig) throws Exception {
