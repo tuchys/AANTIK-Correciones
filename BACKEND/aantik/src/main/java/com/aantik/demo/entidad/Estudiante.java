@@ -21,7 +21,7 @@ public class Estudiante implements Serializable{
 	 */
 	private static final long serialVersionUID = -5136779542810096179L;
 	/**
-	 * 
+	 *  
 	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")

@@ -2,10 +2,17 @@ package com.aantik.demo.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.model.ModAsig;
+import com.aantik.demo.HelperClassServices.ERole;
+import com.aantik.demo.HelperClassServices.RoleG;
+import com.aantik.demo.HelperClassServices.RoleRepository;
+import com.aantik.demo.HelperClassServices.UserG;
 import com.aantik.demo.entidad.Asignacion;
 import com.aantik.demo.repositorio.EstudianteRepositorio;
 import com.aantik.demo.repositorio.UsuarioRepositorio;
@@ -20,6 +27,8 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	EstudianteRepositorio repositorySt;
 	@Autowired
 	UsuarioRepositorio repositoryUser;
+	@Autowired
+	RoleRepository roleRepository;
 	
 	@Override
 	public String crearAsignacion(ModAsig[] asig) throws Exception {
@@ -129,13 +138,16 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	public void rol(String correo) {
 		// TODO Auto-generated method stub
 	    Estudiante stu = repositorySt.getByCorreo(correo);
-	    //User use = repositoryUser.getByUsername(correo);
-	    //Role rol = repositoryRole.getById(use.id);
+	    UserG rol = repositoryUser.getById(stu.getUserId());
 
 	    if(stu.emprendimiento != null) {
 	    	stu.status = 1;
 
-	        //rol.setRoles(2) ;
+	    	Set<RoleG> roles = new HashSet<>();
+	    	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
+	    	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+	    	roles.add(userRole);
+	    	rol.setRoles(roles);
 	    	
 	        try {
 	        	repositorySt.save(stu);
@@ -150,6 +162,11 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	    	if(stu.status != 0) {
 	    		stu.status = 0;
 	    		repositorySt.save(stu);
+		    	Set<RoleG> roles = new HashSet<>();
+		    	RoleG userRole = roleRepository.findByName(ERole.ROLE_PREINSCRITO)
+		    	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+		    	roles.add(userRole);
+		    	rol.setRoles(roles);
 	    	}
 	    	
 

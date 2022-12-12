@@ -28,7 +28,7 @@
               </b-button>
             </template>
             <template #cell(Eliminar)="row">
-              <b-button class="mr-2">Elminar
+              <b-button class="mr-2">Eliminar
               </b-button>
             </template>
           </b-table>
@@ -52,7 +52,7 @@
               </b-button>
             </template>
             <template #cell(Eliminar)="row">
-              <b-button class="mr-2">Elminar
+              <b-button class="mr-2">Eliminar
               </b-button>
             </template>
           </b-table>
