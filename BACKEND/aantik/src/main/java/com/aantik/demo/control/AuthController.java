@@ -314,17 +314,34 @@ public class AuthController {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
   }
 
-    @PostMapping("/deletePreinsc")
+    @PostMapping("/deletePreinsc")//Solved
 	public ResponseEntity<?> DeletePreinsc(@Valid @RequestBody Estudiante estu ){
 		System.out.println(estu.getId());
 	
 		Estudiante emp = repoEst.findById(estu.getId()).get();
-		System.out.println("POOOOOOOOOOROROROROROROROOROROR " + emp.getUserId());
-		int intnum = (int)emp.getUserId();
-		//roleRepo.deleteById(intnum);
 		
 		userRepository.deleteById(emp.getUserId());
 		repoEst.deleteById(estu.getId());
 		return ResponseEntity.ok(repoEst.findByStatus(0));
+	}
+
+	@PostMapping("/AgregarDocente")
+	public ResponseEntity<?> AgregarDocente(@Valid @RequestBody Profesor prof ){
+
+		System.out.println(prof.getCorreo());
+
+		if(!ProfeRepo.existsByCorreo(prof.getCorreo())){
+			agregStd.addUserProfesor(prof.getCorreo());
+			UserG recien = userRepository.findByUsername(prof.getCorreo()).get();
+			System.out.println(recien.getId());
+			prof.setUserId(recien.getId());
+			ProfeRepo.save(prof);
+			return ResponseEntity.ok("Profesor agregado con exito");
+		}else{
+			return ResponseEntity.ok("Ya existe");
+		}
+
+
+	
 	}
 }

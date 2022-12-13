@@ -18,7 +18,7 @@
         <div>
           <b-table striped hover :items="users" :fields="fields1">
             <template #cell(asignar)="row">
-              <b-button class="mr-2">Asignar
+              <b-button class="mr-2"  @click="asignar(row.item.correo, row.item.emprendimiento)">Asignar
               </b-button>
             </template>
           </b-table>
@@ -103,6 +103,25 @@ export default {
       console.log("inicial---",idrec);
 
     },
+    asignar(cor, emp){
+        console.log("id---------",emp);
+        axios.post("http://localhost:8080/api/asignarSTU", null, { params: {
+  cor,
+  emp
+}})
+.then(response => response.status)
+.catch(err => console.warn(err));
+        
+        
+        
+        /*
+        {
+        correo: cor, 
+        emprendimiento: emp,
+
+      });*/
+      console.log("id---------",cor);
+      },
   },
 };
 

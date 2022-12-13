@@ -84,9 +84,9 @@ public class DocController {
 				update.localidad, update.sectoEc, update.hisAse, update.contacto, update.lineaAc,
 				update.secEco2, update.tipoOS, update.horarioNotif, update.horarioAtencion, update.nOdisponibilidad,
 				update.limitacion);
-		
-		RepoDoc.save(pro);
+			
 		addUsers.addUserProfesor(update.correo);
+		RepoDoc.save(pro);
 		//	servDoc.crearProfesor(pro);
 		return ResponseEntity.ok("ok");
 	}

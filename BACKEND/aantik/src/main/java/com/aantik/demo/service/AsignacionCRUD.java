@@ -2,15 +2,21 @@ package com.aantik.demo.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.model.ModAsig;
+import com.aantik.demo.HelperClassServices.ERole;
+import com.aantik.demo.HelperClassServices.RoleG;
+import com.aantik.demo.HelperClassServices.RoleRepository;
+import com.aantik.demo.HelperClassServices.UserG;
 import com.aantik.demo.entidad.Asignacion;
 import com.aantik.demo.repositorio.EstudianteRepositorio;
 import com.aantik.demo.repositorio.UsuarioRepositorio;
 import com.aantik.demo.repositorio.AsigRepositorio;
-
 @Service
 public class AsignacionCRUD implements AsignacionCRUDLocal{
 	
@@ -20,6 +26,8 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 	EstudianteRepositorio repositorySt;
 	@Autowired
 	UsuarioRepositorio repositoryUser;
+	@Autowired
+	RoleRepository roleRepository;
 	
 	@Override
 	public String crearAsignacion(ModAsig[] asig) throws Exception {
@@ -94,6 +102,87 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 			i++;
 		}
 		return asig;
+	}
+	
+	public void asignarr(String cor, String emp) {
+	    // TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(cor);
+	    System.out.println("correo "+cor);
+	    System.out.println("correo "+emp);
+	    if(stu.getCorreo() != null && emp == stu.emprendimiento) {
+	        stu.setEmprendimiento("0");
+        try {
+            repositorySt.save(stu);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+	}
+	    if(stu.getCorreo() != null && emp != null) {
+	        stu.setEmprendimiento(emp) ;                                                                                                                                                          
+  
+	        try {
+	            repositorySt.save(stu);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+
+	}
+	/*
+	public void dasignarr(ModAsig asi) {
+	    // TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(asi.correo);
+	    if(asi != null && stu.getCorreo() != null) {
+	        stu.setEmprendimiento("0") ;                                                                                                                                                          
+  
+	        try {
+	            repositorySt.save(stu);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }
+	}*/
+
+	public void rol(String correo) {
+		// TODO Auto-generated method stub
+	    Estudiante stu = repositorySt.getByCorreo(correo);
+	    UserG rol = repositoryUser.getById(stu.getUserId());
+	    System.out.println("correo "+rol.getUsername());
+
+	    if(stu.emprendimiento != null) {
+	    	stu.status = 1;
+
+	    	Set<RoleG> roles = new HashSet<>();
+	    	RoleG userRole = roleRepository.findByName(ERole.ROLE_STUDIANTE)
+	    	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+	    	roles.add(userRole);
+	    	rol.setRoles(roles);
+	    	
+	        try {
+	        	repositorySt.save(stu);
+	            //repositoryUser.save(rol);
+	        } catch (Exception e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }					
+	    }else
+	    	//Estudiante pre
+	    if(stu.emprendimiento == null) {
+	    	if(stu.status != 0) {
+	    		stu.status = 0;
+	    		repositorySt.save(stu);
+		    	Set<RoleG> roles = new HashSet<>();
+		    	RoleG userRole = roleRepository.findByName(ERole.ROLE_PREINSCRITO)
+		    	.orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+		    	roles.add(userRole);
+		    	rol.setRoles(roles);
+	    	}
+				
+	    }
+				
 	}
 
 }

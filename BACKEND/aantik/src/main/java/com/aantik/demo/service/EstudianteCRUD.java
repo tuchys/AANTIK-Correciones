@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aantik.demo.HelperClassServices.AddUsers;
+import com.aantik.demo.HelperClassServices.UserG;
 import com.aantik.demo.entidad.Estudiante;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -98,7 +99,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	}
 
 	private boolean existeUser(String correo) {
-		Optional<User> Encontrado = repositoryUser.findByUsername(correo);
+		Optional<UserG> Encontrado = repositoryUser.findByUsername(correo);
 		if(Encontrado.isPresent()) {
 			System.out.println("Usuario ya se encuentra registrado");
 			return false;
@@ -229,11 +230,11 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	public Estudiante[] getpreins(Estudiante[] preinscritos) {
 		// TODO Auto-generated method stub
 		Role rol=repositoryRol.findByName("Preinscrito");
-		Iterable<User> buscar =repositoryUser.getByRoles((long)rol.getId()); 
+		Iterable<UserG> buscar =repositoryUser.getByRoles((long)rol.getId()); 
 		int cantidad= countUser(buscar);
 		preinscritos=new Estudiante[cantidad];
 		int i=0;
-		for(User user:buscar){
+		for(UserG user:buscar){
 			Optional<Estudiante> preEncontrado = repository.findByUserId(user.getId());
 			if(preEncontrado.isPresent()) {
 				preinscritos[0]=new Estudiante(); 
@@ -245,10 +246,10 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 		return preinscritos;
 	}
 
-	private int countUser(Iterable<User> buscar) {
+	private int countUser(Iterable<UserG> buscar) {
 		// TODO Auto-generated method stub
 		int tam=0;
-		for (@SuppressWarnings("unused") User contar: buscar)
+		for (@SuppressWarnings("unused") UserG contar: buscar)
 			tam++;
 		return tam;
 	}
@@ -265,14 +266,14 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 		// TODO Auto-generated method stub
 		Role rol=repositoryRol.findByName("Preinscrito");
 		Role rol2=repositoryRol.findByName("Estudiante");
-		Iterable<User> buscarPre =repositoryUser.getByRoles((long)rol.getId()); 
-		Iterable<User> buscarSt =repositoryUser.getByRoles((long)rol2.getId());
+		Iterable<UserG> buscarPre =repositoryUser.getByRoles((long)rol.getId()); 
+		Iterable<UserG> buscarSt =repositoryUser.getByRoles((long)rol2.getId());
 		int cantidad= countUser(buscarPre);
 		int cantidad2= countUser(buscarSt);
 		int i=0,j=0;
 		resp.preins=new ModEstudLiv[cantidad];
 		resp.ins=new ModEstudLiv[cantidad2];
-		for(User user:buscarPre){
+		for(UserG user:buscarPre){
 			Optional<Estudiante> preEncontrado = repository.findByUserId(user.getId());
 			if(preEncontrado.isPresent()) {
 				Estudiante aux=repository.getByUserId(user.getId());
@@ -290,7 +291,7 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 				System.out.println("Preinscrito");
 			}
 		}
-		for(User user:buscarSt){
+		for(UserG user:buscarSt){
 			Optional<Estudiante> preEncontrado = repository.findByUserId(user.getId());
 			if(preEncontrado.isPresent()) {
 				Estudiante aux=repository.getByUserId(user.getId());
@@ -316,9 +317,9 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	public int getCantPreins() {
 		// TODO Auto-generated method stub
 		Role rol=repositoryRol.findByName("Preinscrito");
-		Iterable<User> buscar =repositoryUser.getByRoles((long)rol.getId()); 
+		Iterable<UserG> buscar =repositoryUser.getByRoles((long)rol.getId()); 
 		int i=0;
-		for(User user:buscar){
+		for(UserG user:buscar){
 			Optional<Estudiante> preEncontrado = repository.findByUserId(user.getId());
 			if(preEncontrado.isPresent()) {
 				i++;
@@ -330,11 +331,11 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	public EstudianteM[] getAllPreinsMatch() {
 		// TODO Auto-generated method stub
 		Role rol=repositoryRol.findByName("Preinscrito");
-		Iterable<User> buscar =repositoryUser.getByRoles((long)rol.getId()); 
+		Iterable<UserG> buscar =repositoryUser.getByRoles((long)rol.getId()); 
 		int cantidad= countUser(buscar);
 		EstudianteM[] preinscritos=new EstudianteM[cantidad];
 		int i=0;
-		for(User user:buscar){
+		for(UserG user:buscar){
 			Optional<Estudiante> preExis = repository.findByUserId(user.getId());
 			if(preExis.isPresent()) {
 				Estudiante preEncontrado = repository.getByUserId(user.getId());
@@ -368,11 +369,11 @@ public class EstudianteCRUD implements EstudianteCRUDLocal{
 	public EstudianteM[] getAllinsMatch() {
 		// TODO Auto-generated method stub
 		Role rol=repositoryRol.findByName("Estudiante");
-		Iterable<User> buscar =repositoryUser.getByRoles((long)rol.getId()); 
+		Iterable<UserG> buscar =repositoryUser.getByRoles((long)rol.getId()); 
 		int cantidad= countUser(buscar);
 		EstudianteM[] preinscritos=new EstudianteM[cantidad];
 		int i=0;
-		for(User user:buscar){
+		for(UserG user:buscar){
 			Optional<Estudiante> preExis = repository.findByUserId(user.getId());
 			if(preExis.isPresent()) {
 				Estudiante preEncontrado = repository.getByUserId(user.getId());
