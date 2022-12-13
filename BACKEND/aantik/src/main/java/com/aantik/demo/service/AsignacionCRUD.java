@@ -150,6 +150,7 @@ public class AsignacionCRUD implements AsignacionCRUDLocal{
 		// TODO Auto-generated method stub
 	    Estudiante stu = repositorySt.getByCorreo(correo);
 	    UserG rol = repositoryUser.getById(stu.getUserId());
+	    System.out.println("correo "+rol.getUsername());
 
 	    if(stu.emprendimiento != null) {
 	    	stu.status = 1;

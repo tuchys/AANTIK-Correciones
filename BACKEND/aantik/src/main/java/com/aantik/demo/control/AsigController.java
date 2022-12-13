@@ -126,7 +126,7 @@ public class AsigController {
     	System.out.println("correo "+cor);
     	System.out.println("emp "+emp);
 		    asigRepositorio.asignarr(cor, emp);
-		    //asigRepositorio.rol(cor);
+		    asigRepositorio.rol(cor);
 		    return ResponseEntity.ok("ok");
 
     }/*
