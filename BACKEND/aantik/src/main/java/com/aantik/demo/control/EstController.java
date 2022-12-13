@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.aantik.demo.cargaUsuarios.leerEstudiantes;
 import com.aantik.demo.entidad.Estudiante;
+import com.aantik.demo.match.EstudianteM;
+import com.aantik.demo.model.ModAsig;
 import com.aantik.demo.model.ModEstudiante;
 import com.aantik.demo.model.Mpreinscrito;
 import com.aantik.demo.model.actualizarDatosEs;

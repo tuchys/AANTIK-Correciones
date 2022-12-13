@@ -71,9 +71,9 @@ export default {
     return{
       users:{
         preins: [{
-          id: null,
           nombre: null,
-          datoCambiante: null
+          datoCambiante: null,
+          tallerSp: null,
         }],
         ins: [{
           id: null,

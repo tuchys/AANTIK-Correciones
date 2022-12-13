@@ -30,27 +30,27 @@
         Listado de estudiantes preinscritos
         <br>
         <div>
-         <b-table striped hover :items="this.preinsc" :fields="fieldPre">
-            <!--<template #cell(Editar)="row">
-              <router-link to="/CpreEdit">
-              <b-button class="mr-2">Editar
-              </b-button></router-link>
-            </template>-->
+
+          
+         <b-table striped hover :items="users.preins" :fields="fields1">
+            <template #cell(Editar)="row">
+              <b-button class="mr-2"  @click="editarSt(row.item.id)">Editar
+              </b-button>
+            </template>
             <template #cell(Eliminar)="row">
-              <b-button size="sm" @click="Eliminate(row.item.id)" class="mr-2"> Eliminar
+              <b-button class="mr-2">Eliminar
               </b-button>
             </template>
           </b-table>
         </div>
         Listado de estudiantes inscritos
-           
+
            <br>
            <div>
-             <b-table striped hover id="pages-table" :items="this.student" :fields="fieldStu" >
+             <b-table striped hover id="pages-table" :items="users.ins" :fields="fields2">
                <template #cell(Editar)="row">
-                <router-link to="/CstuEdit">
-                 <b-button class="mr-2">Editar
-                 </b-button></router-link>
+                <b-button class="mr-2"  @click="editarSt(row.item.id)">Editar
+                 </b-button>
                </template>
                <template #cell(Eliminar)="row">
                  <b-button class="mr-2">Eliminar
@@ -59,13 +59,13 @@
              </b-table>
            </div>
            <br>  
-              </b-col>
-              <b-col>
-              
-              </b-col>
-            </b-row>
-          </b-container>   
-        </template>
+      </b-col>
+      <b-col>
+      
+      </b-col>
+    </b-row>
+  </b-container>   
+</template>
 
 <script>
 import SidebarMenuAkahon from "@/components/SideBarCoord.vue"
@@ -78,7 +78,6 @@ export default {
    components: {
     SidebarMenuAkahon,
   },
-
   data() {
       return {
         student: [],
@@ -169,6 +168,24 @@ export default {
     })
     }
   },
+  mounted() {
+    axios.get("http://localhost:8080/gesStu").then(
+      (response) => {
+        this.users= response.data;
+        console.log(this.users)
+      }
+    );
+  },
+  methods: {
+      editarSt(idSt){
+        console.log("id---------",idSt);
+        //self.$router.push({name:'preEdit' })
+      },
+      editarPre(idSt){
+        console.log("id---------",idSt);
+        //self.$router.push({name:'preEdit' })
+      }
+    },
 }
 </script>
 
