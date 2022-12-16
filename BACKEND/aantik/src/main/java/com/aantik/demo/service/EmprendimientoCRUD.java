@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aantik.demo.HelperClassServices.AddUsers;
+import com.aantik.demo.HelperClassServices.UserG;
 import com.aantik.demo.entidad.Emprendimiento;
 import com.aantik.demo.entidad.Role;
 import com.aantik.demo.entidad.User;
@@ -136,7 +137,7 @@ public class EmprendimientoCRUD implements EmprendimientoCRUDLocal{
 	}
 
 	private boolean existeUser(String correo) {
-		Optional<User> Encontrado = repositoryUser.findByUsername(correo);
+		Optional<UserG> Encontrado = repositoryUser.findByUsername(correo);
 		if(Encontrado.isPresent()) {
 			System.out.println("Usuario ya se encuentra registrado");
 			return false;
